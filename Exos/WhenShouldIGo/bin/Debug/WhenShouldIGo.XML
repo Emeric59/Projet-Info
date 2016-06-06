@@ -1,0 +1,367 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WhenShouldIGo</name>
+    </assembly>
+    <members>
+        <member name="T:WhenShouldIGo.MyConstellation">
+            <summary>
+            Represents your Constellation
+            </summary>
+        </member>
+        <member name="T:WhenShouldIGo.MyConstellation.Sentinels">
+            <summary>
+            Specifies the sentinels in your Constellation
+            </summary>
+        </member>
+        <member name="F:WhenShouldIGo.MyConstellation.Sentinels.MSI_FLO">
+            <summary>
+            Sentinel 'MSI-FLO'
+            </summary>
+        </member>
+        <member name="T:WhenShouldIGo.MyConstellation.PackageInstances">
+            <summary>
+            Specifies the package's instances in your Constellation
+            </summary>
+        </member>
+        <member name="F:WhenShouldIGo.MyConstellation.PackageInstances.MSI_FLO_GoogleTraffic">
+            <summary>
+            Package 'GoogleTraffic' on 'MSI-FLO'
+            </summary>
+        </member>
+        <member name="F:WhenShouldIGo.MyConstellation.PackageInstances.MSI_FLO_Pushbullet">
+            <summary>
+            Package 'Pushbullet' on 'MSI-FLO'
+            </summary>
+        </member>
+        <member name="T:WhenShouldIGo.MyConstellation.Packages">
+            <summary>
+            Specifies the packages in your Constellation
+            </summary>
+        </member>
+        <member name="F:WhenShouldIGo.MyConstellation.Packages.GoogleTraffic">
+            <summary>
+            Package 'GoogleTraffic'
+            </summary>
+        </member>
+        <member name="F:WhenShouldIGo.MyConstellation.Packages.Pushbullet">
+            <summary>
+            Package 'Pushbullet'
+            </summary>
+        </member>
+        <member name="M:WhenShouldIGo.MyConstellation.CreateScope(WhenShouldIGo.MyConstellation.Sentinels)">
+            <summary>
+            Creates the message scope to the specified sentinel.
+            </summary>
+            <param name="sentinel">The sentinel.</param>
+            <returns>MessageScope</returns>
+        </member>
+        <member name="M:WhenShouldIGo.MyConstellation.CreateScope(WhenShouldIGo.MyConstellation.PackageInstances)">
+            <summary>
+            Creates the message scope to the specified package's instance.
+            </summary>
+            <param name="package">The package's instance.</param>
+            <returns>MessageScope</returns>
+        </member>
+        <member name="M:WhenShouldIGo.MyConstellation.CreateScope(WhenShouldIGo.MyConstellation.Packages)">
+            <summary>
+            Creates the message scope to the specified package.
+            </summary>
+            <param name="package">The package.</param>
+            <returns>MessageScope</returns>
+        </member>
+        <member name="T:WhenShouldIGo.RealNameAttribute">
+            <summary>
+            Specifies the real name of an enum value.
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="P:WhenShouldIGo.RealNameAttribute.RealName">
+            <summary>
+            Gets or sets the real name.
+            </summary>
+            <value>
+            The real name.
+            </value>
+        </member>
+        <member name="M:WhenShouldIGo.RealNameAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WhenShouldIGo.RealNameAttribute"/> class.
+            </summary>
+            <param name="realname">The real name.</param>
+        </member>
+        <member name="M:WhenShouldIGo.RealNameAttribute.GetRealName``1(``0)">
+            <summary>
+            Gets the real name of an enum value.
+            </summary>
+            <typeparam name="TEnum">The type of the enum.</typeparam>
+            <param name="value">The enum value.</param>
+            <returns>The real name.</returns>
+        </member>
+        <member name="T:WhenShouldIGo.RealNameExtension">
+            <summary>
+            Provides extension methods to get the real name of a Sentinel, Package or PackageInstance.
+            </summary>
+        </member>
+        <member name="T:WhenShouldIGo.GoogleTraffic.StateObjects.TrafficData">
+            <summary>
+            Type 'TrafficData'
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.StateObjects.TrafficData.Name">
+            <summary>
+            The Name.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.StateObjects.TrafficData.DistanceString">
+            <summary>
+            The DistanceString.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.StateObjects.TrafficData.TimeString">
+            <summary>
+            The TimeString.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.StateObjects.TrafficData.InfoTraffic">
+            <summary>
+            The InfoTraffic.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.StateObjects.TrafficData.DistanceInKm">
+            <summary>
+            The DistanceInKm.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.StateObjects.TrafficData.Time">
+            <summary>
+            The Time.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.StateObjects.TrafficData.TimeWithTraffic">
+            <summary>
+            The TimeWithTraffic.
+            </summary>
+        </member>
+        <member name="T:WhenShouldIGo.GoogleTraffic.StateObjects.GoogleTrafficExtensions">
+            <summary>
+            Provides extension methods for GoogleTraffic's StateObjects
+            </summary>
+        </member>
+        <member name="M:WhenShouldIGo.GoogleTraffic.StateObjects.GoogleTrafficExtensions.AsGoogleTrafficTrafficData(Constellation.StateObject)">
+            <summary>
+            Get StateObject value as TrafficData
+            </summary>
+        </member>
+        <member name="M:WhenShouldIGo.GoogleTraffic.StateObjects.GoogleTrafficExtensions.AsGoogleTrafficTrafficData(Constellation.Package.StateObjectNotifier)">
+            <summary>
+            Get StateObject value as TrafficData
+            </summary>
+        </member>
+        <member name="T:WhenShouldIGo.GoogleTraffic.MessageCallbacks.TrafficData">
+            <summary>
+            Type 'TrafficData'
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.MessageCallbacks.TrafficData.Name">
+            <summary>
+            The Name.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.MessageCallbacks.TrafficData.DistanceString">
+            <summary>
+            The DistanceString.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.MessageCallbacks.TrafficData.TimeString">
+            <summary>
+            The TimeString.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.MessageCallbacks.TrafficData.InfoTraffic">
+            <summary>
+            The InfoTraffic.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.MessageCallbacks.TrafficData.DistanceInKm">
+            <summary>
+            The DistanceInKm.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.MessageCallbacks.TrafficData.Time">
+            <summary>
+            The Time.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.GoogleTraffic.MessageCallbacks.TrafficData.TimeWithTraffic">
+            <summary>
+            The TimeWithTraffic.
+            </summary>
+        </member>
+        <member name="T:WhenShouldIGo.GoogleTraffic.MessageCallbacks.GoogleTrafficExtensions">
+            <summary>
+            Provides extension methods for the MessageScope to GoogleTraffic
+            </summary>
+        </member>
+        <member name="M:WhenShouldIGo.GoogleTraffic.MessageCallbacks.GoogleTrafficExtensions.ToGoogleTrafficScope(Constellation.MessageScope)">
+            <summary>
+            Create a GoogleTrafficScope
+            </summary>
+            <param name="scope">The Constellation MessageScope</param>
+        </member>
+        <member name="M:WhenShouldIGo.GoogleTraffic.MessageCallbacks.GoogleTrafficExtensions.CreateGoogleTrafficScope(WhenShouldIGo.MyConstellation.Sentinels)">
+            <summary>
+            Create a GoogleTrafficScope to all packages of the specified sentinel
+            </summary>
+            <param name="sentinel">The sentinel</param>
+        </member>
+        <member name="M:WhenShouldIGo.GoogleTraffic.MessageCallbacks.GoogleTrafficExtensions.CreateGoogleTrafficScope(WhenShouldIGo.MyConstellation.PackageInstances)">
+            <summary>
+            Create a GoogleTrafficScope to a specific package
+            </summary>
+            <param name="package">The package</param>
+        </member>
+        <member name="M:WhenShouldIGo.GoogleTraffic.MessageCallbacks.GoogleTrafficExtensions.CreateGoogleTrafficScope(WhenShouldIGo.MyConstellation.Packages)">
+            <summary>
+            Create a GoogleTrafficScope to a specific package
+            </summary>
+            <param name="package">The package</param>
+        </member>
+        <member name="T:WhenShouldIGo.GoogleTraffic.MessageCallbacks.GoogleTrafficScope">
+            <summary>
+            Represent a message scope to GoogleTraffic
+            </summary>
+        </member>
+        <member name="F:WhenShouldIGo.GoogleTraffic.MessageCallbacks.GoogleTrafficScope.currentScope">
+            <summary>
+            The current scope
+            </summary>
+        </member>
+        <member name="M:WhenShouldIGo.GoogleTraffic.MessageCallbacks.GoogleTrafficScope.#ctor(Constellation.MessageScope)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WhenShouldIGo.GoogleTraffic.MessageCallbacks.GoogleTrafficScope"/> class.
+            </summary>
+            <param name="scope">The scope.</param>
+        </member>
+        <member name="M:WhenShouldIGo.GoogleTraffic.MessageCallbacks.GoogleTrafficScope.GetRoutes(System.String,System.String,System.Threading.CancellationToken,Constellation.Package.MessageContext@)">
+            <summary>
+            Send message 'GetRoutes' to the current scope
+            </summary>
+            <param name="from">The 'from' parameter</param>
+            <param name="to">The 'to' parameter</param>
+            <returns>Task of System.Collections.Generic.List of TrafficData</returns>
+            <param name="cancellationToken">The CancellationToken that this task will observe.</param>		
+            <param name="context">The MessageContext of the received message.</param>
+        </member>
+        <member name="M:WhenShouldIGo.GoogleTraffic.MessageCallbacks.GoogleTrafficScope.GetRoutes(System.String,System.String,Constellation.Package.MessageContext@)">
+            <summary>
+            Send message 'GetRoutes' to the current scope
+            </summary>
+            <param name="from">The 'from' parameter</param>
+            <param name="to">The 'to' parameter</param>
+            <returns>Task of System.Collections.Generic.List of TrafficData</returns>
+            <param name="context">The MessageContext of the received message.</param>
+        </member>
+        <member name="M:WhenShouldIGo.GoogleTraffic.MessageCallbacks.GoogleTrafficScope.GetRoutes(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Send message 'GetRoutes' to the current scope
+            </summary>
+            <param name="from">The 'from' parameter</param>
+            <param name="to">The 'to' parameter</param>
+            <returns>Task of System.Collections.Generic.List of TrafficData</returns>
+            <param name="cancellationToken">The CancellationToken that this task will observe.</param>
+        </member>
+        <member name="M:WhenShouldIGo.GoogleTraffic.MessageCallbacks.GoogleTrafficScope.GetRoutes(System.String,System.String)">
+            <summary>
+            Send message 'GetRoutes' to the current scope
+            </summary>
+            <param name="from">The 'from' parameter</param>
+            <param name="to">The 'to' parameter</param>
+            <returns>Task of System.Collections.Generic.List of TrafficData</returns>
+        </member>
+        <member name="T:WhenShouldIGo.PushBullet.MessageCallbacks.SendPushRequest">
+            <summary>
+            Type 'SendPushRequest'
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.PushBullet.MessageCallbacks.SendPushRequest.Iden">
+            <summary>
+            The Iden.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.PushBullet.MessageCallbacks.SendPushRequest.Title">
+            <summary>
+            The Title.
+            </summary>
+        </member>
+        <member name="P:WhenShouldIGo.PushBullet.MessageCallbacks.SendPushRequest.Message">
+            <summary>
+            The Message.
+            </summary>
+        </member>
+        <member name="T:WhenShouldIGo.PushBullet.MessageCallbacks.PushBulletExtensions">
+            <summary>
+            Provides extension methods for the MessageScope to PushBullet
+            </summary>
+        </member>
+        <member name="M:WhenShouldIGo.PushBullet.MessageCallbacks.PushBulletExtensions.ToPushBulletScope(Constellation.MessageScope)">
+            <summary>
+            Create a PushBulletScope
+            </summary>
+            <param name="scope">The Constellation MessageScope</param>
+        </member>
+        <member name="M:WhenShouldIGo.PushBullet.MessageCallbacks.PushBulletExtensions.CreatePushBulletScope(WhenShouldIGo.MyConstellation.Sentinels)">
+            <summary>
+            Create a PushBulletScope to all packages of the specified sentinel
+            </summary>
+            <param name="sentinel">The sentinel</param>
+        </member>
+        <member name="M:WhenShouldIGo.PushBullet.MessageCallbacks.PushBulletExtensions.CreatePushBulletScope(WhenShouldIGo.MyConstellation.PackageInstances)">
+            <summary>
+            Create a PushBulletScope to a specific package
+            </summary>
+            <param name="package">The package</param>
+        </member>
+        <member name="M:WhenShouldIGo.PushBullet.MessageCallbacks.PushBulletExtensions.CreatePushBulletScope(WhenShouldIGo.MyConstellation.Packages)">
+            <summary>
+            Create a PushBulletScope to a specific package
+            </summary>
+            <param name="package">The package</param>
+        </member>
+        <member name="T:WhenShouldIGo.PushBullet.MessageCallbacks.PushBulletScope">
+            <summary>
+            Represent a message scope to PushBullet
+            </summary>
+        </member>
+        <member name="F:WhenShouldIGo.PushBullet.MessageCallbacks.PushBulletScope.currentScope">
+            <summary>
+            The current scope
+            </summary>
+        </member>
+        <member name="M:WhenShouldIGo.PushBullet.MessageCallbacks.PushBulletScope.#ctor(Constellation.MessageScope)">
+            <summary>
+            Initializes a new instance of the <see cref="T:WhenShouldIGo.PushBullet.MessageCallbacks.PushBulletScope"/> class.
+            </summary>
+            <param name="scope">The scope.</param>
+        </member>
+        <member name="M:WhenShouldIGo.PushBullet.MessageCallbacks.PushBulletScope.SendPush(WhenShouldIGo.PushBullet.MessageCallbacks.SendPushRequest)">
+            <summary>
+            Send message 'SendPush' to the current scope
+            </summary>
+            <param name="request">The 'request' parameter</param>
+        </member>
+        <member name="M:WhenShouldIGo.Program.OnStart">
+            <summary>
+            Called when the package is started.
+            </summary>
+        </member>
+        <member name="M:WhenShouldIGo.Program.TellMeWhen(System.String,System.Int32,System.Int32)">
+            <summary>
+            Tells me when to go.
+            </summary>
+            <param name="destination">The destination.</param>
+            <param name="heureArrivee">The heure arrivee.</param>
+            <param name="minuteArrivee">The minute arrivee.</param>
+        </member>
+    </members>
+</doc>

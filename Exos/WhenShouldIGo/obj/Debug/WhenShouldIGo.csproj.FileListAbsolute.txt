@@ -1,0 +1,14 @@
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\bin\Debug\WhenShouldIGo.exe.config
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\bin\Debug\PackageInfo.xml
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\bin\Debug\WhenShouldIGo.XML
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\bin\Debug\WhenShouldIGo.exe
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\bin\Debug\WhenShouldIGo.pdb
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\bin\Debug\Constellation.Common.dll
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\bin\Debug\Microsoft.AspNet.SignalR.Client.dll
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\bin\Debug\Newtonsoft.Json.dll
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\bin\Debug\Constellation.Common.xml
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\bin\Debug\Microsoft.AspNet.SignalR.Client.xml
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\bin\Debug\Newtonsoft.Json.xml
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\obj\Debug\WhenShouldIGo.csprojResolveAssemblyReference.cache
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\obj\Debug\WhenShouldIGo.exe
+D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\obj\Debug\WhenShouldIGo.pdb
