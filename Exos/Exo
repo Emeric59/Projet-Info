@@ -37,7 +37,7 @@ namespace Exo
                         k = !k;
                         MyConstellation.Packages.Pushbullet.CreatePushBulletScope().SendPush(new SendPushRequest
                         {
-                            Message = $"Utilisation processeur {e.StateObject.DynamicValue.Value} supérieure au seuil de {seuil}",
+                            Message = $"Utilisation processeur {e.StateObject.DynamicValue.Value} % supérieure au seuil de {seuil} %",
                             Title = $"Message from {e.StateObject.SentinelName}"
                         });
                     }
