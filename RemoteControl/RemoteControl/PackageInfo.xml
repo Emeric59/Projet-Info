@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Package xmlns="http://schemas.myconstellation.io/Constellation/1.8/PackageManifest"
          Name="RemoteControl"
-         Version="1.0"
+         Version="1.1"
          Author="PraZ"
          URL="http://www.mywebsite.com"
          Description="RemoteControl Copyright ©  2016"

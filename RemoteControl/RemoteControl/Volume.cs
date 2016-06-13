@@ -11,6 +11,7 @@ namespace RemoteControl
 {
     public class Volume : Program
     {
+        [MessageCallback]
         public static void SetVolume(int valeur)
         {
             double volume = valeur * 655.35;
@@ -23,6 +24,8 @@ namespace RemoteControl
             nircmd.StartInfo.Arguments = string.Format("setsysvolume {0}", volume);
             nircmd.Start();
         }
+
+        [MessageCallback]
         public static void SetVolume(string level)
         {
             Process nircmd = new Process();
