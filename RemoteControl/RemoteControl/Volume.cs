@@ -14,8 +14,11 @@ namespace RemoteControl
         {
             double volume = valeur * 65.535;
             Process nircmd = new Process();
-            
+            nircmd.StartInfo.FileName = RemoteControl.Properties.Resources.nircmd;
+            nircmd.StartInfo.Arguments = "sendkeypress 0xB3";
+            nircmd.Start();
         }
     }
     
+
 }

@@ -5,19 +5,6 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteControl", "RemoteControl\RemoteControl.csproj", "{9387F84E-9EF7-4521-BAAA-8649E2E6F735}"
 EndProject
-Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "nircmd", "D:\nircmd\nircmd.exe", "{064CDD80-4FB6-4BD9-8524-6154946D9CB4}"
-	ProjectSection(DebuggerProjectSystem) = preProject
-		PortSupplier = 00000000-0000-0000-0000-000000000000
-		Executable = D:\nircmd\nircmd.exe
-		RemoteMachine = MSI-FLO
-		StartingDirectory = D:\nircmd
-		Environment = Par défaut
-		LaunchingEngine = 00000000-0000-0000-0000-000000000000
-		UseLegacyDebugEngines = No
-		LaunchSQLEngine = No
-		AttachLaunchAction = No
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,10 +21,6 @@ Global
 		{9387F84E-9EF7-4521-BAAA-8649E2E6F735}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9387F84E-9EF7-4521-BAAA-8649E2E6F735}.Release|x64.ActiveCfg = Release|Any CPU
 		{9387F84E-9EF7-4521-BAAA-8649E2E6F735}.Release|x64.Build.0 = Release|Any CPU
-		{064CDD80-4FB6-4BD9-8524-6154946D9CB4}.Debug|Any CPU.ActiveCfg = Release
-		{064CDD80-4FB6-4BD9-8524-6154946D9CB4}.Debug|x64.ActiveCfg = Release
-		{064CDD80-4FB6-4BD9-8524-6154946D9CB4}.Release|Any CPU.ActiveCfg = Release
-		{064CDD80-4FB6-4BD9-8524-6154946D9CB4}.Release|x64.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
