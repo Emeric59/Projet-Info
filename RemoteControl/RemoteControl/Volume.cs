@@ -52,6 +52,4 @@ namespace RemoteControl
             nircmd.Start();
         }
     }
-    
-
 }
