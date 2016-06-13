@@ -40,11 +40,11 @@ namespace RemoteControl
                 case "mute":
                     nircmd.StartInfo.Arguments = "mutesysvolume 2";
                     break;
-                case "max":
-                    nircmd.StartInfo.Arguments = "setsysvolume 58981";
+                case "plus":
+                    nircmd.StartInfo.Arguments = "changesysvolume 1310";
                     break;
-                case "min":
-                    nircmd.StartInfo.Arguments = "setsysvolume 6553";
+                case "moins":
+                    nircmd.StartInfo.Arguments = "changesysvolume -1310";
                     break;
                 default:
                     return;
