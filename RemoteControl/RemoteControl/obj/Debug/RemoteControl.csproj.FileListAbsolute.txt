@@ -14,3 +14,7 @@ C:\Users\docte\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\Re
 C:\Users\docte\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\RemoteControl.pdb
 C:\Users\docte\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\RemoteControl.Properties.Resources.resources
 C:\Users\docte\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\RemoteControl.csproj.GenerateResource.Cache
+C:\Users\Pierre\Source\Repos\Projet-Info\RemoteControl\RemoteControl\bin\Debug\RemoteControl.exe.config
+C:\Users\Pierre\Source\Repos\Projet-Info\RemoteControl\RemoteControl\bin\Debug\RemoteControl.XML
+C:\Users\Pierre\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\RemoteControl.exe
+C:\Users\Pierre\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\RemoteControl.pdb
