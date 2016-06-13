@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WhenShouldIGo")]
+[assembly: AssemblyTitle("RemoteControl")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WhenShouldIGo")]
+[assembly: AssemblyProduct("RemoteControl")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("253cf270-5722-4d40-8164-04a008ecc3a8")]
+[assembly: Guid("9387f84e-9ef7-4521-baaa-8649e2e6f735")]
 
 // Version information for an assembly consists of the following four values:
 //
