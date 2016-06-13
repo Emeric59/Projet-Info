@@ -23,6 +23,31 @@ namespace RemoteControl
             nircmd.StartInfo.Arguments = string.Format("setsysvolume {0}", volume);
             nircmd.Start();
         }
+        public static void SetVolume(string level)
+        {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
+            nircmd.StartInfo.FileName = path;
+
+            switch (level)
+            {
+                case "mute":
+                    nircmd.StartInfo.Arguments = "mutesysvolume 2";
+                    break;
+                case "max":
+                    nircmd.StartInfo.Arguments = "setsysvolume 58981";
+                    break;
+                case "min":
+                    nircmd.StartInfo.Arguments = "setsysvolume 6553";
+                    break;
+                default:
+                    return;
+            }
+            nircmd.Start();
+        }
     }
     
 
