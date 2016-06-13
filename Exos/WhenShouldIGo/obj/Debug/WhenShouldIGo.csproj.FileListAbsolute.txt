@@ -12,3 +12,14 @@ D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\bin\Debug\Newton
 D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\obj\Debug\WhenShouldIGo.csprojResolveAssemblyReference.cache
 D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\obj\Debug\WhenShouldIGo.exe
 D:\Documents\Visual Studio 2015\Projects\Package2\WhenShouldIGo\obj\Debug\WhenShouldIGo.pdb
+C:\Users\Emeric\Source\Repos\Projet-Info\Exos\WhenShouldIGo\bin\Debug\WhenShouldIGo.exe.config
+C:\Users\Emeric\Source\Repos\Projet-Info\Exos\WhenShouldIGo\bin\Debug\WhenShouldIGo.XML
+C:\Users\Emeric\Source\Repos\Projet-Info\Exos\WhenShouldIGo\obj\Debug\WhenShouldIGo.exe
+C:\Users\Emeric\Source\Repos\Projet-Info\Exos\WhenShouldIGo\obj\Debug\WhenShouldIGo.pdb
+C:\Users\Emeric\Source\Repos\Projet-Info\Exos\WhenShouldIGo\bin\Debug\PackageInfo.xml
+C:\Users\Emeric\Source\Repos\Projet-Info\Exos\WhenShouldIGo\bin\Debug\WhenShouldIGo.exe
+C:\Users\Emeric\Source\Repos\Projet-Info\Exos\WhenShouldIGo\bin\Debug\WhenShouldIGo.pdb
+C:\Users\Emeric\Source\Repos\Projet-Info\Exos\WhenShouldIGo\bin\Debug\Constellation.Common.xml
+C:\Users\Emeric\Source\Repos\Projet-Info\Exos\WhenShouldIGo\bin\Debug\Microsoft.AspNet.SignalR.Client.xml
+C:\Users\Emeric\Source\Repos\Projet-Info\Exos\WhenShouldIGo\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Emeric\Source\Repos\Projet-Info\Exos\WhenShouldIGo\obj\Debug\WhenShouldIGo.csprojResolveAssemblyReference.cache
