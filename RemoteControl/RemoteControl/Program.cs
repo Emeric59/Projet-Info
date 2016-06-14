@@ -67,6 +67,24 @@ namespace RemoteControl
             }
             nircmd.Start();
         }
+
+        [MessageCallback]
+        void openDoge()
+        {
+            Process dogeBrowser = new Process();
+            dogeBrowser.StartInfo.UseShellExecute = true;
+            dogeBrowser.StartInfo.FileName = "https://www.reddit.com/r/doge/";
+            dogeBrowser.Start();
+        }
+
+        [MessageCallback]
+        void openBrowser(string url)
+        {
+            Process browser = new Process();
+            browser.StartInfo.UseShellExecute = true;
+            browser.StartInfo.FileName = url;
+            browser.Start();
+        }
        
     }
 }

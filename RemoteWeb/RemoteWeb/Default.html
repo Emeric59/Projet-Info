@@ -4,26 +4,39 @@
     <title>RemoteControl</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
+    <style type="text/css">
+        p1 {font-size: 25px;}
+    </style>
 </head>
 <body>
     <span id="state">Déconnecté</span>
-    <p>
+    <br />
+    <p1><b>R&egrave;glez le volume de votre ordinateur :</b></p1>
+    <br />
+    <p2><b>
         <button id="Mute"
                 style="background:blue;
-            cursor:pointer;">
-            Mute
+            cursor:pointer;
+            color:white;
+            height:35px;
+            width:60px;">
+            MUTE
         </button>
         <button id="DecreaseVolume"
                 style="background:white;
-            cursor:pointer;">
+            cursor:pointer;
+            height:35px;
+            width:35px;">
             -
         </button>
         <button id="IncreaseVolume"
                 style="background:red;
-            cursor:pointer;">
+            cursor:pointer;
+            height:35px;
+            width:35px;">
             +
         </button>
-    </p>
+        </b></p2>
 
     <script src="Scripts/jquery-1.6.4.min.js"></script>
     <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
