@@ -1,4 +1,4 @@
-﻿var constellation = $.signalR.createConstellationConsumer("http://localhost:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteControl")
+﻿var constellation = $.signalR.createConstellationConsumer("http://localhost:8088", "6d540ec121c933fe48ea0ad3872d5b98dec65226", "RemoteControl")
 
 constellation.connection.stateChanged(function (change) {
     if (change.newState === $.signalR.connectionState.connected) {
