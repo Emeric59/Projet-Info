@@ -31,7 +31,13 @@ constellation.client.onUpdateStateObject(function (stateobject) {
 
 
     
+$("#SearchArtist").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"]}, "loadArtist", document.getElementById("search").value)
+});
 
+$("#SearchAlbum").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadAlbum", document.getElementById("search").value)
+});
 
 
 $("#Mute").click(function () {
@@ -60,5 +66,9 @@ $("#Precedent").click(function () {
 $("#Suivant").click(function () {
     constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "next", "");
 });
+
+
+
+
 constellation.connection.start();
 
