@@ -1,0 +1,3 @@
+﻿A chaque nouvelle synchronisation, ne pas oublier de :
+-modifier la clé standard dans Volume.js à la première ligne
+-modifier le nom de la sentinelle ligne 8 (VERIFIER SETINELLE UI OU PAS)
