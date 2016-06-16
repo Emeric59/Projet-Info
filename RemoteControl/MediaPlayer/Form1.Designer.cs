@@ -67,6 +67,8 @@ namespace MediaPlayer
 
         private AxWMPLib.AxWindowsMediaPlayer player;
 
+        #region Control Function
+
         [MessageCallback]
         private void play()
         {
@@ -96,6 +98,8 @@ namespace MediaPlayer
         {
             player.Ctlcontrols.next();
         }
+
+        #endregion
 
 
         [MessageCallback]
@@ -137,6 +141,7 @@ namespace MediaPlayer
                 collection.Add(playlist.Item[i].getItemInfo("Author"), playlist.Item[i].getItemInfo("Album"), playlist.Item[i].getItemInfo("Title"));
             }
             return collection;
+            
         }
         [MessageCallback]
         private TupleList<string, string, string> getPlaylist()
