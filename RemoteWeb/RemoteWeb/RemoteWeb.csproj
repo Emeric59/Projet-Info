@@ -100,6 +100,7 @@
     <Content Include="scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="scripts\ngConstellation-1.8.0.js" />
     <Content Include="scripts\Volume.js" />
+    <Content Include="notice.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

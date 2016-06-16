@@ -13,15 +13,16 @@
     <br />
     <p1><b>R&egrave;glez le volume de votre ordinateur :</b></p1>
     <br />
-    <p2><b>
+    <p2>
         <button id="Mute"
-                style="background:blue;
+                style="background:chocolate;
             cursor:pointer;
             color:white;
             height:35px;
             width:60px;">
             MUTE
         </button>
+        <br />
         <button id="DecreaseVolume"
                 style="background:white;
             cursor:pointer;
@@ -30,13 +31,75 @@
             -
         </button>
         <button id="IncreaseVolume"
-                style="background:red;
+                style="background:white;
             cursor:pointer;
             height:35px;
             width:35px;">
             +
         </button>
-        </b></p2>
+        <br />
+        <button id="Play"
+                style="background:lime;
+            cursor:pointer;
+            height:40px;
+            width:60px;">
+            Play
+        </button>
+        <button id="Pause"
+                style="background:lime;
+            cursor:pointer;
+            height:40px;
+            width:60px;">
+            Pause
+        </button>
+        <button id="Stop"
+                style="background:lime;
+            cursor:pointer;
+            height:40px;
+            width:60px;">
+            Stop
+        </button>
+        <br />
+        <button id="Precedent"
+                style="background:dimgray;
+            cursor:pointer;
+            height:40px;
+            width:60px;">
+            Pr&eacute;c.
+        </button>
+        <button id="Suivant"
+                style="background:dimgray;
+            cursor:pointer;
+            height:40px;
+            width:60px;">
+            Suiv.
+        </button>
+        <button id="Shuffle"
+                style="background:dimgray;
+            cursor:pointer;
+            height:40px;
+            width:60px;">
+            Rand.
+        </button>
+        <br />
+        <span id="shuffleState">off</span>
+
+        <br/>
+        <input id="search" type="search" placeholder="Entrez un mot-clef" name="search">
+        <br />
+        <button id="SearchArtist">Search an Artist</button>
+        <button id="SearchAlbum">Search an Album</button>
+
+
+        <br/>
+        
+        <span  id="CurrentSong">none</span>
+        <br />
+
+        <table id="CurrentPlaylist" >
+            <caption align="top">Current Play list</caption>
+        </table>
+        </p2>
 
     <script src="Scripts/jquery-1.6.4.min.js"></script>
     <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>

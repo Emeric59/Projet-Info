@@ -66,3 +66,5 @@ C:\Users\Pierre\Source\Repos\Projet-Info\RemoteControl\RemoteControl\bin\Debug\N
 C:\Users\Pierre\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\RemoteControl.csprojResolveAssemblyReference.cache
 C:\Users\Pierre\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\RemoteControl.Properties.Resources.resources
 C:\Users\Pierre\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\RemoteControl.csproj.GenerateResource.Cache
+C:\Users\docte\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\Interop.WMPLib.dll
+C:\Users\docte\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\RemoteControl.csproj.ResolveComReference.cache
