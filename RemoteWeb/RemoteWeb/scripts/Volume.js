@@ -24,7 +24,10 @@ constellation.client.onUpdateStateObject(function (stateobject) {
         }
         for (var i = 1; i < listSize; i++) {
             var ligne = tableau.insertRow(-1);
-            ligne.innerHTML += stateobject.Value[i].Item3;
+            var colonne1 = ligne.insertCell(0);
+            colonne1.innerHTML += stateobject.Value[i].Item3;
+            var colonne2 = ligne.insertCell(1);
+            colonne2.innerHTML += stateobject.Value[i].Item2;
         }
     }
 });
@@ -67,7 +70,12 @@ $("#Suivant").click(function () {
     constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "next", "");
 });
 
-
+$("#Shuffle").click(function () {
+    constellation.server.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "", function (result) {
+        console.log("shuffleState", result);
+        $("#shuffleState").text(result.Data == true ? "on" : "off");
+        });
+});
 
 
 constellation.connection.start();

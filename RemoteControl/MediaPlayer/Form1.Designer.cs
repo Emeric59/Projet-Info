@@ -70,6 +70,14 @@ namespace MediaPlayer
         #region Control Function
 
         [MessageCallback]
+        private bool shuffle()
+        {
+            bool shuffle = player.settings.getMode("shuffle");
+            player.settings.setMode("shuffle", !shuffle);
+            return shuffle;
+        }
+
+        [MessageCallback]
         private void play()
         {
             player.Ctlcontrols.play();

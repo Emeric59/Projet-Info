@@ -36,5 +36,6 @@ namespace MediaPlayer
         {
             Application.Exit();
         }
+        
     }
 }
