@@ -19,6 +19,20 @@ $("#IncreaseVolume").click(function () {
 $("#DecreaseVolume").click(function () {
     constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", "moins");
 });
-
+$("#Play").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "play");
+});
+$("#Pause").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "pause");
+});
+$("#Stop").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "stop");
+});
+$("#Precedent").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "previous");
+});
+$("#Suivant").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "next");
+});
 constellation.connection.start();
 
