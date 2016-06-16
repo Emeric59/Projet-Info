@@ -1,4 +1,6 @@
 ﻿var constellation = $.signalR.createConstellationConsumer("http://localhost:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteControl")
+var tableau = document.getElementById("CurrentPlaylist");
+
 
 constellation.connection.stateChanged(function (change) {
     if (change.newState === $.signalR.connectionState.connected) {
@@ -13,6 +15,17 @@ constellation.client.onUpdateStateObject(function (stateobject) {
     console.log(stateobject);
     if (stateobject.Name == "CurrentSong") {
         $("#CurrentSong").text(stateobject.Value[0].Item3);
+    }
+    if (stateobject.Name == "CurrentPlaylist") {
+        var listSize = stateobject.Value.length;
+        var tableauSize = tableau.rows.length;
+        for (var j = 0; j < tableauSize; j++) {
+            tableau.deleteRow(-1);
+        }
+        for (var i = 1; i < listSize; i++) {
+            var ligne = tableau.insertRow(-1);
+            ligne.innerHTML += stateobject.Value[i].Item3;
+        }
     }
 });
 
