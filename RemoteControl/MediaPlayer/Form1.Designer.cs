@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Constellation;
 using Constellation.Package;
+using AxWMPLib;
+using WMPLib;
 
 namespace MediaPlayer
 {
@@ -66,6 +68,37 @@ namespace MediaPlayer
         private AxWMPLib.AxWindowsMediaPlayer player;
 
         [MessageCallback]
+        private void play()
+        {
+            player.Ctlcontrols.play();
+        }
+
+        [MessageCallback]
+        private void pause()
+        {
+            player.Ctlcontrols.pause();
+        }
+
+        [MessageCallback]
+        private void stop()
+        {
+            player.Ctlcontrols.stop();
+        }
+
+        [MessageCallback]
+        private void previous()
+        {
+            player.Ctlcontrols.previous();
+        }
+
+        [MessageCallback]
+        private void next()
+        {
+            player.Ctlcontrols.next();
+        }
+
+
+        [MessageCallback]
         private void loadArtist(string artist)
         {
             player.currentPlaylist = player.mediaCollection.getByAuthor(artist);
@@ -87,7 +120,7 @@ namespace MediaPlayer
 
         
         [MessageCallback]
-        private TupleList<string, string, string> GetCollection(string type, string value)
+        private TupleList<string, string, string> getCollection(string type, string value)
         {
 
             var playlist = player.mediaCollection.getByAttribute(type, value);
@@ -106,7 +139,7 @@ namespace MediaPlayer
             return collection;
         }
         [MessageCallback]
-        private TupleList<string, string, string> GetPlaylist()
+        private TupleList<string, string, string> getPlaylist()
         {
             int count = player.currentPlaylist.count;
             var collection = new TupleList<string, string, string>
@@ -120,6 +153,12 @@ namespace MediaPlayer
                 collection.Add(player.currentPlaylist.Item[i].getItemInfo("Author"), player.currentPlaylist.Item[i].getItemInfo("Album"), player.currentPlaylist.Item[i].getItemInfo("Title"));
             }
             return collection;
+        }
+
+        private void player_MediaChange(object sender,_WMPOCXEvents_MediaChangeEvent e)
+        {
+            PackageHost.PushStateObject("CurrentPlaylist", getPlaylist());
+            PackageHost.PushStateObject("CurrentSong", new TupleList<string, string, string> { { player.currentMedia.getItemInfo("Author"), player.currentMedia.getItemInfo("Album"), player.currentMedia.getItemInfo("Title") } });
         }
 
 

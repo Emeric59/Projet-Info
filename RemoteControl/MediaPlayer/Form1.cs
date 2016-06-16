@@ -24,7 +24,8 @@ namespace MediaPlayer
             PackageHost.RegisterStateObjectLinks(this);
             PackageHost.RegisterMessageCallbacks(this);
             PackageHost.DeclarePackageDescriptor();
-
+            player.MediaChange += new AxWMPLib._WMPOCXEvents_MediaChangeEventHandler(player_MediaChange);
+            
             this.Text = string.Format("IsRunning: {0} - IsConnected: {1} - IsStandAlone: {2}", PackageHost.IsRunning, PackageHost.IsConnected, PackageHost.IsStandAlone);
             PackageHost.WriteInfo("I'm running !");
 
