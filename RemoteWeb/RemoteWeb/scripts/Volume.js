@@ -6,6 +6,11 @@ constellation.connection.stateChanged(function (change) {
     if (change.newState === $.signalR.connectionState.connected) {
         $("#state").text("Connecté")
         constellation.server.requestSubscribeStateObjects("MSI-FLO_UI", "MediaPlayer", "*", "*");
+        constellation.server.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "", function (result) {
+            console.log("shuffleState", result);
+            $("#shuffleState").text(result.Data == false ? "off" : "on");
+        });
+
     } else {
         $("#state").text("Non connecté")
     }
@@ -24,21 +29,28 @@ constellation.client.onUpdateStateObject(function (stateobject) {
         }
         for (var i = 1; i < listSize; i++) {
             var ligne = tableau.insertRow(-1);
-            //ligne.addEventListener('click', function (stateobject) {
-
-            //});
+            
             var colonne1 = ligne.insertCell(0);
             colonne1.innerHTML += stateobject.Value[i].Item3;
-            
+            colonne1.setAttribute("style", "cursor:pointer");
+            colonne1.addEventListener("click", loadTitleFromList);
+
             var colonne2 = ligne.insertCell(1);
             colonne2.innerHTML += stateobject.Value[i].Item2;
-            colonne2.onclick = loadAlbumFromList(stateobject, i);
+            colonne2.setAttribute("style", "cursor:pointer");
+            colonne2.addEventListener("click", loadAlbumFromList);
         }
     }
 });
 
-function loadAlbumFromList(stateobject, i) {
-    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadAlbum", stateobject.Value[i].Item2)
+function loadAlbumFromList() {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadAlbum", this.innerHTML)
+    console.log(this.innerHTML);
+};
+
+function loadTitleFromList() {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadTitleFromPlaylist", this.innerHTML)
+    console.log(this.innerHTML);
 };
     
 $("#SearchArtist").click(function () {
@@ -78,9 +90,9 @@ $("#Suivant").click(function () {
 });
 
 $("#Shuffle").click(function () {
-    constellation.server.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "", function (result) {
+    constellation.server.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "set", function (result) {
         console.log("shuffleState", result);
-        $("#shuffleState").text(result.Data == true ? "on" : "off");
+        $("#shuffleState").text(result.Data == true ? "off" : "on");
         });
 });
 

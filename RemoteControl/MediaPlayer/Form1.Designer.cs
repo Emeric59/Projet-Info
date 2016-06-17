@@ -70,10 +70,13 @@ namespace MediaPlayer
         #region Control Function
 
         [MessageCallback]
-        private bool shuffle()
+        private bool shuffle(string mode)
         {
             bool shuffle = player.settings.getMode("shuffle");
-            player.settings.setMode("shuffle", !shuffle);
+            if (mode == "set")
+            {
+                player.settings.setMode("shuffle", !shuffle);
+            }
             return shuffle;
         }
 
@@ -122,15 +125,22 @@ namespace MediaPlayer
             player.currentPlaylist = player.mediaCollection.getByAlbum(album);
         }
 
+        [MessageCallback]
+        private void loadTitleFromPlaylist(string title)
+        {
+            int i = 0;
+            while (i<player.currentPlaylist.count)
+            {
+                if (player.currentPlaylist.Item[i].getItemInfo("Title") == title) 
+                {
+                    player.Ctlcontrols.playItem(player.currentPlaylist.Item[i]);
+                    return;
+                }
+                i++;
+            }
+        }
 
-        //private void loadTitleFromArtist(string artist, string title)
-        //{
-        //    var collection = new TupleList<string, string, string> { };
-        //    collection = GetCollection("Artist", artist);
-        //    player.currentMedia =
-        //}
 
-        
         [MessageCallback]
         private TupleList<string, string, string> getCollection(string type, string value)
         {
