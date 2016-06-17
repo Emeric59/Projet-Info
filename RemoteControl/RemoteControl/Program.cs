@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using WMPLib;
 
 
 
@@ -84,6 +83,18 @@ namespace RemoteControl
             browser.StartInfo.UseShellExecute = true;
             browser.StartInfo.FileName = url;
             browser.Start();
+        }
+
+        [MessageCallback]
+        void openMediaPlayer()
+        {
+            PackageHost.ControlManager.StartPackage("MSI-FLO_UI", "MediaPlayer");
+        }
+
+        [MessageCallback]
+        void closeMediaPlayer()
+        {
+            PackageHost.ControlManager.StopPackage("MSI-FLO_UI", "MediaPlayer");
         }
        
     }

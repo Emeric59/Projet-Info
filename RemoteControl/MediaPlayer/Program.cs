@@ -28,14 +28,8 @@ namespace MediaPlayer
 
         public override void OnShutdown()
         {
+            PackageHost.PurgeStateObjects();
             Application.Exit();
         }
-
-        [MessageCallback]
-        public void ClosePlayer()
-        {
-            Application.Exit();
-        }
-        
     }
 }
