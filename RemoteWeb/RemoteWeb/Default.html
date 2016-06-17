@@ -5,14 +5,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <style type="text/css">
-        p1 {font-size: 25px;}
+        p1 {font-size: 40px;
+            font-family:'Bell MT';
+        }
+        p2 {font-family:'Bell MT';
+            font-weight:bold;
+            font-size:20px;
+        }
     </style>
 </head>
 <body>
     <span id="state">Déconnecté</span>
     <br />
     <p1><b>R&egrave;glez le volume de votre ordinateur :</b></p1>
-    <br />
     <p2>
         <button id="Mute"
                 style="background:chocolate;
@@ -38,6 +43,7 @@
             +
         </button>
         <br />
+        G&egrave;rez la lecture de vos musiques :
         <button id="Play"
                 style="background:lime;
             cursor:pointer;
@@ -60,6 +66,7 @@
             Stop
         </button>
         <br />
+        S&eacute;lectionnez la musique de votre choix :
         <button id="Precedent"
                 style="background:dimgray;
             cursor:pointer;
@@ -82,6 +89,8 @@
             Rand.
         </button>
         <br />
+        </p2>
+        <p3>
         <span id="shuffleState">off</span>
 
         <br/>
@@ -100,7 +109,7 @@
         <table id="CurrentPlaylist" >
             <caption align="top">Current Play list</caption>
         </table>
-        </p2>
+        </p3>
 
     <script src="Scripts/jquery-1.6.4.min.js"></script>
     <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
