@@ -20,6 +20,8 @@ constellation.client.onUpdateStateObject(function (stateobject) {
     console.log(stateobject);
     if (stateobject.Name == "CurrentSong") {
         $("#CurrentSong").text(stateobject.Value[0].Item3);
+        $("#CurrentArtist").text(stateobject.Value[0].Item1);
+        $("#CurrentAlbum").text(stateobject.Value[0].Item2);
     }
     if (stateobject.Name == "CurrentPlaylist") {
         var listSize = stateobject.Value.length;
@@ -44,23 +46,27 @@ constellation.client.onUpdateStateObject(function (stateobject) {
 });
 
 function loadAlbumFromList() {
-    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadAlbum", this.innerHTML)
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadAlbum", this.innerHTML);
     console.log(this.innerHTML);
 };
 
 function loadTitleFromList() {
-    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadTitleFromPlaylist", this.innerHTML)
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadTitleFromPlaylist", this.innerHTML);
     console.log(this.innerHTML);
 };
     
 $("#SearchArtist").click(function () {
-    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"]}, "loadArtist", document.getElementById("search").value)
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadArtist", document.getElementById("search").value);
 });
 
 $("#SearchAlbum").click(function () {
-    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadAlbum", document.getElementById("search").value)
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadAlbum", document.getElementById("search").value);
 });
 
+$("#BackArtist").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadArtist", document.getElementById("CurrentArtist").innerHTML);
+    console.log(document.getElementById("CurrentArtist").innerHTML);
+});
 
 $("#Mute").click(function () {
     constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", "mute");

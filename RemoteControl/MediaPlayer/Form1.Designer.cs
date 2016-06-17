@@ -4,6 +4,8 @@ using Constellation;
 using Constellation.Package;
 using AxWMPLib;
 using WMPLib;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace MediaPlayer
 {
@@ -129,9 +131,9 @@ namespace MediaPlayer
         private void loadTitleFromPlaylist(string title)
         {
             int i = 0;
-            while (i<player.currentPlaylist.count)
+            while (i < player.currentPlaylist.count)
             {
-                if (player.currentPlaylist.Item[i].getItemInfo("Title") == title) 
+                if (player.currentPlaylist.Item[i].getItemInfo("Title") == title)
                 {
                     player.Ctlcontrols.playItem(player.currentPlaylist.Item[i]);
                     return;
@@ -159,7 +161,7 @@ namespace MediaPlayer
                 collection.Add(playlist.Item[i].getItemInfo("Author"), playlist.Item[i].getItemInfo("Album"), playlist.Item[i].getItemInfo("Title"));
             }
             return collection;
-            
+
         }
         [MessageCallback]
         private TupleList<string, string, string> getPlaylist()
@@ -178,12 +180,38 @@ namespace MediaPlayer
             return collection;
         }
 
-        private void player_MediaChange(object sender,_WMPOCXEvents_MediaChangeEvent e)
+        private void player_MediaChange(object sender, _WMPOCXEvents_MediaChangeEvent e)
         {
+
             PackageHost.PushStateObject("CurrentPlaylist", getPlaylist());
             PackageHost.PushStateObject("CurrentSong", new TupleList<string, string, string> { { player.currentMedia.getItemInfo("Author"), player.currentMedia.getItemInfo("Album"), player.currentMedia.getItemInfo("Title") } });
+            Task.Factory.StartNew(() =>
+            {
+                double i = 0;
+                while (player.Ctlcontrols.currentPosition < player.currentMedia.duration)
+                {
+                    if (player.Ctlcontrols.currentPosition > i)
+                    {
+                        i++;
+                        string total = convertInHHMMSS(player.currentMedia.duration);
+                        string current = convertInHHMMSS(player.Ctlcontrols.currentPosition);
+                        PackageHost.PushStateObject("TimeData", new { total, current});
+                    }
+
+                }
+                Thread.Sleep(1000);
+            });
         }
 
+        private string convertInHHMMSS(double time)
+        {
+            int seconds = (int)time;
+            int minutes = seconds / 60;
+            int hours = minutes / 60;
+            seconds = seconds % 60;
+            minutes = minutes % 60;
+            return string.Format("{0}:{1}:{2}", hours, minutes, seconds);
+        }
 
     }
 
