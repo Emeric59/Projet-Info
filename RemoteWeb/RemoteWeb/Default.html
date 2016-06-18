@@ -85,7 +85,8 @@
                 style="background:mediumturquoise;
             cursor:pointer;
             height:40px;
-            width:60px;">
+            width:60px;
+            ">
             Rand.
         </button>
         <br />
@@ -98,17 +99,17 @@
         <br />
         <button id="SearchArtist">Search an Artist</button>
         <button id="SearchAlbum">Search an Album</button>
-        <span id="clickT">none</span>
-
 
         <br/>
-        
-        <span  id="CurrentSong">none</span>
+        <p>Chanson en cours de lecture :</p>
+            <p></p><span id="CurrentSong">none</span>
+            <p><span id="CurrentArtist"></span> - <span id="CurrentAlbum"></span></p>
         <br />
 
         <table id="CurrentPlaylist" >
             <caption align="top">Current Play list</caption>
         </table>
+            <button id="BackArtist">Get back to Artist</button>
         </p3>
 
     <script src="Scripts/jquery-1.6.4.min.js"></script>
