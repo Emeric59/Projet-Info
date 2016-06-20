@@ -125,14 +125,14 @@ namespace RemoteControl
         [MessageCallback]
         void poweroff()
         {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
             DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment éteindre l'ordinateur ?", "Shutdown ?", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
-            {
-                Process nircmd = new Process();
-
-                string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
-                File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
-
+            {                
                 nircmd.StartInfo.FileName = path;
                 nircmd.StartInfo.Arguments = string.Format("exitwin poweroff");
                 nircmd.Start();
@@ -146,14 +146,14 @@ namespace RemoteControl
         [MessageCallback]
         void reboot()
         {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
             DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment rédemarrer l'ordinateur ?", "Reboot ?", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                Process nircmd = new Process();
-
-                string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
-                File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
-
                 nircmd.StartInfo.FileName = path;
                 nircmd.StartInfo.Arguments = string.Format("exitwin reboot");
                 nircmd.Start();
@@ -167,14 +167,14 @@ namespace RemoteControl
         [MessageCallback]
         void standbyPC()
         {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
             DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment mettre en veille l'ordinateur ?", "Sleep ?", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                Process nircmd = new Process();
-
-                string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
-                File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
-
                 nircmd.StartInfo.FileName = path;
                 nircmd.StartInfo.Arguments = string.Format("standby");
                 nircmd.Start();
