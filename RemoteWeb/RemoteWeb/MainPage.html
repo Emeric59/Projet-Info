@@ -4,6 +4,7 @@
     <title>MainPageRemoteControl</title>
 	<meta charset="utf-8" />
     <link rel="stylesheet" href="MainPage.css">
+    <link rel="stylesheet" href="Toggles.css">
 </head>
 <body>
 
@@ -21,17 +22,31 @@
     </div>
 
     <!-- Elements d'ouverture du menu -->
-    <span onclick="openNav()">OPEN MENU</span>
-
     <!-- Contenu -->
     <div id="main">
+
+        <span onclick="openNav()" style="font-size:35px;"><img src="http://www.heritagecaledon.ca/imgs/menuButton.png" style="width:25px;height:25px;" /> MENU</span>
+
+
+
+        <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+            <label class="onoffswitch-label" for="myonoffswitch">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+        </div>
+
+
 
     </div>
 
 
 
 
+
     <script src="scripts/SideBar.js"></script>
+    <script src="scripts/Toggles.js"></script>
 
 
 </body>

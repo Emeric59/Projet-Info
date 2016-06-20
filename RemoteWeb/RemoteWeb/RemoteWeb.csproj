@@ -104,6 +104,7 @@
     <Content Include="scripts\Volume.js" />
     <Content Include="notice.txt" />
     <Content Include="MainPage.css" />
+    <Content Include="Toggles.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

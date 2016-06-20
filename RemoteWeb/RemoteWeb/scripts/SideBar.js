@@ -1,4 +1,10 @@
-﻿/* Controle les largeurs lors de l'ouverture */
+﻿$(document).ready(function () {
+    $(document).on('click', '.toggle-button', function () {
+        $(this).toggleClass('.toggle-button-selected');
+    });
+});
+
+/* Controle les largeurs lors de l'ouverture */
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
@@ -11,3 +17,4 @@ function closeNav() {
     document.getElementById("main").style.marginLeft = "0";
     document.body.style.backgroundColor = "white";
 }
+
