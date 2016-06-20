@@ -10,6 +10,9 @@ constellation.connection.stateChanged(function (change) {
             console.log("shuffleState", result);
             $("#shuffleState").text(result.Data == false ? "off" : "on");
         });
+        var PlayerState = constellation.server.requestStateObjects("MSI-FLO_UI", "RemoteControl", "MediaPlayerState", "*");
+        console.log(PlayerState.Value);
+        $("#MediaPlayerState").text(stateobject.Value);
 
     } else {
         $("#state").text("Non connecté")
@@ -55,6 +58,16 @@ function loadTitleFromList() {
     console.log(this.innerHTML);
 };
     
+$("#Run").click(function () {
+    console.log($("#MediaPlayerState"));
+
+    if ($("#MediaPlayerState") == true) {
+        constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "closeMediaPlayer", "");
+    } else {
+        constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openMediaPlayer", "");
+    }
+});
+
 $("#SearchArtist").click(function () {
     constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadArtist", document.getElementById("search").value);
 });

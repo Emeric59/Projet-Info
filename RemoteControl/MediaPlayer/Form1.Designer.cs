@@ -185,22 +185,22 @@ namespace MediaPlayer
 
             PackageHost.PushStateObject("CurrentPlaylist", getPlaylist());
             PackageHost.PushStateObject("CurrentSong", new TupleList<string, string, string> { { player.currentMedia.getItemInfo("Author"), player.currentMedia.getItemInfo("Album"), player.currentMedia.getItemInfo("Title") } });
-            Task.Factory.StartNew(() =>
-            {
-                double i = 0;
-                while (player.Ctlcontrols.currentPosition < player.currentMedia.duration)
-                {
-                    if (player.Ctlcontrols.currentPosition > i)
-                    {
-                        i++;
-                        string total = convertInHHMMSS(player.currentMedia.duration);
-                        string current = convertInHHMMSS(player.Ctlcontrols.currentPosition);
-                        PackageHost.PushStateObject("TimeData", new { total, current});
-                    }
+            //Task.Factory.StartNew(() =>
+            //{
+            //    double i = 0;
+            //    while (player.Ctlcontrols.currentPosition < player.currentMedia.duration)
+            //    {
+            //        if (player.Ctlcontrols.currentPosition > i)
+            //        {
+            //            i++;
+            //            string total = convertInHHMMSS(player.currentMedia.duration);
+            //            string current = convertInHHMMSS(player.Ctlcontrols.currentPosition);
+            //            PackageHost.PushStateObject("TimeData", new { total, current });
+            //        }
 
-                }
-                Thread.Sleep(1000);
-            });
+            //    }
+            //    Thread.Sleep(1000);
+            //});
         }
 
         private string convertInHHMMSS(double time)

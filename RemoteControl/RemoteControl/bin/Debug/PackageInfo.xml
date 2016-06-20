@@ -5,7 +5,7 @@
          Author="PraZ"
          URL="http://www.mywebsite.com"
          Description="RemoteControl Copyright ©  2016"
-         EnableControlHub="true">
+         EnableControlHub="false">
   <Compatibility constellationVersion="1.8" dotNetTargetPlatform="net45" />
   <Settings>
     <!-- Add your package's settings here -->

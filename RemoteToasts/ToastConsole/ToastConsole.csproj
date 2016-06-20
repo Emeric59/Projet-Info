@@ -50,7 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Constellation.Common, Version=1.8.0.0, Culture=neutral, PublicKeyToken=324a4f45ff674ee1, processorArchitecture=MSIL">
-      <HintPath>..\packages\Constellation.1.8.0.16088\lib\net45\Constellation.Common.dll</HintPath>
+      <HintPath>..\packages\Constellation.1.8.0.16166\lib\net45\Constellation.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -58,7 +58,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NotificationsExtensions.Win10.NETCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -94,6 +94,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Windows" />
+    <Reference Include="Windows.UI" />
+    <Reference Include="Windows.UI.Xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
