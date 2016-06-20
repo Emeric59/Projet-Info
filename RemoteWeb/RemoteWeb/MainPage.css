@@ -1,0 +1,52 @@
+﻿body {
+}
+
+/* Sidemenu */
+.sidenav {
+    height: 100%; /* Prends toute la longueur */
+    width: 0; /* A changer par JS */
+    position: fixed;
+    z-index: 1; /* Au dessus de la page */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Fond noir */
+    overflow-x: hidden; /* Pas de déroulement horizontal */
+    padding-top: 60px; /* Marge haut */
+    transition: 0.5s; /* Duree d'animation */
+}
+
+/* Liens du Sidemenu */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+/* Effets hover des liens */
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+/* Bouton de fermeture du Sidemenu */
+.closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px !important;
+    margin-left: 50px;
+}
+
+/* Style du main, pour decaler lors de l'ouverture */
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+/* Pour les plus petits ecrans (mobile) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
