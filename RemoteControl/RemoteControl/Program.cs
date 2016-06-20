@@ -26,7 +26,7 @@ namespace RemoteControl
         {
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
             PackageHost.WriteInfo("Les Doges c'est trop bien.");
-            string MySentinel = "MSI-FLO";
+            string MySentinel = "PCDEPIERRE";
 
             int seuil = 90;
             PackageHost.WriteInfo($"Seuil de tolérance processeur à {seuil}%");
