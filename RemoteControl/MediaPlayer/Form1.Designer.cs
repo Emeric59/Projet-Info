@@ -128,6 +128,12 @@ namespace MediaPlayer
             player.currentPlaylist = player.mediaCollection.getByAuthor(artist);
         }
 
+        /*[MessageCallback]
+        private void loadVideo()
+        {
+            player.currentPlaylist = player.mediaCollection.getAttributeStringCollection("Title", "Video");
+        }*/
+
         [MessageCallback]
         private void loadAlbum(string album)
         {

@@ -1,12 +1,15 @@
 ﻿using Constellation;
 using Constellation.Package;
+using RemoteControl.PushBullet.MessageCallbacks;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
+using System.Threading;
+using System.Windows.Forms;
 
 
 namespace RemoteControl
@@ -23,7 +26,32 @@ namespace RemoteControl
         {
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
             PackageHost.WriteInfo("Les Doges c'est trop bien.");
-            
+
+
+            int seuil = 90;
+            PackageHost.WriteInfo($"Seuil de tolérance processeur à {seuil}%");
+
+            bool k = false; // initialisation en état processeur faible
+            PackageHost.SubscribeStateObjects(sentinel: "PC-EMERIC", package: "HWMonitor");
+            PackageHost.StateObjectUpdated += (s, e) =>
+            {
+                if (e.StateObject.Name == "/ram/load/0")
+                {
+                    if (!k && e.StateObject.DynamicValue.Value > seuil)
+                    {
+                        k = !k;
+                        MyConstellation.Packages.Pushbullet.CreatePushBulletScope().SendPush(new SendPushRequest
+                        {
+                            Message = $"Utilisation de la mémoire RAM à {e.StateObject.DynamicValue.Value}% supérieure au seuil de {seuil}%",
+                            Title = $"Message from {e.StateObject.SentinelName}"
+                        });
+                    }
+                    else if (k && e.StateObject.DynamicValue.Value < seuil)
+                    {
+                        k = !k;
+                    }
+                }
+            };
         }
 
         [MessageCallback]
@@ -68,12 +96,118 @@ namespace RemoteControl
         }
 
         [MessageCallback]
-        void openDoge()
+        void panicMode()
         {
-            Process dogeBrowser = new Process();
-            dogeBrowser.StartInfo.UseShellExecute = true;
-            dogeBrowser.StartInfo.FileName = "https://www.reddit.com/r/doge/";
-            dogeBrowser.Start();
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
+            nircmd.StartInfo.FileName = path;
+            nircmd.StartInfo.Arguments = string.Format("sendkeypress rwin+d");
+            nircmd.Start();
+
+        }
+
+        [MessageCallback]
+        void sleepScreen()
+        {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
+            nircmd.StartInfo.FileName = path;
+            nircmd.StartInfo.Arguments = string.Format("monitor off");
+            nircmd.Start();
+        }
+
+        [MessageCallback]
+        void poweroff()
+        {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
+            DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment éteindre l'ordinateur ?", "Shutdown ?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {                
+                nircmd.StartInfo.FileName = path;
+                nircmd.StartInfo.Arguments = string.Format("exitwin poweroff");
+                nircmd.Start();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }            
+        }
+
+        [MessageCallback]
+        void reboot()
+        {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
+            DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment rédemarrer l'ordinateur ?", "Reboot ?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                nircmd.StartInfo.FileName = path;
+                nircmd.StartInfo.Arguments = string.Format("exitwin reboot");
+                nircmd.Start();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+        }
+
+        [MessageCallback]
+        void standbyPC()
+        {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
+            DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment mettre en veille l'ordinateur ?", "Sleep ?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                nircmd.StartInfo.FileName = path;
+                nircmd.StartInfo.Arguments = string.Format("standby");
+                nircmd.Start();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+        }
+
+        [MessageCallback]
+        void answerQuestion(string reponse)
+        {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
+            nircmd.StartInfo.FileName = path;
+
+            switch (reponse)
+            {
+                case "oui":
+                    nircmd.StartInfo.Arguments = string.Format("dlg \"\" \"\" click yes");
+                    PackageHost.WriteInfo("On clique sur oui");
+                    break;
+                case "non":
+                    nircmd.StartInfo.Arguments = string.Format("dlg \"\" \"\" click no");
+                    break;
+                default:
+                    return;
+            }
+            nircmd.Start();
         }
 
         [MessageCallback]
@@ -88,14 +222,14 @@ namespace RemoteControl
         [MessageCallback]
         void openMediaPlayer()
         {
-            PackageHost.ControlManager.StartPackage("MSI-FLO_UI", "MediaPlayer");
+            PackageHost.ControlManager.StartPackage("PC-EMERIC_UI", "MediaPlayer");
             PackageHost.PushStateObject("MediaPlayerState", true);
         }
 
         [MessageCallback]
         void closeMediaPlayer()
         {
-            PackageHost.ControlManager.StopPackage("MSI-FLO_UI", "MediaPlayer");
+            PackageHost.ControlManager.StopPackage("PC-EMERIC_UI", "MediaPlayer");
             PackageHost.PushStateObject("MediaPlayerState", false);
         }
 

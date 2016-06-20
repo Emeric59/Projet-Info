@@ -5,32 +5,49 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <style type="text/css">
+        body {background-color:beige;}
         p1 {font-size: 20px;
             font-family:'Bell MT';
             font-weight:bold;
+            position:absolute;
+                top:20%;
         }
-        p2 {font-family:'Bell MT';
-            font-weight:bold;
-            font-size:20px;
+        p2 {position:absolute;
+                top:50%;
+                right:50%;
+            border: 3px dotted black;
+            background-color:white;
+        }
+        p3 {position:absolute;
+                left:40;
+                top:10;
+        }
+        p4 {position:absolute;
+                right:0;
+                top:0;
         }
     </style>
 </head>
 <body>
-    <span id="state">Déconnecté</span>
-    <br />
-    <button id="Run"
-            style="background:black;
+    <p3>
+        <button id="Run"
+                style="background:black;
             cursor:auto;
             color:white;">
-        <span id="MediaPlayerState">
-        Media player déconnecté
-        <br/>
-        Appuyez ici pour le connecter
-        </span>
-    </button>
+            <span id="MediaPlayerState">
+                Media player déconnecté
+                <br />
+                Appuyez ici pour le connecter
+            </span>
+        </button>
+    </p3>
+    <P4>
+        Vous &ecirc;tes
+        <span id="state">Déconnecté</span>
+        &agrave; constellation
+    </P4>
     <br/>
-    <p1><b>R&egrave;glez le volume de votre ordinateur :</b></p1>
-    <p2>
+    <p1>R&egrave;glez le volume de votre ordinateur :
         <button id="Mute"
                 style="background:chocolate;
             cursor:pointer;
@@ -101,19 +118,35 @@
             Rand.
         </button>
         <br />
-        </p2>
-        <p3>
+        <button id="Panic"
+                style="background:red;
+            cursor:pointer;
+            height:40px;
+            width:60px;
+            ">
+            Panic
+        </button>
+        <button id="MonitorOff"
+                style="background:red;
+            cursor:pointer;
+            height:40px;
+            width:80px;
+            ">
+            MonitorOff
+        </button>
+        </p1>
+        <p2>
+        Al&eacute;atoire :
         <span id="shuffleState">off</span>
-
         <br/>
         <input id="search" type="search" placeholder="Entrez un mot-clef" name="search">
         <br />
         <button id="SearchArtist">Search an Artist</button>
         <button id="SearchAlbum">Search an Album</button>
-
+        
         <br/>
-        <p>Chanson en cours de lecture :</p>
-            <p></p><span id="CurrentSong">none</span>
+        Chanson en cours de lecture :
+            <p><span id="CurrentSong">none</span><p/>
             <p><span id="CurrentArtist"></span> - <span id="CurrentAlbum"></span></p>
         <br />
 
@@ -121,7 +154,7 @@
             <caption align="top">Current Play list</caption>
         </table>
             <button id="BackArtist">Get back to Artist</button>
-        </p3>
+        </p2>
 
     <script src="Scripts/jquery-1.6.4.min.js"></script>
     <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
