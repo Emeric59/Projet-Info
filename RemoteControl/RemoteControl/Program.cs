@@ -110,7 +110,7 @@ namespace RemoteControl
         }
 
         [MessageCallback]
-        void sleepScreen()
+        void monitorOff()
         {
             Process nircmd = new Process();
 
@@ -123,7 +123,7 @@ namespace RemoteControl
         }
 
         [MessageCallback]
-        void poweroff()
+        void shutdown()
         {
             Process nircmd = new Process();
 
@@ -165,7 +165,7 @@ namespace RemoteControl
         }
 
         [MessageCallback]
-        void standbyPC()
+        void sleep()
         {
             Process nircmd = new Process();
 
