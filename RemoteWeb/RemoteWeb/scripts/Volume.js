@@ -1,6 +1,7 @@
-﻿var constellation = $.signalR.createConstellationConsumer("http://localhost:8088", "6d540ec121c933fe48ea0ad3872d5b98dec65226", "RemoteControl")
+﻿var constellation = $.signalR.createConstellationConsumer("http://localhost:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteControl")
 var tableau = document.getElementById("CurrentPlaylist");
-var MySentinel = "PCDEPIERRE_UI";
+var MySentinel = "MSI-FLO_UI";
+var PlayerState = false;
 
 constellation.connection.stateChanged(function (change) {
     if (change.newState === $.signalR.connectionState.connected) {
@@ -9,10 +10,8 @@ constellation.connection.stateChanged(function (change) {
         constellation.server.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "", function (result) {
             $("#shuffleState").text(result.Data == false ? "off" : "on");
         });
-        var PlayerState = constellation.server.requestStateObjects(MySentinel, "RemoteControl", "MediaPlayerState", "*");
-        console.log(PlayerState.Value);
-        $("#MediaPlayerState").text(PlayerState.Value);
-
+        constellation.server.requestSubscribeStateObjects(MySentinel, "RemoteControl", "MediaPlayerState", "*");
+        
     } else {
         $("#state").text("Non connecté")
     }
@@ -20,7 +19,7 @@ constellation.connection.stateChanged(function (change) {
 
 constellation.client.onUpdateStateObject(function (stateobject) {
     console.log(stateobject);
-    if (stateobject.Name == "CurrentSong") {
+    if (stateobject.Name == "CurrentSong" && stateobject.Value.length != 0) {
         $("#CurrentSong").text(stateobject.Value[0].Item3);
         $("#CurrentArtist").text(stateobject.Value[0].Item1);
         $("#CurrentAlbum").text(stateobject.Value[0].Item2);
@@ -45,6 +44,15 @@ constellation.client.onUpdateStateObject(function (stateobject) {
             colonne2.addEventListener("click", loadAlbumFromList);
         }
     }
+    if (stateobject.Name == "MediaPlayerState") {
+        if(stateobject.Value == false){
+            $("#MediaPlayerState").text("Media player déconnecté");
+            PlayerState = false;
+        } else {
+            $("#MediaPlayerState").text("Media player connecté");
+            PlayerState = true;
+        }
+    }
 });
 
 function loadAlbumFromList() {
@@ -58,9 +66,7 @@ function loadTitleFromList() {
 };
     
 $("#Run").click(function () {
-    console.log($("#MediaPlayerState"));
-
-    if ($("#MediaPlayerState") == true) {
+    if (PlayerState == true) {
         constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "closeMediaPlayer", "");
     } else {
         constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openMediaPlayer", "");
