@@ -88,14 +88,14 @@ namespace RemoteControl
         [MessageCallback]
         void openMediaPlayer()
         {
-            PackageHost.ControlManager.StartPackage("MSI-FLO_UI", "MediaPlayer");
+            PackageHost.ControlManager.StartPackage("PCDEPIERRE_UI", "MediaPlayer");
             PackageHost.PushStateObject("MediaPlayerState", true);
         }
 
         [MessageCallback]
         void closeMediaPlayer()
         {
-            PackageHost.ControlManager.StopPackage("MSI-FLO_UI", "MediaPlayer");
+            PackageHost.ControlManager.StopPackage("PCDEPIERRE_UI", "MediaPlayer");
             PackageHost.PushStateObject("MediaPlayerState", false);
         }
 
