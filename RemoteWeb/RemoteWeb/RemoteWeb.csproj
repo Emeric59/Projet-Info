@@ -78,6 +78,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\dogelogo.jpg" />
     <Content Include="Images\fillerlogo.jpg" />
     <Content Include="MainPage.html" />
     <Content Include="packages.config" />
