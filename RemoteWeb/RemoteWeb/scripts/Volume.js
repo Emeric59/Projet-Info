@@ -1,16 +1,16 @@
-﻿var constellation = $.signalR.createConstellationConsumer("http://localhost:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteControl")
+﻿var constellation = $.signalR.createConstellationConsumer("http://localhost:8088", "a28d975296302b2e3620a8626eb6d1ce56c79f23", "RemoteControl")
 var tableau = document.getElementById("CurrentPlaylist");
 
 
 constellation.connection.stateChanged(function (change) {
     if (change.newState === $.signalR.connectionState.connected) {
         $("#state").text("Connecté")
-        constellation.server.requestSubscribeStateObjects("MSI-FLO_UI", "MediaPlayer", "*", "*");
+        constellation.server.requestSubscribeStateObjects("PC-EMERIC_UI", "MediaPlayer", "*", "*");
         constellation.server.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "", function (result) {
             console.log("shuffleState", result);
             $("#shuffleState").text(result.Data == false ? "off" : "on");
         });
-        var PlayerState = constellation.server.requestStateObjects("MSI-FLO_UI", "RemoteControl", "MediaPlayerState", "*");
+        var PlayerState = constellation.server.requestStateObjects("PC-EMERIC_UI", "RemoteControl", "MediaPlayerState", "*");
         console.log(PlayerState.Value);
         $("#MediaPlayerState").text(stateobject.Value);
 

@@ -68,6 +68,20 @@ namespace RemoteControl
         }
 
         [MessageCallback]
+        void panicMode()
+        {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
+            nircmd.StartInfo.FileName = path;
+            nircmd.StartInfo.Arguments = string.Format("sendkeypress rwin+d");
+            nircmd.Start();
+
+        }
+
+        [MessageCallback]
         void openDoge()
         {
             Process dogeBrowser = new Process();
@@ -88,14 +102,14 @@ namespace RemoteControl
         [MessageCallback]
         void openMediaPlayer()
         {
-            PackageHost.ControlManager.StartPackage("MSI-FLO_UI", "MediaPlayer");
+            PackageHost.ControlManager.StartPackage("PC-EMERIC_UI", "MediaPlayer");
             PackageHost.PushStateObject("MediaPlayerState", true);
         }
 
         [MessageCallback]
         void closeMediaPlayer()
         {
-            PackageHost.ControlManager.StopPackage("MSI-FLO_UI", "MediaPlayer");
+            PackageHost.ControlManager.StopPackage("PC-EMERIC_UI", "MediaPlayer");
             PackageHost.PushStateObject("MediaPlayerState", false);
         }
 
