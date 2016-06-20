@@ -27,7 +27,7 @@ namespace RemoteControl
 
 
             int seuil = 90;
-            PackageHost.WriteInfo($"seuil de tolérance processeur à {seuil}%");
+            PackageHost.WriteInfo($"Seuil de tolérance processeur à {seuil}%");
 
             bool k = false; // initialisation en état processeur faible
             PackageHost.SubscribeStateObjects(sentinel: "PC-EMERIC", package: "HWMonitor");
@@ -105,6 +105,58 @@ namespace RemoteControl
             nircmd.StartInfo.Arguments = string.Format("sendkeypress rwin+d");
             nircmd.Start();
 
+        }
+
+        [MessageCallback]
+        void sleepScreen()
+        {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
+            nircmd.StartInfo.FileName = path;
+            nircmd.StartInfo.Arguments = string.Format("monitor off");
+            nircmd.Start();
+        }
+
+        [MessageCallback]
+        void poweroff()
+        {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
+            nircmd.StartInfo.FileName = path;
+            nircmd.StartInfo.Arguments = string.Format("exitwin poweroff");
+            nircmd.Start();
+        }
+
+        [MessageCallback]
+        void reboot()
+        {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
+            nircmd.StartInfo.FileName = path;
+            nircmd.StartInfo.Arguments = string.Format("exitwin reboot");
+            nircmd.Start();
+        }
+
+        [MessageCallback]
+        void standbyPC()
+        {
+            Process nircmd = new Process();
+
+            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
+            nircmd.StartInfo.FileName = path;
+            nircmd.StartInfo.Arguments = string.Format("standby");
+            nircmd.Start();
         }
 
         [MessageCallback]
