@@ -1,5 +1,6 @@
 ﻿using Constellation;
 using Constellation.Package;
+using RemoteControl.PushBullet.MessageCallbacks;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,7 +24,32 @@ namespace RemoteControl
         {
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
             PackageHost.WriteInfo("Les Doges c'est trop bien.");
-            
+
+
+            int seuil = 90;
+            PackageHost.WriteInfo($"seuil de tolérance processeur à {seuil}%");
+
+            bool k = false; // initialisation en état processeur faible
+            PackageHost.SubscribeStateObjects(sentinel: "PC-EMERIC", package: "HWMonitor");
+            PackageHost.StateObjectUpdated += (s, e) =>
+            {
+                if (e.StateObject.Name == "/ram/load/0")
+                {
+                    if (!k && e.StateObject.DynamicValue.Value > seuil)
+                    {
+                        k = !k;
+                        MyConstellation.Packages.Pushbullet.CreatePushBulletScope().SendPush(new SendPushRequest
+                        {
+                            Message = $"Utilisation de la mémoire RAM à {e.StateObject.DynamicValue.Value}% supérieure au seuil de {seuil}%",
+                            Title = $"Message from {e.StateObject.SentinelName}"
+                        });
+                    }
+                    else if (k && e.StateObject.DynamicValue.Value < seuil)
+                    {
+                        k = !k;
+                    }
+                }
+            };
         }
 
         [MessageCallback]
