@@ -26,13 +26,13 @@ namespace RemoteControl
         {
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
             PackageHost.WriteInfo("Les Doges c'est trop bien.");
-
+            string MySentinel = "MSI-FLO";
 
             int seuil = 90;
             PackageHost.WriteInfo($"Seuil de tolérance processeur à {seuil}%");
 
             bool k = false; // initialisation en état processeur faible
-            PackageHost.SubscribeStateObjects(sentinel: "PCDEPIERRE", package: "HWMonitor");
+            PackageHost.SubscribeStateObjects(sentinel: MySentinel, package: "HWMonitor");
             PackageHost.StateObjectUpdated += (s, e) =>
             {
                 if (e.StateObject.Name == "/ram/load/0")
@@ -151,7 +151,7 @@ namespace RemoteControl
             string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
             File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
 
-            DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment redémarrer l'ordinateur ?", "Reboot ?", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment rédemarrer l'ordinateur ?", "Reboot ?", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 nircmd.StartInfo.FileName = path;
@@ -222,14 +222,14 @@ namespace RemoteControl
         [MessageCallback]
         void openMediaPlayer()
         {
-            PackageHost.ControlManager.StartPackage("PCDEPIERRE_UI", "MediaPlayer");
+            PackageHost.ControlManager.StartPackage(PackageHost.SentinelName, "MediaPlayer");
             PackageHost.PushStateObject("MediaPlayerState", true);
         }
 
         [MessageCallback]
         void closeMediaPlayer()
         {
-            PackageHost.ControlManager.StopPackage("PCDEPIERRE_UI", "MediaPlayer");
+            PackageHost.ControlManager.StopPackage(PackageHost.SentinelName, "MediaPlayer");
             PackageHost.PushStateObject("MediaPlayerState", false);
         }
 

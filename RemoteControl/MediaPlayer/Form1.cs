@@ -28,8 +28,10 @@ namespace MediaPlayer
             PackageHost.RegisterMessageCallbacks(this);
             PackageHost.DeclarePackageDescriptor();
             player.MediaChange += new AxWMPLib._WMPOCXEvents_MediaChangeEventHandler(player_MediaChange);
-            
 
+            timer.Interval = 1000;
+            timer.Elapsed += Timer_Elapsed;
+            timer.Enabled = true;
             PackageHost.PushStateObject("CurrentSong", new TupleList<string, string, string> { });
             
 

@@ -68,8 +68,8 @@ namespace MediaPlayer
         #endregion
 
         private AxWMPLib.AxWindowsMediaPlayer player;
-        string MySentinel = "MSI-FLO_UI";
         System.Timers.Timer timer = new System.Timers.Timer();
+
 
 
         [StateObjectLink(Package = "MediaPlayer", Name = "CurrentSong")]
@@ -200,12 +200,8 @@ namespace MediaPlayer
             {
                 PackageHost.PushStateObject("CurrentPlaylist", getPlaylist());
                 PackageHost.PushStateObject("CurrentSong", new TupleList<string, string, string> { { player.currentMedia.getItemInfo("Author"), player.currentMedia.getItemInfo("Album"), player.currentMedia.getItemInfo("Title") } });
-                
-                timer.Interval = 1000;
-                timer.Elapsed += Timer_Elapsed;
-                timer.Enabled = true;
             }                            
-
+            
 
         }
 
