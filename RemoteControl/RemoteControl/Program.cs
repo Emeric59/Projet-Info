@@ -110,7 +110,7 @@ namespace RemoteControl
         }
 
         [MessageCallback]
-        void sleepScreen()
+        void monitorOff()
         {
             Process nircmd = new Process();
 
@@ -123,7 +123,7 @@ namespace RemoteControl
         }
 
         [MessageCallback]
-        void poweroff()
+        void shutdown()
         {
             Process nircmd = new Process();
 
@@ -151,7 +151,7 @@ namespace RemoteControl
             string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
             File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
 
-            DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment rédemarrer l'ordinateur ?", "Reboot ?", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment redémarrer l'ordinateur ?", "Reboot ?", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 nircmd.StartInfo.FileName = path;
@@ -165,7 +165,7 @@ namespace RemoteControl
         }
 
         [MessageCallback]
-        void standbyPC()
+        void sleep()
         {
             Process nircmd = new Process();
 

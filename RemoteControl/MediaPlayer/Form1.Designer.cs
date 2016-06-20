@@ -68,6 +68,14 @@ namespace MediaPlayer
         #endregion
 
         private AxWMPLib.AxWindowsMediaPlayer player;
+        string MySentinel = "MSI-FLO_UI";
+        System.Timers.Timer timer = new System.Timers.Timer();
+
+
+        [StateObjectLink(Package = "MediaPlayer", Name = "CurrentSong")]
+        private StateObjectNotifier MPlayer { get; set; }
+        
+
 
         #region Control Function
 
@@ -113,8 +121,7 @@ namespace MediaPlayer
         }
 
         #endregion
-
-
+        
         [MessageCallback]
         private void loadArtist(string artist)
         {
@@ -185,29 +192,33 @@ namespace MediaPlayer
             }
             return collection;
         }
-
+        
         private void player_MediaChange(object sender, _WMPOCXEvents_MediaChangeEvent e)
         {
+            
+            if (DateTime.Now > this.MPlayer.Value.LastUpdate.AddSeconds(2))
+            {
+                PackageHost.PushStateObject("CurrentPlaylist", getPlaylist());
+                PackageHost.PushStateObject("CurrentSong", new TupleList<string, string, string> { { player.currentMedia.getItemInfo("Author"), player.currentMedia.getItemInfo("Album"), player.currentMedia.getItemInfo("Title") } });
+                
+                timer.Interval = 1000;
+                timer.Elapsed += Timer_Elapsed;
+                timer.Enabled = true;
+            }                            
 
-            PackageHost.PushStateObject("CurrentPlaylist", getPlaylist());
-            PackageHost.PushStateObject("CurrentSong", new TupleList<string, string, string> { { player.currentMedia.getItemInfo("Author"), player.currentMedia.getItemInfo("Album"), player.currentMedia.getItemInfo("Title") } });
-            //Task.Factory.StartNew(() =>
-            //{
-            //    double i = 0;
-            //    while (player.Ctlcontrols.currentPosition < player.currentMedia.duration)
-            //    {
-            //        if (player.Ctlcontrols.currentPosition > i)
-            //        {
-            //            i++;
-            //            string total = convertInHHMMSS(player.currentMedia.duration);
-            //            string current = convertInHHMMSS(player.Ctlcontrols.currentPosition);
-            //            PackageHost.PushStateObject("TimeData", new { total, current });
-            //        }
 
-            //    }
-            //    Thread.Sleep(1000);
-            //});
         }
+
+        
+
+        private void Timer_Elapsed(object sender, System.EventArgs e)
+        {
+            string total =  convertInHHMMSS(player.currentMedia.duration) ;
+            string current = convertInHHMMSS(player.Ctlcontrols.currentPosition);
+
+            PackageHost.PushStateObject("TimeData", new { total, current });
+        }
+
 
         private string convertInHHMMSS(double time)
         {
@@ -216,7 +227,7 @@ namespace MediaPlayer
             int hours = minutes / 60;
             seconds = seconds % 60;
             minutes = minutes % 60;
-            return string.Format("{0}:{1}:{2}", hours, minutes, seconds);
+            return string.Format("{0:D2}:{1:D2}:{2:D2}", hours, minutes, seconds);
         }
 
     }
