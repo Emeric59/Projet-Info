@@ -107,6 +107,21 @@ $("#Precedent").click(function () {
 $("#Suivant").click(function () {
     constellation.server.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "next", "");
 });
+$("#Panic").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "panicMode", "");
+});
+$("#MonitorOff").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "monitorOff", "");
+});
+$("#Shutdown").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "shutdown", "");
+});
+$("#Reboot").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "reboot", "");
+});
+$("#StandBy").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "sleep", "");
+});
 
 $("#Shuffle").click(function () {
     constellation.server.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "set", function (result) {

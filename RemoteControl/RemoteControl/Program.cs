@@ -32,7 +32,7 @@ namespace RemoteControl
             PackageHost.WriteInfo($"Seuil de tolérance processeur à {seuil}%");
 
             bool k = false; // initialisation en état processeur faible
-            PackageHost.SubscribeStateObjects(sentinel: "PC-EMERIC", package: "HWMonitor");
+            PackageHost.SubscribeStateObjects(sentinel: "PCDEPIERRE", package: "HWMonitor");
             PackageHost.StateObjectUpdated += (s, e) =>
             {
                 if (e.StateObject.Name == "/ram/load/0")
@@ -222,14 +222,14 @@ namespace RemoteControl
         [MessageCallback]
         void openMediaPlayer()
         {
-            PackageHost.ControlManager.StartPackage("PC-EMERIC_UI", "MediaPlayer");
+            PackageHost.ControlManager.StartPackage("PCDEPIERRE_UI", "MediaPlayer");
             PackageHost.PushStateObject("MediaPlayerState", true);
         }
 
         [MessageCallback]
         void closeMediaPlayer()
         {
-            PackageHost.ControlManager.StopPackage("PC-EMERIC_UI", "MediaPlayer");
+            PackageHost.ControlManager.StopPackage("PCDEPIERRE_UI", "MediaPlayer");
             PackageHost.PushStateObject("MediaPlayerState", false);
         }
 
