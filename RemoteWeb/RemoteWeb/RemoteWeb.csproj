@@ -78,6 +78,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MainPage.html" />
     <Content Include="packages.config" />
     <Content Include="scripts\angular-mocks.js" />
     <Content Include="scripts\angular.js" />
@@ -94,6 +95,7 @@
     <Content Include="Default.html" />
     <None Include="scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="scripts\Constellation-1.8.0.js" />
+    <Content Include="scripts\SideBar.js" />
     <Content Include="scripts\jquery-1.6.4.js" />
     <Content Include="scripts\jquery-1.6.4.min.js" />
     <Content Include="scripts\jquery.signalR-2.2.0.js" />
@@ -101,6 +103,7 @@
     <Content Include="scripts\ngConstellation-1.8.0.js" />
     <Content Include="scripts\Volume.js" />
     <Content Include="notice.txt" />
+    <Content Include="MainPage.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
