@@ -7,7 +7,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
+using System.Threading;
+using System.Windows.Forms;
 
 
 namespace RemoteControl
@@ -123,49 +125,89 @@ namespace RemoteControl
         [MessageCallback]
         void poweroff()
         {
-            Process nircmd = new Process();
+            DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment éteindre l'ordinateur ?", "Shutdown ?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Process nircmd = new Process();
 
-            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
-            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+                string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+                File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
 
-            nircmd.StartInfo.FileName = path;
-            nircmd.StartInfo.Arguments = string.Format("exitwin poweroff");
-            nircmd.Start();
+                nircmd.StartInfo.FileName = path;
+                nircmd.StartInfo.Arguments = string.Format("exitwin poweroff");
+                nircmd.Start();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }            
         }
 
         [MessageCallback]
         void reboot()
         {
-            Process nircmd = new Process();
+            DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment rédemarrer l'ordinateur ?", "Reboot ?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Process nircmd = new Process();
 
-            string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
-            File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+                string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+                File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
 
-            nircmd.StartInfo.FileName = path;
-            nircmd.StartInfo.Arguments = string.Format("exitwin reboot");
-            nircmd.Start();
+                nircmd.StartInfo.FileName = path;
+                nircmd.StartInfo.Arguments = string.Format("exitwin reboot");
+                nircmd.Start();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
         }
 
         [MessageCallback]
         void standbyPC()
         {
+            DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment mettre en veille l'ordinateur ?", "Sleep ?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Process nircmd = new Process();
+
+                string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
+                File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
+
+                nircmd.StartInfo.FileName = path;
+                nircmd.StartInfo.Arguments = string.Format("standby");
+                nircmd.Start();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+        }
+
+        [MessageCallback]
+        void answerQuestion(string reponse)
+        {
             Process nircmd = new Process();
 
             string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
             File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
 
             nircmd.StartInfo.FileName = path;
-            nircmd.StartInfo.Arguments = string.Format("standby");
-            nircmd.Start();
-        }
 
-        [MessageCallback]
-        void openDoge()
-        {
-            Process dogeBrowser = new Process();
-            dogeBrowser.StartInfo.UseShellExecute = true;
-            dogeBrowser.StartInfo.FileName = "https://www.reddit.com/r/doge/";
-            dogeBrowser.Start();
+            switch (reponse)
+            {
+                case "oui":
+                    nircmd.StartInfo.Arguments = string.Format("dlg \"\" \"\" click yes");
+                    PackageHost.WriteInfo("On clique sur oui");
+                    break;
+                case "non":
+                    nircmd.StartInfo.Arguments = string.Format("dlg \"\" \"\" click no");
+                    break;
+                default:
+                    return;
+            }
+            nircmd.Start();
         }
 
         [MessageCallback]
