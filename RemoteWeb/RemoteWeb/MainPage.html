@@ -11,7 +11,7 @@
 
     <div id="sideZone">
         <img src="Images/dogelogo.jpg" alt="logo" align="middle" width="250" />
-        <span onclick="openNav()" style="font-size:35px;">MENU</span>
+        <span onclick="openNav()" width="220" ><img src="Images/menu-button.png" /></span>
     </div>
 
 
@@ -20,43 +20,42 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-        <a href="#">Controle PC</a>
+        <a href="javascript:void(0)" onclick="openControl()">Controle PC</a>
 
-        <a href="#">Volume</a>
+        <a href="javascript:void(0)" onclick="openVolume()">Volume</a>
 
-        <a href="#">Lecteur Media</a>
+        <a href="javascript:void(0)" onclick="openMediaPlayer()">Lecteur Media</a>
 
 
     </div>
 
-    <!-- Elements d'ouverture du menu -->
     <!-- Contenu -->
-    <div id="main">
+    <iframe src="HomeFrame.html" id="mainFrame" scrolling="no" frameborder="0" style="position:page;top:0px;left:0px;bottom:0px"">
 
         
 
 
 
-        <div class="onoffswitch">
-            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-            <label class="onoffswitch-label" for="myonoffswitch">
-                <span class="onoffswitch-inner"></span>
-                <span class="onoffswitch-switch"></span>
-            </label>
-        </div>
+        
 
 
 
+    </iframe>
+
+    <!--
+
+    <div class="onoffswitch">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+        <label class="onoffswitch-label" for="myonoffswitch">
+            <span class="onoffswitch-inner"></span>
+            <span class="onoffswitch-switch"></span>
+        </label>
     </div>
 
+    -->
 
 
-
-
-
-
-
-
+    <script src="scripts/Frames.js"></script>
     <script src="scripts/SideBar.js"></script>
     <script src="scripts/Toggles.js"></script>
 

@@ -43,9 +43,14 @@
 }
 
 /* Style du main, pour decaler lors de l'ouverture */
-#main {
+#mainFrame {
     margin-left : 250px;
-    padding: 20px;
+    overflow:hidden;
+    overflow-x:hidden;
+    overflow-y:hidden;
+    height:100%;
+    width:calc(100%-100px);
+
 }
 
 /* Pour les plus petits ecrans (mobile) */
@@ -62,8 +67,10 @@
 
 
 #sideZone{
+    height: 100%; /* Prends toute la longueur */
     position:absolute;
     top:0;
     left:0;
     width:250px;
+    border-right:outset;
 }

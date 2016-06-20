@@ -78,9 +78,22 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ControlFrame.html" />
+    <Content Include="HomeFrame.html" />
     <Content Include="Images\dogelogo.jpg" />
     <Content Include="Images\fillerlogo.jpg" />
+    <Content Include="Images\MediaPlayer\pause.png" />
+    <Content Include="Images\MediaPlayer\play.png" />
+    <Content Include="Images\MediaPlayer\shuffle.png" />
+    <Content Include="Images\MediaPlayer\skip-next.png" />
+    <Content Include="Images\MediaPlayer\skip-previous.png" />
+    <Content Include="Images\MediaPlayer\stop.png" />
+    <Content Include="Images\menu-button.png" />
+    <Content Include="Images\Volume\volume-high.png" />
+    <Content Include="Images\Volume\volume-low.png" />
+    <Content Include="Images\Volume\volume-off.png" />
     <Content Include="MainPage.html" />
+    <Content Include="MediaPlayerFrame.html" />
     <Content Include="packages.config" />
     <Content Include="scripts\angular-mocks.js" />
     <Content Include="scripts\angular.js" />
@@ -97,6 +110,7 @@
     <Content Include="Default.html" />
     <None Include="scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="scripts\Constellation-1.8.0.js" />
+    <Content Include="scripts\Frames.js" />
     <Content Include="scripts\SideBar.js" />
     <Content Include="scripts\jquery-1.6.4.js" />
     <Content Include="scripts\jquery-1.6.4.min.js" />
@@ -107,6 +121,7 @@
     <Content Include="notice.txt" />
     <Content Include="MainPage.css" />
     <Content Include="Toggles.css" />
+    <Content Include="VolumeFrame.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +130,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
