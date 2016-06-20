@@ -44,7 +44,7 @@
 
 /* Style du main, pour decaler lors de l'ouverture */
 #main {
-    transition: margin-left .5s;
+    margin-left : 250px;
     padding: 20px;
 }
 
@@ -61,3 +61,9 @@
 .toggle-button-selected button { left: 26px; top: 0; margin: 0; border: none; width: 24px; height: 24px; box-shadow: 0 0 4px rgba(0,0,0,0.1); }
 
 
+#sideZone{
+    position:absolute;
+    top:0;
+    left:0;
+    width:250px;
+}
