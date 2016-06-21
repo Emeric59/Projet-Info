@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
+using NAudio.CoreAudioApi;
 
 
 namespace RemoteControl
@@ -24,16 +25,16 @@ namespace RemoteControl
 
         public override void OnStart()
         {
-            float? level;
-            level = GetApplicationVolume("Master");
-            Console.WriteLine("level : {0}", level);
+            PackageHost.PurgeStateObjects();
+            MMDevice MMD = loadDefaultAudioDevice();
+            MMD.AudioEndpointVolume.OnVolumeNotification += AudioEndpointVolume_OnVolumeNotification;
+            PackageHost.PushStateObject("VolumeLevel", Math.Round(MMD.AudioEndpointVolume.MasterVolumeLevelScalar * 100));
 
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
-            PackageHost.WriteInfo("Les Doges c'est trop bien.");
             string MySentinel = "MSI-FLO";
 
             int seuil = 90;
-            PackageHost.WriteInfo($"Seuil de tolérance processeur à {seuil}%");
+            PackageHost.WriteInfo($"Seuil de tolérance RAM à {seuil}%");
 
             bool k = false; // initialisation en état processeur faible
             PackageHost.SubscribeStateObjects(sentinel: MySentinel, package: "HWMonitor");
@@ -56,6 +57,19 @@ namespace RemoteControl
                     }
                 }
             };
+        }
+
+        private void AudioEndpointVolume_OnVolumeNotification(AudioVolumeNotificationData data)
+        {
+            double level = Math.Round( data.MasterVolume * 100);
+            PackageHost.PushStateObject("VolumeLevel", level);
+        }
+
+        private MMDevice loadDefaultAudioDevice()
+        {
+            MMDeviceEnumerator MMDE = new MMDeviceEnumerator();
+            MMDevice MMD = MMDE.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            return MMD;
         }
 
         [MessageCallback]

@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteControl", "RemoteCont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaPlayer", "MediaPlayer\MediaPlayer.csproj", "{60209583-EA70-4874-9D06-DF61265B739D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreAudio", "D:\Documents\Visual Studio 2015\Projects\netcoreaudio-master\CoreAudio\CoreAudio.csproj", "{2222E8D7-6130-4B46-9749-474E3FE2891B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,14 +31,6 @@ Global
 		{60209583-EA70-4874-9D06-DF61265B739D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{60209583-EA70-4874-9D06-DF61265B739D}.Release|x64.ActiveCfg = Release|Any CPU
 		{60209583-EA70-4874-9D06-DF61265B739D}.Release|x64.Build.0 = Release|Any CPU
-		{2222E8D7-6130-4B46-9749-474E3FE2891B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2222E8D7-6130-4B46-9749-474E3FE2891B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2222E8D7-6130-4B46-9749-474E3FE2891B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{2222E8D7-6130-4B46-9749-474E3FE2891B}.Debug|x64.Build.0 = Debug|Any CPU
-		{2222E8D7-6130-4B46-9749-474E3FE2891B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2222E8D7-6130-4B46-9749-474E3FE2891B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2222E8D7-6130-4B46-9749-474E3FE2891B}.Release|x64.ActiveCfg = Release|Any CPU
-		{2222E8D7-6130-4B46-9749-474E3FE2891B}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
