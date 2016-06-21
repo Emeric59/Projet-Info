@@ -5,6 +5,13 @@
 	<meta charset="utf-8" />
     <link rel="stylesheet" href="MainPage.css">
     <link rel="stylesheet" href="Toggles.css">
+
+    <script language="javascript" type="text/javascript">
+      function resizeIframe(obj) {
+        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+      }
+    </script>
+
 </head>
 <body>
 
@@ -24,13 +31,13 @@
 
         <a href="javascript:void(0)" onclick="openVolume(); closeNav()">Volume</a>
 
-        <a href="javascript:void(0)" onclick="openMediaPlayer(); closeNav()">Lecteur Media</a>
+        <a href="javascript:void(0)" onclick="openMediaPlayer(); closeNav()">Media</a>
 
 
     </div>
 
     <!-- Contenu -->
-    <iframe src="HomeFrame.html" id="mainFrame" scrolling="no" frameborder="0" style="position:page;top:0px;left:0px;bottom:0px" "></iframe>
+    <iframe src="HomeFrame.html" id="mainFrame" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
 
     <!--
 

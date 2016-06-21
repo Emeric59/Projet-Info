@@ -45,9 +45,7 @@
 /* Style du main, pour decaler lors de l'ouverture */
 #mainFrame {
     margin-left : 250px;
-    overflow:hidden;
-    overflow-x:hidden;
-    overflow-y:hidden;
+
     height:100%;
     width:calc(100%-100px);
 
@@ -69,3 +67,6 @@
     width:250px;
 }
 
+.menu-button:hover{
+    cursor:pointer;
+}

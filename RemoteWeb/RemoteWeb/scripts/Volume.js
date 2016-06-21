@@ -136,5 +136,9 @@ $("#Shuffle").click(function () {
 });
 
 
+function navigateToUrl(url) {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openBrowser", url)
+}
+
 constellation.connection.start();
 
