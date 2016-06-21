@@ -85,6 +85,7 @@
     <Content Include="Images\Control\reload.png" />
     <Content Include="Images\Control\sleep.png" />
     <Content Include="Images\dogelogo.jpg" />
+    <Content Include="Images\menu-button-bright.png" />
     <Content Include="Images\shibe.png" />
     <Content Include="Images\fillerlogo.jpg" />
     <Content Include="Images\MediaPlayer\pause.png" />
