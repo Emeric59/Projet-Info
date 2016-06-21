@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace RemoteControl
 {
-    public class Program : PackageBase
+    public partial class Program : PackageBase
     {
         static void Main(string[] args)
         {
@@ -24,9 +24,13 @@ namespace RemoteControl
 
         public override void OnStart()
         {
+            float? level;
+            level = GetApplicationVolume("Master");
+            Console.WriteLine("level : {0}", level);
+
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
             PackageHost.WriteInfo("Les Doges c'est trop bien.");
-            string MySentinel = "PCDEPIERRE";
+            string MySentinel = "MSI-FLO";
 
             int seuil = 90;
             PackageHost.WriteInfo($"Seuil de tolérance processeur à {seuil}%");
