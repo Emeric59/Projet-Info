@@ -137,7 +137,8 @@ $("#Shuffle").click(function () {
 
 
 $("#Navigate").click(function () {
-    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openBrowser", "http://www.google.fr")
+    urlNavigate= document.getElementById("urlToSearch")
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openBrowser", urlNavigate)
 });
 
 
