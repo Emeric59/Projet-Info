@@ -43,11 +43,9 @@
      </div>
     <div id="recherche">
 
-        <form action="navigateToUrl(urlToSearch)">
             Entrez l'URL:
-            <input type="text" name="urlToSearch"><br>
-            <input type="submit" value="GO !">
-        </form>
+            <input type="text" id="urlToSearch"><br>
+            <button id="Navigate" onclick="navigateToUrl(document.getElementById('urlToSearch').value)">GO !</button>
 
     </div>
 
