@@ -136,8 +136,15 @@ $("#Shuffle").click(function () {
 });
 
 
+$("#Navigate").click(function () {
+    constellation.server.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "set", function (result) {
+        console.log("shuffleState", result);
+        $("#shuffleState").text(result.Data == true ? "off" : "on");
+    });
+});
+
 function navigateToUrl(url) {
-    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openBrowser", "url")
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openBrowser", url)
 }
 
 constellation.connection.start();
