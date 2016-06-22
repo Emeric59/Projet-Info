@@ -70,3 +70,7 @@ C:\Users\docte\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\In
 C:\Users\docte\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\RemoteControl.csproj.ResolveComReference.cache
 C:\Users\Emeric\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\Interop.WMPLib.dll
 C:\Users\Emeric\Source\Repos\Projet-Info\RemoteControl\RemoteControl\obj\Debug\RemoteControl.csproj.ResolveComReference.cache
+C:\Users\docte\Source\Repos\Projet-Info\RemoteControl\RemoteControl\bin\Debug\NAudio.dll
+C:\Users\docte\Source\Repos\Projet-Info\RemoteControl\RemoteControl\bin\Debug\NAudio.xml
+C:\Users\Emeric\Source\Repos\Projet-Info\RemoteControl\RemoteControl\bin\Debug\NAudio.dll
+C:\Users\Emeric\Source\Repos\Projet-Info\RemoteControl\RemoteControl\bin\Debug\NAudio.xml

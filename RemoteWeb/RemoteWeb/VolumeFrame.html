@@ -4,7 +4,7 @@
     <title></title>
 	<meta charset="utf-8" />
 </head>
-<body>
+<body onload='init()'>
 
     <button id="Mute">
     <img src="Images/Volume/volume-off.png" alt="Mute" />
@@ -12,10 +12,23 @@
     <button id="DecreaseVolume">
         <img src="Images/Volume/volume-low.png" alt="Volume-" />
     </button>
-    <button id="Stop">
+    <button id="IncreaseVolume">
         <img src="Images/Volume/volume-high.png" alt="Volume+" />
     </button>
+    <br/>
+    <section>
+        <span class="tooltip"></span>
+        <div id="slider"></div>
+        <span class="volume"></span>
+    </section>
 
+
+    <script src="Scripts/jquery-1.6.4.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="Scripts/Constellation-1.8.0.js"></script>
+    <script src="Scripts/Volume.js"></script>
+    <script src="scripts/VolumeFrame.js"></script>
 
 </body>
 </html>

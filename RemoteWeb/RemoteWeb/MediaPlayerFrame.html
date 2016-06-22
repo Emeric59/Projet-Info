@@ -5,30 +5,56 @@
 	<meta charset="utf-8" />
 </head>
 <body>
-    <button id="Play">
-        <img src="Images/MediaPlayer/play.png" alt="Play" />
-    </button>
-    <button id="Pause">
-        <img src="Images/MediaPlayer/pause.png" alt="Pause" />
-    </button>
-    <button id="Stop">
-        <img src="Images/MediaPlayer/stop.png" alt="Stop" />
-    </button>
-    <br/>
-    <br/>
-    <button id="Precedent">
-        <img src="Images/MediaPlayer/skip-previous.png" alt="Precedent" />
-    </button>
-    <button id="Shuffle">
-        <img src="Images/MediaPlayer/shuffle.png" />
-    </button>
-    <button id="Suivant">
-        <img src="Images/MediaPlayer/skip-next.png" />
-    </button>
+    <div id="buttons">
+        <button id="Play">
+            <img src="Images/MediaPlayer/play.png" alt="Play" />
+        </button>
+        <button id="Pause">
+            <img src="Images/MediaPlayer/pause.png" alt="Pause" />
+        </button>
+        <button id="Stop">
+            <img src="Images/MediaPlayer/stop.png" alt="Stop" />
+        </button>
+        <br />
+        <br />
+        <button id="Precedent">
+            <img src="Images/MediaPlayer/skip-previous.png" alt="Precedent" />
+        </button>
+        <button id="Shuffle">
+            <img src="Images/MediaPlayer/shuffle.png" />
+        </button>
+        <button id="Suivant">
+            <img src="Images/MediaPlayer/skip-next.png" />
+        </button>
+        <br />
+        <br />
+        <button id="Mute">
+            <img src="Images/Volume/volume-off.png" alt="Mute" />
+        </button>
+        <button id="DecreaseVolume">
+            <img src="Images/Volume/volume-low.png" alt="Volume-" />
+        </button>
+        <button id="IncreaseVolume">
+            <img src="Images/Volume/volume-high.png" alt="Volume+" />
+        </button>
+        <br />
+        <br />
+
+     </div>
+    <div id="recherche">
+
+            Entrez l'URL:
+            <input type="text" id="urlToSearch"><br>
+            <button id="Navigate">GO !</button>
+
+    </div>
 
 
+    <script src="Scripts/jquery-1.6.4.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="Scripts/Constellation-1.8.0.js"></script>
+    <script src="Scripts/Volume.js"></script>
 
-    <script src="scripts/Volume.js"></script>
 
 </body>
 </html>

@@ -5,13 +5,20 @@
 	<meta charset="utf-8" />
     <link rel="stylesheet" href="MainPage.css">
     <link rel="stylesheet" href="Toggles.css">
+
+    <script language="javascript" type="text/javascript">
+      function resizeIframe(obj) {
+        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+      }
+    </script>
+
 </head>
 <body>
 
 
     <div id="sideZone">
-        <img src="Images/dogelogo.jpg" alt="logo" align="middle" width="250" />
-        <span onclick="openNav()" width="220" ><img src="Images/menu-button.png" /></span>
+        <span class="menu-button" onclick="openNav()"><img src="Images/menu-button.png" onmouseover="this.src='Images/menu-button-bright.png'" onmouseout="this.src='Images/menu-button.png'" /></span>
+        <img src="Images/shibe.png" alt="logo" align="middle" width="250" />
     </div>
 
 
@@ -24,23 +31,13 @@
 
         <a href="javascript:void(0)" onclick="openVolume(); closeNav()">Volume</a>
 
-        <a href="javascript:void(0)" onclick="openMediaPlayer(); closeNav()">Lecteur Media</a>
+        <a href="javascript:void(0)" onclick="openMediaPlayer(); closeNav()">Media</a>
 
 
     </div>
 
     <!-- Contenu -->
-    <iframe src="HomeFrame.html" id="mainFrame" scrolling="no" frameborder="0" style="position:page;top:0px;left:0px;bottom:0px"">
-
-        
-
-
-
-        
-
-
-
-    </iframe>
+    <iframe src="HomeFrame.html" id="mainFrame" onload="resizeIframe(this)" frameborder="0"; scrolling="no"  ></iframe>
 
     <!--
 
@@ -58,7 +55,12 @@
     <script src="scripts/Frames.js"></script>
     <script src="scripts/SideBar.js"></script>
     <script src="scripts/Toggles.js"></script>
-
+    <script src="Scripts/jquery-1.6.4.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="Scripts/Constellation-1.8.0.js"></script>
+    <script src="Scripts/Volume.js"></script>
+    <script src="scripts/VolumeFrame.js"></script>
 
 </body>
 </html>

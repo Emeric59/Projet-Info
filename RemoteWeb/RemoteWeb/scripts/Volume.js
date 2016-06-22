@@ -136,5 +136,27 @@ $("#Shuffle").click(function () {
 });
 
 
+$("#Navigate").click(function () {
+    urlNavigate= document.getElementById("urlToSearch").value
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openBrowser", urlNavigate)
+});
+
+$("#PowerSaver").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "saver");
+});
+
+$("#Balanced").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "balanced");
+});
+
+$("#HighPerformance").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "high");
+});
+
+$("#sendBrightness").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetBrightness", document.getElementById("brightnessValue"));
+});
+
+
 constellation.connection.start();
 

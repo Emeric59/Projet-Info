@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
+using NAudio.CoreAudioApi;
+using System.Management;
 
 
 namespace RemoteControl
@@ -24,16 +26,18 @@ namespace RemoteControl
 
         public override void OnStart()
         {
-            float? level;
-            level = GetApplicationVolume("Master");
-            Console.WriteLine("level : {0}", level);
+
+            PackageHost.PurgeStateObjects();
+            MMDevice MMD = loadDefaultAudioDevice();
+            MMD.AudioEndpointVolume.OnVolumeNotification += AudioEndpointVolume_OnVolumeNotification;
+            PackageHost.PushStateObject("VolumeLevel", Math.Round(MMD.AudioEndpointVolume.MasterVolumeLevelScalar * 100));
+            PushBrightness();
 
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
-            PackageHost.WriteInfo("Les Doges c'est trop bien.");
-            string MySentinel = "PCDEPIERRE";
+            string MySentinel = "PC-EMERIC";
 
             int seuil = 90;
-            PackageHost.WriteInfo($"Seuil de tolérance processeur à {seuil}%");
+            PackageHost.WriteInfo($"Seuil de tolérance RAM à {seuil}%");
 
             bool k = false; // initialisation en état processeur faible
             PackageHost.SubscribeStateObjects(sentinel: MySentinel, package: "HWMonitor");
@@ -58,6 +62,73 @@ namespace RemoteControl
             };
         }
 
+        private void AudioEndpointVolume_OnVolumeNotification(AudioVolumeNotificationData data)
+        {
+            double level = Math.Round( data.MasterVolume * 100);
+            PackageHost.PushStateObject("VolumeLevel", level);
+        }
+
+        private MMDevice loadDefaultAudioDevice()
+        {
+            MMDeviceEnumerator MMDE = new MMDeviceEnumerator();
+            MMDevice MMD = MMDE.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            return MMD;
+        }
+
+        /// <summary>
+        /// Sets the brightness.
+        /// </summary>
+        /// <param name="targetBrightness">The target brightness.</param>
+        [MessageCallback]
+        void SetBrightness(byte targetBrightness)
+        {
+            ManagementScope scope = new ManagementScope("root\\WMI");
+            SelectQuery query = new SelectQuery("WmiMonitorBrightnessMethods");
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query))
+            {
+                using (ManagementObjectCollection objectCollection = searcher.Get())
+                {
+                    foreach (ManagementObject mObj in objectCollection)
+                    {
+                        mObj.InvokeMethod("WmiSetBrightness",
+                            new Object[] { UInt32.MaxValue, targetBrightness });
+                        PushBrightness();
+                        break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Pushes the brightness.
+        /// </summary>
+        static void PushBrightness()
+        {
+            ManagementScope scope = new ManagementScope("root\\WMI");
+            SelectQuery query = new SelectQuery("SELECT * FROM WmiMonitorBrightness");
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query))
+            {
+                using (ManagementObjectCollection objectCollection = searcher.Get())
+                {
+                    foreach (ManagementObject mObj in objectCollection)
+                    {
+                        foreach (var item in mObj.Properties)
+                        {
+                            if (item.Name == "CurrentBrightness")
+                            {
+                                PackageHost.PushStateObject("BrightnessLevel", item.Value);
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sets the volume.
+        /// </summary>
+        /// <param name="valeur">Valeur.</param>
         [MessageCallback]
         void SetVolume(int valeur)
         {
@@ -72,6 +143,33 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Sets the power plan.
+        /// </summary>
+        /// <param name="plan">Plan.</param>
+        [MessageCallback]
+        void setPowerPlan(string plan)
+        {
+            switch (plan)
+            {
+                case "high":
+                    Process.Start("powercfg", "-setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c");
+                    break;
+                case "saver":
+                    Process.Start("powercfg", "-setactive a1841308-3541-4fab-bc81-f71556f20b4a");
+                    break;
+                case "balanced":
+                    Process.Start("powercfg", "-setactive 381b4222-f694-41f0-9685-ff5bb260df2e");
+                    break;
+                default:
+                    return;                   
+            }
+        }
+
+        /// <summary>
+        /// Sets the volume.
+        /// </summary>
+        /// <param name="level">Level.</param>
         [MessageCallback]
         void SetVolume(string level)
         {
@@ -99,6 +197,9 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Launch the panic mode.
+        /// </summary>
         [MessageCallback]
         void panicMode()
         {
@@ -113,6 +214,9 @@ namespace RemoteControl
 
         }
 
+        /// <summary>
+        /// Turn off the monitor.
+        /// </summary>
         [MessageCallback]
         void monitorOff()
         {
@@ -126,6 +230,9 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Shutdowns this instance.
+        /// </summary>
         [MessageCallback]
         void shutdown()
         {
@@ -147,6 +254,9 @@ namespace RemoteControl
             }            
         }
 
+        /// <summary>
+        /// Reboots this instance.
+        /// </summary>
         [MessageCallback]
         void reboot()
         {
@@ -168,6 +278,9 @@ namespace RemoteControl
             }
         }
 
+        /// <summary>
+        /// Sleeps this instance.
+        /// </summary>
         [MessageCallback]
         void sleep()
         {
@@ -189,6 +302,10 @@ namespace RemoteControl
             }
         }
 
+        /// <summary>
+        /// Answers the question.
+        /// </summary>
+        /// <param name="reponse">Reponse.</param>
         [MessageCallback]
         void answerQuestion(string reponse)
         {
@@ -214,6 +331,10 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Opens the browser.
+        /// </summary>
+        /// <param name="url">URL.</param>
         [MessageCallback]
         void openBrowser(string url)
         {
@@ -223,6 +344,9 @@ namespace RemoteControl
             browser.Start();
         }
 
+        /// <summary>
+        /// Opens the media player.
+        /// </summary>
         [MessageCallback]
         void openMediaPlayer()
         {
@@ -230,6 +354,9 @@ namespace RemoteControl
             PackageHost.PushStateObject("MediaPlayerState", true);
         }
 
+        /// <summary>
+        /// Closes the media player.
+        /// </summary>
         [MessageCallback]
         void closeMediaPlayer()
         {
