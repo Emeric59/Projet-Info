@@ -73,6 +73,10 @@ namespace RemoteControl
             return MMD;
         }
 
+        /// <summary>
+        /// Sets the volume.
+        /// </summary>
+        /// <param name="valeur">Valeur.</param>
         [MessageCallback]
         void SetVolume(int valeur)
         {
@@ -87,6 +91,10 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Sets the power plan.
+        /// </summary>
+        /// <param name="plan">Plan.</param>
         [MessageCallback]
         void setPowerPlan(string plan)
         {
@@ -105,8 +113,12 @@ namespace RemoteControl
                     return;                   
             }
         }
-        
-            [MessageCallback]
+
+        /// <summary>
+        /// Sets the volume.
+        /// </summary>
+        /// <param name="level">Level.</param>
+        [MessageCallback]
         void SetVolume(string level)
         {
             Process nircmd = new Process();
@@ -133,6 +145,9 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Launch the panic mode.
+        /// </summary>
         [MessageCallback]
         void panicMode()
         {
@@ -147,6 +162,9 @@ namespace RemoteControl
 
         }
 
+        /// <summary>
+        /// Turn off the monitor.
+        /// </summary>
         [MessageCallback]
         void monitorOff()
         {
@@ -160,6 +178,9 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Shutdowns this instance.
+        /// </summary>
         [MessageCallback]
         void shutdown()
         {
@@ -181,6 +202,9 @@ namespace RemoteControl
             }            
         }
 
+        /// <summary>
+        /// Reboots this instance.
+        /// </summary>
         [MessageCallback]
         void reboot()
         {
@@ -202,6 +226,9 @@ namespace RemoteControl
             }
         }
 
+        /// <summary>
+        /// Sleeps this instance.
+        /// </summary>
         [MessageCallback]
         void sleep()
         {
@@ -223,6 +250,10 @@ namespace RemoteControl
             }
         }
 
+        /// <summary>
+        /// Answers the question.
+        /// </summary>
+        /// <param name="reponse">Reponse.</param>
         [MessageCallback]
         void answerQuestion(string reponse)
         {
@@ -248,6 +279,10 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Opens the browser.
+        /// </summary>
+        /// <param name="url">URL.</param>
         [MessageCallback]
         void openBrowser(string url)
         {
@@ -257,6 +292,9 @@ namespace RemoteControl
             browser.Start();
         }
 
+        /// <summary>
+        /// Opens the media player.
+        /// </summary>
         [MessageCallback]
         void openMediaPlayer()
         {
@@ -264,6 +302,9 @@ namespace RemoteControl
             PackageHost.PushStateObject("MediaPlayerState", true);
         }
 
+        /// <summary>
+        /// Closes the media player.
+        /// </summary>
         [MessageCallback]
         void closeMediaPlayer()
         {
