@@ -121,7 +121,10 @@ namespace MediaPlayer
         }
 
         #endregion
-        
+
+
+        #region Music Control
+
         [MessageCallback]
         private void loadArtist(string artist)
         {
@@ -192,7 +195,17 @@ namespace MediaPlayer
             }
             return collection;
         }
-        
+
+        #endregion
+
+
+        private void GetVideos()
+        {
+            player.currentPlaylist = player.mediaCollection.getByAttribute("MediaType","video");
+            
+
+        }
+
         private void player_MediaChange(object sender, _WMPOCXEvents_MediaChangeEvent e)
         {
             
