@@ -26,6 +26,7 @@ namespace RemoteControl
 
         public override void OnStart()
         {
+
             PackageHost.PurgeStateObjects();
             MMDevice MMD = loadDefaultAudioDevice();
             MMD.AudioEndpointVolume.OnVolumeNotification += AudioEndpointVolume_OnVolumeNotification;
@@ -33,7 +34,7 @@ namespace RemoteControl
             PushBrightness();
 
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
-            string MySentinel = "MSI-FLO";
+            string MySentinel = "PC-EMERIC";
 
             int seuil = 90;
             PackageHost.WriteInfo($"Seuil de tolérance RAM à {seuil}%");
@@ -74,6 +75,10 @@ namespace RemoteControl
             return MMD;
         }
 
+        /// <summary>
+        /// Sets the volume.
+        /// </summary>
+        /// <param name="valeur">Valeur.</param>
         [MessageCallback]
         void SetBrightness(byte targetBrightness)
         {
@@ -131,6 +136,33 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Sets the power plan.
+        /// </summary>
+        /// <param name="plan">Plan.</param>
+        [MessageCallback]
+        void setPowerPlan(string plan)
+        {
+            switch (plan)
+            {
+                case "high":
+                    Process.Start("powercfg", "-setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c");
+                    break;
+                case "saver":
+                    Process.Start("powercfg", "-setactive a1841308-3541-4fab-bc81-f71556f20b4a");
+                    break;
+                case "balanced":
+                    Process.Start("powercfg", "-setactive 381b4222-f694-41f0-9685-ff5bb260df2e");
+                    break;
+                default:
+                    return;                   
+            }
+        }
+
+        /// <summary>
+        /// Sets the volume.
+        /// </summary>
+        /// <param name="level">Level.</param>
         [MessageCallback]
         void SetVolume(string level)
         {
@@ -158,6 +190,9 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Launch the panic mode.
+        /// </summary>
         [MessageCallback]
         void panicMode()
         {
@@ -172,6 +207,9 @@ namespace RemoteControl
 
         }
 
+        /// <summary>
+        /// Turn off the monitor.
+        /// </summary>
         [MessageCallback]
         void monitorOff()
         {
@@ -185,6 +223,9 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Shutdowns this instance.
+        /// </summary>
         [MessageCallback]
         void shutdown()
         {
@@ -206,6 +247,9 @@ namespace RemoteControl
             }            
         }
 
+        /// <summary>
+        /// Reboots this instance.
+        /// </summary>
         [MessageCallback]
         void reboot()
         {
@@ -227,6 +271,9 @@ namespace RemoteControl
             }
         }
 
+        /// <summary>
+        /// Sleeps this instance.
+        /// </summary>
         [MessageCallback]
         void sleep()
         {
@@ -248,6 +295,10 @@ namespace RemoteControl
             }
         }
 
+        /// <summary>
+        /// Answers the question.
+        /// </summary>
+        /// <param name="reponse">Reponse.</param>
         [MessageCallback]
         void answerQuestion(string reponse)
         {
@@ -273,6 +324,10 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Opens the browser.
+        /// </summary>
+        /// <param name="url">URL.</param>
         [MessageCallback]
         void openBrowser(string url)
         {
@@ -282,6 +337,9 @@ namespace RemoteControl
             browser.Start();
         }
 
+        /// <summary>
+        /// Opens the media player.
+        /// </summary>
         [MessageCallback]
         void openMediaPlayer()
         {
@@ -289,6 +347,9 @@ namespace RemoteControl
             PackageHost.PushStateObject("MediaPlayerState", true);
         }
 
+        /// <summary>
+        /// Closes the media player.
+        /// </summary>
         [MessageCallback]
         void closeMediaPlayer()
         {
