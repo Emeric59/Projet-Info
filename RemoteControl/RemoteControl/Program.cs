@@ -23,7 +23,6 @@ namespace RemoteControl
             PackageHost.Start<Program>(args);
             
         }
-
         public override void OnStart()
         {
 
@@ -76,9 +75,9 @@ namespace RemoteControl
         }
 
         /// <summary>
-        /// Sets the volume.
+        /// Sets the brightness.
         /// </summary>
-        /// <param name="valeur">Valeur.</param>
+        /// <param name="targetBrightness">The target brightness.</param>
         [MessageCallback]
         void SetBrightness(byte targetBrightness)
         {
@@ -99,6 +98,9 @@ namespace RemoteControl
             }
         }
 
+        /// <summary>
+        /// Pushes the brightness.
+        /// </summary>
         static void PushBrightness()
         {
             ManagementScope scope = new ManagementScope("root\\WMI");
@@ -122,6 +124,10 @@ namespace RemoteControl
             }
         }
 
+        /// <summary>
+        /// Sets the volume.
+        /// </summary>
+        /// <param name="valeur">Valeur.</param>
         [MessageCallback]
         void SetVolume(int valeur)
         {

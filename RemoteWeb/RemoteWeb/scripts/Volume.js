@@ -1,6 +1,6 @@
-﻿var constellation = $.signalR.createConstellationConsumer("http://localhost:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteControl")
+﻿var constellation = $.signalR.createConstellationConsumer("http://localhost:8088", "a28d975296302b2e3620a8626eb6d1ce56c79f23", "RemoteControl")
 var tableau = document.getElementById("CurrentPlaylist");
-var MySentinel = "MSI-FLO_UI";
+var MySentinel = "PC-EMERIC_UI";
 var PlayerState = false;
 
 constellation.connection.stateChanged(function (change) {
@@ -141,7 +141,21 @@ $("#Navigate").click(function () {
     constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openBrowser", urlNavigate)
 });
 
+$("#PowerSaver").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "saver");
+});
+
+$("#Balanced").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "balanced");
+});
+
+$("#HighPerformance").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "high");
+});
+
+$("#sendBrightness").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetBrightness", document.getElementById("brightnessValue").value);
+});
 
 
 constellation.connection.start();
-
