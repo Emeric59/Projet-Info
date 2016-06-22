@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
 using NAudio.CoreAudioApi;
+using System.Management;
 
 
 namespace RemoteControl
@@ -30,6 +31,7 @@ namespace RemoteControl
             MMDevice MMD = loadDefaultAudioDevice();
             MMD.AudioEndpointVolume.OnVolumeNotification += AudioEndpointVolume_OnVolumeNotification;
             PackageHost.PushStateObject("VolumeLevel", Math.Round(MMD.AudioEndpointVolume.MasterVolumeLevelScalar * 100));
+            PushBrightness();
 
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
             string MySentinel = "PC-EMERIC";
@@ -73,6 +75,60 @@ namespace RemoteControl
             return MMD;
         }
 
+        /// <summary>
+        /// Sets the brightness.
+        /// </summary>
+        /// <param name="targetBrightness">The target brightness.</param>
+        [MessageCallback]
+        void SetBrightness(byte targetBrightness)
+        {
+            ManagementScope scope = new ManagementScope("root\\WMI");
+            SelectQuery query = new SelectQuery("WmiMonitorBrightnessMethods");
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query))
+            {
+                using (ManagementObjectCollection objectCollection = searcher.Get())
+                {
+                    foreach (ManagementObject mObj in objectCollection)
+                    {
+                        mObj.InvokeMethod("WmiSetBrightness",
+                            new Object[] { UInt32.MaxValue, targetBrightness });
+                        PushBrightness();
+                        break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Pushes the brightness.
+        /// </summary>
+        static void PushBrightness()
+        {
+            ManagementScope scope = new ManagementScope("root\\WMI");
+            SelectQuery query = new SelectQuery("SELECT * FROM WmiMonitorBrightness");
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query))
+            {
+                using (ManagementObjectCollection objectCollection = searcher.Get())
+                {
+                    foreach (ManagementObject mObj in objectCollection)
+                    {
+                        foreach (var item in mObj.Properties)
+                        {
+                            if (item.Name == "CurrentBrightness")
+                            {
+                                PackageHost.PushStateObject("BrightnessLevel", item.Value);
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sets the volume.
+        /// </summary>
+        /// <param name="valeur">Valeur.</param>
         [MessageCallback]
         void SetVolume(int valeur)
         {
@@ -87,6 +143,10 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Sets the power plan.
+        /// </summary>
+        /// <param name="plan">Plan.</param>
         [MessageCallback]
         void setPowerPlan(string plan)
         {
@@ -105,8 +165,12 @@ namespace RemoteControl
                     return;                   
             }
         }
-        
-            [MessageCallback]
+
+        /// <summary>
+        /// Sets the volume.
+        /// </summary>
+        /// <param name="level">Level.</param>
+        [MessageCallback]
         void SetVolume(string level)
         {
             Process nircmd = new Process();
@@ -133,6 +197,9 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Launch the panic mode.
+        /// </summary>
         [MessageCallback]
         void panicMode()
         {
@@ -147,6 +214,9 @@ namespace RemoteControl
 
         }
 
+        /// <summary>
+        /// Turn off the monitor.
+        /// </summary>
         [MessageCallback]
         void monitorOff()
         {
@@ -160,6 +230,9 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Shutdowns this instance.
+        /// </summary>
         [MessageCallback]
         void shutdown()
         {
@@ -181,6 +254,9 @@ namespace RemoteControl
             }            
         }
 
+        /// <summary>
+        /// Reboots this instance.
+        /// </summary>
         [MessageCallback]
         void reboot()
         {
@@ -202,6 +278,9 @@ namespace RemoteControl
             }
         }
 
+        /// <summary>
+        /// Sleeps this instance.
+        /// </summary>
         [MessageCallback]
         void sleep()
         {
@@ -223,6 +302,10 @@ namespace RemoteControl
             }
         }
 
+        /// <summary>
+        /// Answers the question.
+        /// </summary>
+        /// <param name="reponse">Reponse.</param>
         [MessageCallback]
         void answerQuestion(string reponse)
         {
@@ -248,6 +331,10 @@ namespace RemoteControl
             nircmd.Start();
         }
 
+        /// <summary>
+        /// Opens the browser.
+        /// </summary>
+        /// <param name="url">URL.</param>
         [MessageCallback]
         void openBrowser(string url)
         {
@@ -257,6 +344,9 @@ namespace RemoteControl
             browser.Start();
         }
 
+        /// <summary>
+        /// Opens the media player.
+        /// </summary>
         [MessageCallback]
         void openMediaPlayer()
         {
@@ -264,6 +354,9 @@ namespace RemoteControl
             PackageHost.PushStateObject("MediaPlayerState", true);
         }
 
+        /// <summary>
+        /// Closes the media player.
+        /// </summary>
         [MessageCallback]
         void closeMediaPlayer()
         {
