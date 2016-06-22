@@ -153,5 +153,10 @@ $("#HighPerformance").click(function () {
     constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "high");
 });
 
+$("#sendBrightness").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetBrightness", document.getElementById("brightnessValue"));
+});
+
+
 constellation.connection.start();
 

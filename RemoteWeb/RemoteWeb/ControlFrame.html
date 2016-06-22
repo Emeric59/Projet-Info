@@ -3,34 +3,42 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
+    <link rel="stylesheet" href="MainPage.css">
+    <link rel="stylesheet" href="Toggles.css">
 </head>
 <body>
 
-    <button id="MonitorOff">
+    <button id="MonitorOff" class="buttonCustom">
         <img src="Images/Control/monitor.png" alt="Turn Off Monitor" />
     </button>
-    <button id="Shutdown">
+    <button id="Shutdown" class="buttonCustom">
         <img src="Images/Control/power.png" alt="Shutdown" />
     </button>
-    <button id="Reboot">
+    <button id="Reboot" class="buttonCustom">
         <img src="Images/Control/reload.png" alt="Reboot" />
     </button>
-    <button id="StandBy">
+    <button id="StandBy" class="buttonCustom">
         <img src="Images/Control/sleep.png" alt="Sleep" />
     </button>
     <br/>
     <br/>
+    <br/>
+    <br/>
     Power Plan Modes :
     <br/>
-    <button id="PowerSaver">
+    <button id="PowerSaver" class="buttonCustom">
         <img src="Images/Control/battery-saver.png" alt="Power Saver" />
     </button>
-    <button id="Balanced">
+    <button id="Balanced" class="buttonCustom">
         <img src="Images/Control/balanced.png" alt="Balanced" />
     </button>
-    <button id="High Performance">
+    <button id="HighPerformance" class="buttonCustom">
         <img src="Images/Control/high-performance.png" alt="High Performance" />
     </button>
+    <br/>
+    Luminosité :
+    <input class="sliderCustom" type="range" id="brightnessValue" value="50" max="100" min="0" step="5">
+    <button id="sendBrightness" class="buttonCustom">Change it !</button>
 
 
     <script src="Scripts/jquery-1.6.4.min.js"></script>
