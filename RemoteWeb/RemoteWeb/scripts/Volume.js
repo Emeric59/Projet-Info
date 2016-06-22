@@ -137,7 +137,7 @@ $("#Shuffle").click(function () {
 
 
 $("#Navigate").click(function () {
-    urlNavigate= document.getElementById("urlToSearch")
+    urlNavigate= document.getElementById("urlToSearch").value
     constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openBrowser", urlNavigate)
 });
 

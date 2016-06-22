@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
 using NAudio.CoreAudioApi;
+using System.Management;
 
 
 namespace RemoteControl
@@ -29,6 +30,7 @@ namespace RemoteControl
             MMDevice MMD = loadDefaultAudioDevice();
             MMD.AudioEndpointVolume.OnVolumeNotification += AudioEndpointVolume_OnVolumeNotification;
             PackageHost.PushStateObject("VolumeLevel", Math.Round(MMD.AudioEndpointVolume.MasterVolumeLevelScalar * 100));
+            PushBrightness();
 
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
             string MySentinel = "MSI-FLO";
@@ -70,6 +72,49 @@ namespace RemoteControl
             MMDeviceEnumerator MMDE = new MMDeviceEnumerator();
             MMDevice MMD = MMDE.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
             return MMD;
+        }
+
+        [MessageCallback]
+        void SetBrightness(byte targetBrightness)
+        {
+            ManagementScope scope = new ManagementScope("root\\WMI");
+            SelectQuery query = new SelectQuery("WmiMonitorBrightnessMethods");
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query))
+            {
+                using (ManagementObjectCollection objectCollection = searcher.Get())
+                {
+                    foreach (ManagementObject mObj in objectCollection)
+                    {
+                        mObj.InvokeMethod("WmiSetBrightness",
+                            new Object[] { UInt32.MaxValue, targetBrightness });
+                        PushBrightness();
+                        break;
+                    }
+                }
+            }
+        }
+
+        static void PushBrightness()
+        {
+            ManagementScope scope = new ManagementScope("root\\WMI");
+            SelectQuery query = new SelectQuery("SELECT * FROM WmiMonitorBrightness");
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query))
+            {
+                using (ManagementObjectCollection objectCollection = searcher.Get())
+                {
+                    foreach (ManagementObject mObj in objectCollection)
+                    {
+                        foreach (var item in mObj.Properties)
+                        {
+                            if (item.Name == "CurrentBrightness")
+                            {
+                                PackageHost.PushStateObject("BrightnessLevel", item.Value);
+
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         [MessageCallback]
