@@ -121,7 +121,11 @@ namespace MediaPlayer
         }
 
         #endregion
-        
+
+        /// <summary>
+        /// Loads the artist.
+        /// </summary>
+        /// <param name="artist">The artist.</param>
         [MessageCallback]
         private void loadArtist(string artist)
         {
@@ -134,12 +138,20 @@ namespace MediaPlayer
             player.currentPlaylist = player.mediaCollection.getAttributeStringCollection("Title", "Video");
         }*/
 
+        /// <summary>
+        /// Loads the album.
+        /// </summary>
+        /// <param name="album">The album.</param>
         [MessageCallback]
         private void loadAlbum(string album)
         {
             player.currentPlaylist = player.mediaCollection.getByAlbum(album);
         }
 
+        /// <summary>
+        /// Loads the title from playlist.
+        /// </summary>
+        /// <param name="title">The title.</param>
         [MessageCallback]
         private void loadTitleFromPlaylist(string title)
         {
