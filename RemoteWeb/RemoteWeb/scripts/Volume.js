@@ -141,7 +141,17 @@ $("#Navigate").click(function () {
     constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openBrowser", urlNavigate);
 });
 
+$("#PowerSaver").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "saver");
+});
 
+$("#Balanced").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "balanced");
+});
+
+$("#HighPerformance").click(function () {
+    constellation.server.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "high");
+});
 
 constellation.connection.start();
 

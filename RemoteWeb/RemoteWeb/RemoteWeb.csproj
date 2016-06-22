@@ -80,6 +80,9 @@
   <ItemGroup>
     <Content Include="ControlFrame.html" />
     <Content Include="HomeFrame.html" />
+    <Content Include="Images\Control\balanced.png" />
+    <Content Include="Images\Control\battery-saver.png" />
+    <Content Include="Images\Control\high-performance.png" />
     <Content Include="Images\Control\monitor.png" />
     <Content Include="Images\Control\power.png" />
     <Content Include="Images\Control\reload.png" />
