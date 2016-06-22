@@ -23,7 +23,6 @@ namespace RemoteControl
             PackageHost.Start<Program>(args);
             
         }
-
         public override void OnStart()
         {
 
