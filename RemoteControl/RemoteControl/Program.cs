@@ -25,13 +25,14 @@ namespace RemoteControl
 
         public override void OnStart()
         {
+
             PackageHost.PurgeStateObjects();
             MMDevice MMD = loadDefaultAudioDevice();
             MMD.AudioEndpointVolume.OnVolumeNotification += AudioEndpointVolume_OnVolumeNotification;
             PackageHost.PushStateObject("VolumeLevel", Math.Round(MMD.AudioEndpointVolume.MasterVolumeLevelScalar * 100));
 
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
-            string MySentinel = "MSI-FLO";
+            string MySentinel = "PC-EMERIC";
 
             int seuil = 90;
             PackageHost.WriteInfo($"Seuil de tolérance RAM à {seuil}%");
@@ -87,6 +88,25 @@ namespace RemoteControl
         }
 
         [MessageCallback]
+        void setPowerPlan(string plan)
+        {
+            switch (plan)
+            {
+                case "high":
+                    Process.Start("powercfg", "-setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c");
+                    break;
+                case "saver":
+                    Process.Start("powercfg", "-setactive a1841308-3541-4fab-bc81-f71556f20b4a");
+                    break;
+                case "balanced":
+                    Process.Start("powercfg", "-setactive 381b4222-f694-41f0-9685-ff5bb260df2e");
+                    break;
+                default:
+                    return;                   
+            }
+        }
+        
+            [MessageCallback]
         void SetVolume(string level)
         {
             Process nircmd = new Process();
