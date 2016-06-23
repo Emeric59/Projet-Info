@@ -12,7 +12,6 @@ using System.Threading;
 using System.Windows.Forms;
 using NAudio.CoreAudioApi;
 using System.Management;
-using Microsoft.Win32.TaskScheduler;
 
 namespace RemoteControl
 {
