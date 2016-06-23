@@ -12,7 +12,7 @@ using System.Threading;
 using System.Windows.Forms;
 using NAudio.CoreAudioApi;
 using System.Management;
-
+using Microsoft.Win32.TaskScheduler;
 
 namespace RemoteControl
 {
@@ -21,7 +21,7 @@ namespace RemoteControl
         static void Main(string[] args)
         {
             PackageHost.Start<Program>(args);
-            
+
         }
         public override void OnStart()
         {
@@ -64,7 +64,7 @@ namespace RemoteControl
 
         private void AudioEndpointVolume_OnVolumeNotification(AudioVolumeNotificationData data)
         {
-            double level = Math.Round( data.MasterVolume * 100);
+            double level = Math.Round(data.MasterVolume * 100);
             PackageHost.PushStateObject("VolumeLevel", level);
         }
 
@@ -162,7 +162,7 @@ namespace RemoteControl
                     Process.Start("powercfg", "-setactive 381b4222-f694-41f0-9685-ff5bb260df2e");
                     break;
                 default:
-                    return;                   
+                    return;
             }
         }
 
@@ -246,7 +246,7 @@ namespace RemoteControl
 
             DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment éteindre l'ordinateur ?", "Shutdown ?", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
-            {                
+            {
                 nircmd.StartInfo.FileName = path;
                 nircmd.StartInfo.Arguments = string.Format("exitwin poweroff");
                 nircmd.Start();
@@ -254,7 +254,7 @@ namespace RemoteControl
             else if (dialogResult == DialogResult.No)
             {
                 return;
-            }            
+            }
         }
 
         /// <summary>
@@ -367,5 +367,25 @@ namespace RemoteControl
             PackageHost.PushStateObject("MediaPlayerState", false);
         }
 
+
+        //[MessageCallback]
+        //void TaskCreator(string title, string description,int jour, int mois, int annee, int heure, int minute)
+        //{
+
+
+        //    MyConstellation.Packages.Pushbullet.CreatePushBulletScope().SendPush(new SendPushRequest
+        //    {
+        //        Message = $"Utilisation de la mémoire RAM à {e.StateObject.DynamicValue.Value}% supérieure au seuil de {seuil}%",
+        //        Title = $"Message from {e.StateObject.SentinelName}"
+        //    });
+
+
+        //    string date = string.Format("{0}-{1}-{2} {3}:{4}:00",jour,mois,annee,heure,minute);
+        //        td.Triggers.Add(new TimeTrigger() { StartBoundary = Convert.ToDateTime(date) });
+        //        td.Actions.Add(new ExecAction(, null, null));
+        //        ts.RootFolder.RegisterTaskDefinition(title, td);
+        //}
     }
 }
+
+
