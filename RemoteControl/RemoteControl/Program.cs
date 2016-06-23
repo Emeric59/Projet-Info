@@ -12,6 +12,7 @@ using System.Threading;
 using System.Windows.Forms;
 using NAudio.CoreAudioApi;
 using System.Management;
+using Microsoft.Win32.TaskScheduler;
 
 namespace RemoteControl
 {
@@ -366,25 +367,51 @@ namespace RemoteControl
             PackageHost.PushStateObject("MediaPlayerState", false);
         }
 
+        /// <summary>
+        /// Create a Windows task.
+        /// </summary>
+        /// <param name="title">Title.</param>
+        /// <param name="description">The message you want to see.</param>
+        /// <param name="jour">Mour.</param>
+        /// <param name="mois">Mois.</param>
+        /// <param name="annee">Annee.</param>
+        /// <param name="heure">Heure.</param>
+        /// <param name="minute">Minute.</param>
+        [MessageCallback]
+        void TaskCreator(string title, string description, int jour, int mois, int annee, int heure, int minute)
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            path += string.Format("\\{0}.txt",title);
 
-        //[MessageCallback]
-        //void TaskCreator(string title, string description,int jour, int mois, int annee, int heure, int minute)
-        //{
+            if (!File.Exists(path))
+            {
+                File.Create(path).Dispose();
+                using (TextWriter tw = new StreamWriter(path))
+                {
+                    tw.WriteLine(description);
+                    tw.Close();
+                }
+            }
 
+            else if (File.Exists(path))
+            {
+                using (TextWriter tw = new StreamWriter(path))
+                {
+                    tw.WriteLine(description);
+                    tw.Close();
+                }
+            }
 
-        //    MyConstellation.Packages.Pushbullet.CreatePushBulletScope().SendPush(new SendPushRequest
-        //    {
-        //        Message = $"Utilisation de la mémoire RAM à {e.StateObject.DynamicValue.Value}% supérieure au seuil de {seuil}%",
-        //        Title = $"Message from {e.StateObject.SentinelName}"
-        //    });
+            using (TaskService ts = new TaskService())
+            {
+                TaskDefinition td = ts.NewTask();
+                td.RegistrationInfo.Description = description;
 
-
-        //    string date = string.Format("{0}-{1}-{2} {3}:{4}:00",jour,mois,annee,heure,minute);
-        //        td.Triggers.Add(new TimeTrigger() { StartBoundary = Convert.ToDateTime(date) });
-        //        td.Actions.Add(new ExecAction(, null, null));
-        //        ts.RootFolder.RegisterTaskDefinition(title, td);
-        //}
+                string date = string.Format("{0}-{1}-{2} {3}:{4}:00", jour, mois, annee, heure, minute);
+                td.Triggers.Add(new TimeTrigger() { StartBoundary = Convert.ToDateTime(date) });
+                td.Actions.Add(new ExecAction(@"notepad.exe", path, null));
+                ts.RootFolder.RegisterTaskDefinition(title, td);
+            }
+        }
     }
 }
-
-
