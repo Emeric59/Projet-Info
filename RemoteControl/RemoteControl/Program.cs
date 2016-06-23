@@ -128,7 +128,7 @@ namespace RemoteControl
         /// <summary>
         /// Sets the volume.
         /// </summary>
-        /// <param name="valeur">Valeur.</param>
+        /// <param name="valeur">Value.</param>
         [MessageCallback]
         void SetVolume(int valeur)
         {
@@ -372,10 +372,10 @@ namespace RemoteControl
         /// </summary>
         /// <param name="title">Title.</param>
         /// <param name="description">The message you want to see.</param>
-        /// <param name="jour">Jour.</param>
-        /// <param name="mois">Mois.</param>
-        /// <param name="annee">Annee.</param>
-        /// <param name="heure">Heure.</param>
+        /// <param name="jour">Day.</param>
+        /// <param name="mois">Month.</param>
+        /// <param name="annee">Year.</param>
+        /// <param name="heure">Hour.</param>
         /// <param name="minute">Minute.</param>
         [MessageCallback]
         void TaskCreator(string title, string description, int jour, int mois, int annee, int heure, int minute)
