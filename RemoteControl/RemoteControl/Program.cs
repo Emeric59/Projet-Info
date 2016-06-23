@@ -362,7 +362,7 @@ namespace RemoteControl
         }
 
         /// <summary>
-        /// Create a Windows task.
+        /// Create a Windows task which opens a notepad to remind your created task at the right moment.
         /// </summary>
         /// <param name="title">Title.</param>
         /// <param name="description">The message you want to see.</param>
