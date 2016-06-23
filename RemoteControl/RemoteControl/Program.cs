@@ -372,7 +372,7 @@ namespace RemoteControl
         /// </summary>
         /// <param name="title">Title.</param>
         /// <param name="description">The message you want to see.</param>
-        /// <param name="jour">Mour.</param>
+        /// <param name="jour">Jour.</param>
         /// <param name="mois">Mois.</param>
         /// <param name="annee">Annee.</param>
         /// <param name="heure">Heure.</param>
