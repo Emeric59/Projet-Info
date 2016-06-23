@@ -1,0 +1,38 @@
+<ion<ion-view view-title="Search">
+  <ion-content>
+<h1>Search</h1>
+
+<p1>
+
+    <ul class="list">
+
+        <li class="item item-toggle">
+            Lecteur Media
+            <label class="toggle toggle-assertive">
+                <input type="checkbox">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+        </li>
+
+    </ul> 
+
+</p1><br/>
+
+<p2>
+    <input id="search" type="search" placeholder="Research Art. or Alb." name="search">
+    <button id="SearchArtist" class="button icon-left ion-search">Artist</button>
+    <button id="SearchAlbum" class="button icon-left ion-search">Album</button>
+</p2><br />
+      
+<p3>
+    Chanson en cours de lecture :
+    <p><span id="CurrentSong">none</span><p />
+    <p><span id="CurrentArtist"></span> - <span id="CurrentAlbum"></span></p>   <br />
+    <p>Current playlist :</p>    <br />
+    <table id="CurrentPlaylist"></table>
+    <button id="BackArtist" class="button icon-left ion-ios-arrow-back">Back to Artist</button>
+</p3>
+  </ion-content>
+</ion-view>
