@@ -25,6 +25,7 @@ namespace RemoteControl
         }
         public override void OnStart()
         {
+            // Contrôle de la RAM et envoie de push si elle dépasse le seuil indiqué
 
             PackageHost.PurgeStateObjects();
             MMDevice MMD = loadDefaultAudioDevice();
@@ -38,7 +39,7 @@ namespace RemoteControl
             int seuil = 90;
             PackageHost.WriteInfo($"Seuil de tolérance RAM à {seuil}%");
 
-            bool k = false; // initialisation en état processeur faible
+            bool k = false; // Initialisation en état processeur faible
             PackageHost.SubscribeStateObjects(sentinel: MySentinel, package: "HWMonitor");
             PackageHost.StateObjectUpdated += (s, e) =>
             {
@@ -209,6 +210,9 @@ namespace RemoteControl
 
             nircmd.StartInfo.FileName = path;
             nircmd.StartInfo.Arguments = string.Format("sendkeypress rwin+d");
+            nircmd.Start();
+            nircmd.StartInfo.FileName = path;
+            nircmd.StartInfo.Arguments = string.Format("mutesysvolume 1");
             nircmd.Start();
 
         }
