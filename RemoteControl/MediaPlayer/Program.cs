@@ -1,9 +1,5 @@
-﻿using Constellation;
-using Constellation.Package;
+﻿using Constellation.Package;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace MediaPlayer

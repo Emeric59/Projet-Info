@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Constellation;
 using Constellation.Package;
 using AxWMPLib;
-using WMPLib;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace MediaPlayer
 {
