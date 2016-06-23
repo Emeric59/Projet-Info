@@ -240,6 +240,82 @@
             Closes the media player.
             </summary>
         </member>
+        <member name="M:RemoteControl.Program.SetBrightness(System.Byte)">
+            <summary>
+            Sets the brightness.
+            </summary>
+            <param name="targetBrightness">The target brightness.</param>
+        </member>
+        <member name="M:RemoteControl.Program.PushBrightness">
+            <summary>
+            Pushes the brightness.
+            </summary>
+        </member>
+        <member name="M:RemoteControl.Program.SetVolume(System.Int32)">
+            <summary>
+            Sets the volume.
+            </summary>
+            <param name="valeur">Valeur.</param>
+        </member>
+        <member name="M:RemoteControl.Program.setPowerPlan(System.String)">
+            <summary>
+            Sets the power plan.
+            </summary>
+            <param name="plan">Plan.</param>
+        </member>
+        <member name="M:RemoteControl.Program.SetVolume(System.String)">
+            <summary>
+            Sets the volume.
+            </summary>
+            <param name="level">Level.</param>
+        </member>
+        <member name="M:RemoteControl.Program.panicMode">
+            <summary>
+            Launch the panic mode.
+            </summary>
+        </member>
+        <member name="M:RemoteControl.Program.monitorOff">
+            <summary>
+            Turn off the monitor.
+            </summary>
+        </member>
+        <member name="M:RemoteControl.Program.shutdown">
+            <summary>
+            Shutdowns this instance.
+            </summary>
+        </member>
+        <member name="M:RemoteControl.Program.reboot">
+            <summary>
+            Reboots this instance.
+            </summary>
+        </member>
+        <member name="M:RemoteControl.Program.sleep">
+            <summary>
+            Sleeps this instance.
+            </summary>
+        </member>
+        <member name="M:RemoteControl.Program.answerQuestion(System.String)">
+            <summary>
+            Answers the question.
+            </summary>
+            <param name="reponse">Reponse.</param>
+        </member>
+        <member name="M:RemoteControl.Program.openBrowser(System.String)">
+            <summary>
+            Opens the browser.
+            </summary>
+            <param name="url">URL.</param>
+        </member>
+        <member name="M:RemoteControl.Program.openMediaPlayer">
+            <summary>
+            Opens the media player.
+            </summary>
+        </member>
+        <member name="M:RemoteControl.Program.closeMediaPlayer">
+            <summary>
+            Closes the media player.
+            </summary>
+        </member>
         <member name="T:RemoteControl.Properties.Resources">
             <summary>
               Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
