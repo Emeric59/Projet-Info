@@ -1,18 +1,12 @@
-﻿using Constellation;
-using Constellation.Package;
+﻿using Constellation.Package;
 using RemoteControl.PushBullet.MessageCallbacks;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 using System.Windows.Forms;
 using NAudio.CoreAudioApi;
 using System.Management;
-
+using Microsoft.Win32.TaskScheduler;
 
 namespace RemoteControl
 {
@@ -21,7 +15,7 @@ namespace RemoteControl
         static void Main(string[] args)
         {
             PackageHost.Start<Program>(args);
-            
+
         }
         public override void OnStart()
         {
@@ -134,7 +128,7 @@ namespace RemoteControl
         /// <summary>
         /// Sets the volume.
         /// </summary>
-        /// <param name="valeur">Valeur.</param>
+        /// <param name="valeur">Value.</param>
         [MessageCallback]
         void SetVolume(int valeur)
         {
@@ -168,7 +162,7 @@ namespace RemoteControl
                     Process.Start("powercfg", "-setactive 381b4222-f694-41f0-9685-ff5bb260df2e");
                     break;
                 default:
-                    return;                   
+                    return;
             }
         }
 
@@ -252,7 +246,7 @@ namespace RemoteControl
 
             DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment éteindre l'ordinateur ?", "Shutdown ?", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
-            {                
+            {
                 nircmd.StartInfo.FileName = path;
                 nircmd.StartInfo.Arguments = string.Format("exitwin poweroff");
                 nircmd.Start();
@@ -260,7 +254,7 @@ namespace RemoteControl
             else if (dialogResult == DialogResult.No)
             {
                 return;
-            }            
+            }
         }
 
         /// <summary>
@@ -373,5 +367,51 @@ namespace RemoteControl
             PackageHost.PushStateObject("MediaPlayerState", false);
         }
 
+        /// <summary>
+        /// Create a Windows task which opens a notepad to remind your created task at the right moment.
+        /// </summary>
+        /// <param name="title">Title.</param>
+        /// <param name="description">The message you want to see.</param>
+        /// <param name="jour">Day.</param>
+        /// <param name="mois">Month.</param>
+        /// <param name="annee">Year.</param>
+        /// <param name="heure">Hour.</param>
+        /// <param name="minute">Minute.</param>
+        [MessageCallback]
+        void TaskCreator(string title, string description, int jour, int mois, int annee, int heure, int minute)
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            path += string.Format("\\{0}.txt",title);
+
+            if (!File.Exists(path))
+            {
+                File.Create(path).Dispose();
+                using (TextWriter tw = new StreamWriter(path))
+                {
+                    tw.WriteLine(description);
+                    tw.Close();
+                }
+            }
+
+            else if (File.Exists(path))
+            {
+                using (TextWriter tw = new StreamWriter(path))
+                {
+                    tw.WriteLine(description);
+                    tw.Close();
+                }
+            }
+
+            using (TaskService ts = new TaskService())
+            {
+                TaskDefinition td = ts.NewTask();
+                td.RegistrationInfo.Description = description;
+
+                string date = string.Format("{0}-{1}-{2} {3}:{4}:00", jour, mois, annee, heure, minute);
+                td.Triggers.Add(new TimeTrigger() { StartBoundary = Convert.ToDateTime(date) });
+                td.Actions.Add(new ExecAction(@"notepad.exe", path, null));
+                ts.RootFolder.RegisterTaskDefinition(title, td);
+            }
+        }
     }
 }

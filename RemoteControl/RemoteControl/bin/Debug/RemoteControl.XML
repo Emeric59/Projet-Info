@@ -24,11 +24,6 @@
             Specifies the package's instances in your Constellation
             </summary>
         </member>
-        <member name="F:RemoteControl.MyConstellation.PackageInstances.PC_EMERIC_HWMonitor">
-            <summary>
-            Package 'HWMonitor' on 'PC-EMERIC'
-            </summary>
-        </member>
         <member name="F:RemoteControl.MyConstellation.PackageInstances.PC_EMERIC_Pushbullet">
             <summary>
             Package 'Pushbullet' on 'PC-EMERIC'
@@ -37,11 +32,6 @@
         <member name="T:RemoteControl.MyConstellation.Packages">
             <summary>
             Specifies the packages in your Constellation
-            </summary>
-        </member>
-        <member name="F:RemoteControl.MyConstellation.Packages.HWMonitor">
-            <summary>
-            Package 'HWMonitor'
             </summary>
         </member>
         <member name="F:RemoteControl.MyConstellation.Packages.Pushbullet">
@@ -102,310 +92,6 @@
             <summary>
             Provides extension methods to get the real name of a Sentinel, Package or PackageInstance.
             </summary>
-        </member>
-        <member name="T:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames">
-            <summary>
-            Specifies the know StateObjects for the package HWMonitor
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._hdd_1_load_0">
-            <summary>
-            StateObject '/hdd/1/load/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_clock_4">
-            <summary>
-            StateObject '/intelcpu/0/clock/4'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_power_2">
-            <summary>
-            StateObject '/intelcpu/0/power/2'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_power_3">
-            <summary>
-            StateObject '/intelcpu/0/power/3'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_power_0">
-            <summary>
-            StateObject '/intelcpu/0/power/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_power_1">
-            <summary>
-            StateObject '/intelcpu/0/power/1'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._ram_load_0">
-            <summary>
-            StateObject '/ram/load/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_clock_0">
-            <summary>
-            StateObject '/intelcpu/0/clock/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nvidiagpu_0_clock_2">
-            <summary>
-            StateObject '/nvidiagpu/0/clock/2'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_clock_1">
-            <summary>
-            StateObject '/intelcpu/0/clock/1'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_clock_2">
-            <summary>
-            StateObject '/intelcpu/0/clock/2'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_clock_3">
-            <summary>
-            StateObject '/intelcpu/0/clock/3'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nic_23_datarate_1">
-            <summary>
-            StateObject '/nic/23/datarate/1'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nic_23_datarate_0">
-            <summary>
-            StateObject '/nic/23/datarate/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._ram_data_0">
-            <summary>
-            StateObject '/ram/data/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._ram_data_1">
-            <summary>
-            StateObject '/ram/data/1'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nic_1_datarate_2">
-            <summary>
-            StateObject '/nic/1/datarate/2'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nic_1_datarate_1">
-            <summary>
-            StateObject '/nic/1/datarate/1'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nic_1_datarate_0">
-            <summary>
-            StateObject '/nic/1/datarate/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._hdd_0_data_2">
-            <summary>
-            StateObject '/hdd/0/data/2'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames.Hardware">
-            <summary>
-            StateObject 'Hardware'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._hdd_0_data_1">
-            <summary>
-            StateObject '/hdd/0/data/1'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._hdd_0">
-            <summary>
-            StateObject '/hdd/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._hdd_0_level_0">
-            <summary>
-            StateObject '/hdd/0/level/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_load_2">
-            <summary>
-            StateObject '/intelcpu/0/load/2'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_load_1">
-            <summary>
-            StateObject '/intelcpu/0/load/1'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_load_4">
-            <summary>
-            StateObject '/intelcpu/0/load/4'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nic_0_datarate_2">
-            <summary>
-            StateObject '/nic/0/datarate/2'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nic_0_datarate_1">
-            <summary>
-            StateObject '/nic/0/datarate/1'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nic_0_datarate_0">
-            <summary>
-            StateObject '/nic/0/datarate/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nic_3_datarate_2">
-            <summary>
-            StateObject '/nic/3/datarate/2'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nic_3_datarate_1">
-            <summary>
-            StateObject '/nic/3/datarate/1'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nic_3_datarate_0">
-            <summary>
-            StateObject '/nic/3/datarate/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nvidiagpu_0_load_2">
-            <summary>
-            StateObject '/nvidiagpu/0/load/2'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nvidiagpu_0_load_3">
-            <summary>
-            StateObject '/nvidiagpu/0/load/3'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nvidiagpu_0_load_0">
-            <summary>
-            StateObject '/nvidiagpu/0/load/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nvidiagpu_0_load_1">
-            <summary>
-            StateObject '/nvidiagpu/0/load/1'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_load_0">
-            <summary>
-            StateObject '/intelcpu/0/load/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._hdd_0_load_0">
-            <summary>
-            StateObject '/hdd/0/load/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._hdd_1">
-            <summary>
-            StateObject '/hdd/1'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_load_3">
-            <summary>
-            StateObject '/intelcpu/0/load/3'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nvidiagpu_0_clock_0">
-            <summary>
-            StateObject '/nvidiagpu/0/clock/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._hdd_1_temperature_0">
-            <summary>
-            StateObject '/hdd/1/temperature/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._hdd_0_temperature_0">
-            <summary>
-            StateObject '/hdd/0/temperature/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nvidiagpu_0_clock_1">
-            <summary>
-            StateObject '/nvidiagpu/0/clock/1'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_temperature_4">
-            <summary>
-            StateObject '/intelcpu/0/temperature/4'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._nic_23_datarate_2">
-            <summary>
-            StateObject '/nic/23/datarate/2'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_temperature_2">
-            <summary>
-            StateObject '/intelcpu/0/temperature/2'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_temperature_3">
-            <summary>
-            StateObject '/intelcpu/0/temperature/3'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_temperature_0">
-            <summary>
-            StateObject '/intelcpu/0/temperature/0'
-            </summary>
-        </member>
-        <member name="F:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames._intelcpu_0_temperature_1">
-            <summary>
-            StateObject '/intelcpu/0/temperature/1'
-            </summary>
-        </member>
-        <member name="T:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNamesExtension">
-            <summary>
-            Provides extension methods to get the real name of a HWMonitorStateObjectNames.
-            </summary>
-        </member>
-        <member name="T:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectLinkAttribute">
-            <summary>
-             Specifies that the property is attach to HWMonitor's StateObject.
-            </summary>
-            <seealso cref="T:Constellation.Package.StateObjectLinkAttribute" />
-        </member>
-        <member name="M:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectLinkAttribute.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectLinkAttribute"/> class.
-            </summary>
-            <param name="name">The StateObject name.</param>
-        </member>
-        <member name="M:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectLinkAttribute.#ctor(RemoteControl.MyConstellation.Sentinels)">
-            <summary>
-            Initializes a new instance of the <see cref="T:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectLinkAttribute"/> class.
-            </summary>
-            <param name="sentinel">The sentinel.</param>
-        </member>
-        <member name="M:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectLinkAttribute.#ctor(RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames)">
-            <summary>
-            Initializes a new instance of the <see cref="T:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectLinkAttribute"/> class.
-            </summary>
-            <param name="name">The StateObject name.</param>
-        </member>
-        <member name="M:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectLinkAttribute.#ctor(RemoteControl.MyConstellation.Sentinels,RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames)">
-            <summary>
-            Initializes a new instance of the <see cref="T:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectLinkAttribute"/> class.
-            </summary>
-            <param name="sentinel">The sentinel.</param>
-            <param name="name">The StateObject name.</param>
-        </member>
-        <member name="M:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectLinkAttribute.#ctor(RemoteControl.MyConstellation.Sentinels,RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectNames,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:RemoteControl.HWMonitor.StateObjects.HWMonitorStateObjectLinkAttribute"/> class.
-            </summary>
-            <param name="sentinel">The sentinel.</param>
-            <param name="name">The StateObject name.</param>
-            <param name="type">The StateObject type.</param>
         </member>
         <member name="T:RemoteControl.PushBullet.MessageCallbacks.SendPushRequest">
             <summary>
@@ -553,6 +239,18 @@
             <summary>
             Closes the media player.
             </summary>
+        </member>
+        <member name="M:RemoteControl.Program.TaskCreator(System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Create a Windows task.
+            </summary>
+            <param name="title">Title.</param>
+            <param name="description">The message you want to see.</param>
+            <param name="jour">Jour.</param>
+            <param name="mois">Mois.</param>
+            <param name="annee">Annee.</param>
+            <param name="heure">Heure.</param>
+            <param name="minute">Minute.</param>
         </member>
         <member name="T:RemoteControl.Properties.Resources">
             <summary>
