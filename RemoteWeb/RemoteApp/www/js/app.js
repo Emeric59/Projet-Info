@@ -76,7 +76,16 @@ angular.module('starter', ['ionic', 'starter.controllers','ngConstellation'])
     abstract: true,
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
-  })
+    })
+
+        .state('app.login', {
+            url: '/login',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/login.html'
+                }
+            }
+        })
 
   .state('app.search', {
     url: '/search',
@@ -104,6 +113,15 @@ angular.module('starter', ['ionic', 'starter.controllers','ngConstellation'])
         }
       }
     })
+          .state('app.TaskCreator', {
+              url: '/TaskCreator',
+              views: {
+                  'menuContent': {
+                      templateUrl: 'templates/TaskCreator.html',
+                      //controller: 'TaskCreator'
+                  }
+              }
+          })
 
   .state('app.single', {
     url: '/playlists/:playlistId',
