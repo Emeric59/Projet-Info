@@ -12,7 +12,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngConstellation'])
 
             $scope.state = false; // scope permet de faire que la variable soit utilisée par le html, et pas seulement réduite au js
 
-            constellation.intializeClient("http://localhost:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "demoWebAng");
+            constellation.intializeClient("http://localhost:8088", "a28d975296302b2e3620a8626eb6d1ce56c79f23", "demoWebAng");
 
             constellation.onUpdateStateObject(function (stateobject) {
                 $scope.$apply(function () {
