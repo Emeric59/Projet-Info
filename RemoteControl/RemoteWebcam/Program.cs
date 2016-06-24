@@ -18,7 +18,7 @@ namespace RemoteWebcam
 
         public override void OnStart()
         {
-            PackageHost.WriteInfo("Package starting - IsRunning: {0} - IsConnected: {1}", PackageHost.IsRunning, PackageHost.IsConnected);
+            PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
             // initialise la liste des périphériques video et audio
             Collection<EncoderDevice> Vdevices = EncoderDevices.FindDevices(EncoderDeviceType.Video);
 

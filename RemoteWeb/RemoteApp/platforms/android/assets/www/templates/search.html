@@ -1,7 +1,7 @@
-<ion-view view-title="Search">
-  <ion-content>
-<h1>Search</h1>
+<ion-view view-title="Media">
+    <link rel="stylesheet" type="text/css" href="../css/ionicons.css">
 
+  <ion-content>
 <p1>
 
     <ul class="list">
@@ -17,6 +17,38 @@
         </li>
 
     </ul> 
+    <p>
+        <div class="button-bar" style="width:96%;margin-left:2%">
+            <div class="button button-calm" id="Play">
+                <i class="ion-play" style="text-align:center"></i>
+            </div>
+
+            <div class="button button-energized" id="Pause">
+                <i class="ion-pause"></i>
+            </div>
+
+            <div class="button button-assertive" id="Stop">
+                <i class="ion-stop"></i>
+            </div>
+        </div>
+    </p>
+    <p>
+        <div class="button-bar" style="width:96%;margin-left:2%">
+            <div class="button button-balanced" id="Previous">
+                <i class="ion-ios-skipbackward" style="text-align:center"></i>
+            </div>
+
+            <div class="button button-balanced" id="Shuffle" >
+                <i class="ion-shuffle"></i>
+            </div>
+
+            <div class="button button-balanced" id="Next">
+                <i class="ion-ios-skipforward"></i>
+            </div>
+        </div>
+
+
+    </p>
 
 </p1><br/>
 
@@ -24,11 +56,11 @@
     <input id="search" type="search" placeholder="Research Art. or Alb." name="search">
     <button id="SearchArtist" class="button icon-left ion-search">Artist</button>
     <button id="SearchAlbum" class="button icon-left ion-search">Album</button>
-</p2><br />
+</p2><br /><br />
       
 <p3>
     Chanson en cours de lecture :
-    <p><span id="CurrentSong">none</span><p />
+    <p><br /><span id="CurrentSong">None</span><p />
     <p><span id="CurrentArtist"></span> - <span id="CurrentAlbum"></span></p>   <br />
     <p>Current playlist :</p>    <br />
     <table id="CurrentPlaylist"></table>
