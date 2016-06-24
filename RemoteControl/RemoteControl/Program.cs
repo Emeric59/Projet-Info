@@ -28,7 +28,7 @@ namespace RemoteControl
             PushBrightness();
 
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
-            string MySentinel = "PCDEPIERRE";
+            string MySentinel = "PC-EMERIC";
 
             int seuil = 90;
             PackageHost.WriteInfo($"Seuil de tolérance RAM à {seuil}%");
