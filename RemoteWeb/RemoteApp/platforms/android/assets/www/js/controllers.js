@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('remote.controllers', [])
 
 .controller('AppCtrl2', function ($scope, $ionicModal, $timeout) {
 
