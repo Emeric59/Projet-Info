@@ -4,14 +4,6 @@
         <h1>PCControler</h1>
 
         <h1>
-            <button id="DecreaseVolume"
-                    class="ion-android-volume-down button-large button-icon "></button>
-            <button id="IncreaseVolume"
-                    class="ion-android-volume-up"></button>
-            <button id="Mute">
-                <i class="ion-volume-mute"></i>
-
-            </button>
             <span>{{state}}</span>
         </h1>
         <br />
@@ -36,26 +28,7 @@
             <button class="button button-bar button-dark" ; ng-click="monitoroff()">
                 Turn off monitor
             </button>
-        </div>
-
-            <i class="icon ion-ios7-sunny-outline"></i>
-            <input type="range" name="volume" min="0" max="5" value="{{slider.rangeValue}}" ng-model="slider.rangeValue">
-            <i class="icon ion-ios7-sunny"></i>
-
-        </div>
-        <div class="item item-divider">
-            Range Value : {{slider.rangeValue}}
-        </div>
-
-        <p2>
-            <button id="Play"
-                    class="ion-play"></button>
-            <button id="Pause">
-                    <i class="ion-pause" ></i>
-            </button>
-            <button id="Stop"
-                    class="ion-stop"></button>
-        </p2>
+            </div>
 
         <h1>
             <button id="PowerSaver"
@@ -83,21 +56,6 @@
                     class="ion-alert-circled button-large button-icon"></button>
         </h1>
 
-
-
-            <br />
-            <div class="doc-example ionic">
-                <div class="bar bar-header">
-                    <div class="h1 title">Range</div>
-                </div>
-                <div class="content-wrapper">
-                    <div class="content has-header padding-top">
-
-                        <div class="range">
-                            <i class="icon ion-volume-low"></i>
-                            <input type="range" name="volume">
-                            <i class="icon ion-volume-high"></i>
-                        </div>
         <p>
                 
                     <div class="button-bar" style="width:96%;margin-left:2%" >
