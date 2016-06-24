@@ -64,8 +64,13 @@ namespace RemoteControl
 
         private void AudioEndpointVolume_OnVolumeNotification(AudioVolumeNotificationData data)
         {
-            double level = Math.Round( data.MasterVolume * 100);
-            PackageHost.PushStateObject("VolumeLevel", level);
+            double volume = Math.Round( data.MasterVolume * 100);
+            PackageHost.PushStateObject("VolumeLevel", new
+            {
+                level = volume,
+                muteState = data.Muted
+            },
+            "VolumeLevel");
         }
 
         private MMDevice loadDefaultAudioDevice()
@@ -102,6 +107,7 @@ namespace RemoteControl
         /// <summary>
         /// Pushes the brightness.
         /// </summary>
+        [MessageCallback]
         static void PushBrightness()
         {
             ManagementScope scope = new ManagementScope("root\\WMI");
