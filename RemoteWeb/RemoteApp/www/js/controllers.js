@@ -99,17 +99,16 @@ angular.module('remote.controllers', [])
 
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "monitorOff", "");
 
-
             };
 
-            $scope.brightness = {};
-            $scope.brightness.value = 0;
+            //$scope.brightness = {};
+            //$scope.brightness.value = 0;
 
-            $scope.$watch('brightness.value', function (val, old) {
-                $scope.brightness.value = parseInt(val);
-                console.log('range=' + $scope.brightness.value)
+            //$scope.$watch('brightness.value', function (val, old) {
+            //    $scope.brightness.value = parseInt(val);
+            //    console.log('range=' + $scope.brightness.value)
 
-            });
+            //});
 
             $scope.volume = {};
             $scope.volume.value = 0;
@@ -117,5 +116,14 @@ angular.module('remote.controllers', [])
                 $scope.volume.value = parseInt(val);
                 console.log('range=' + $scope.volume.value)
             });
+
+            $scope.brightness = {};
+            $scope.brightness.value = 10;
+            $scope.setBrightness = function (rangeValue) {
+                console.log(rangeValue.value);
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetBrightness", rangeValue.value);
+
+            };
+
 
         }]);
