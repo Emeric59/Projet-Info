@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 
 
-angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers', 'remote.constellationScripts'])
+angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
 
 
 .run(['$ionicPlatform', '$rootScope', 'constellationConsumer', function ($ionicPlatform, $rootScope, consumer) {

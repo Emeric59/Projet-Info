@@ -90,4 +90,32 @@ angular.module('remote.controllers', [])
 })
 
 .controller('PlaylistCtrl', function ($scope, $stateParams) {
-});
+})
+
+.controller('MyController', ['$scope',
+        function ($scope) {
+
+            $scope.monitoroff = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "monitorOff", "");
+
+
+            };
+
+            $scope.brightness = {};
+            $scope.brightness.value = 0;
+
+            $scope.$watch('brightness.value', function (val, old) {
+                $scope.brightness.value = parseInt(val);
+                console.log('range=' + $scope.brightness.value)
+
+            });
+
+            $scope.volume = {};
+            $scope.volume.value = 0;
+            $scope.$watch('volume.value', function (val, old) {
+                $scope.volume.value = parseInt(val);
+                console.log('range=' + $scope.volume.value)
+            });
+
+        }]);
