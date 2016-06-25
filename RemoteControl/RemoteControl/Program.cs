@@ -6,7 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using NAudio.CoreAudioApi;
 using System.Management;
-using Microsoft.Win32.TaskScheduler;
+//using Microsoft.Win32.TaskScheduler;
 
 namespace RemoteControl
 {
@@ -28,7 +28,7 @@ namespace RemoteControl
             PushBrightness();
 
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
-            string MySentinel = "PC-EMERIC";
+            string MySentinel = "PCDEPIERRE";
 
             int seuil = 90;
             PackageHost.WriteInfo($"Seuil de tolérance RAM à {seuil}%");
@@ -402,16 +402,16 @@ namespace RemoteControl
                 }
             }
 
-            using (TaskService ts = new TaskService())
-            {
-                TaskDefinition td = ts.NewTask();
-                td.RegistrationInfo.Description = description;
-
-                string date = string.Format("{0}-{1}-{2} {3}:{4}:00", jour, mois, annee, heure, minute);
-                td.Triggers.Add(new TimeTrigger() { StartBoundary = Convert.ToDateTime(date) });
-                td.Actions.Add(new ExecAction(@"notepad.exe", path, null));
-                ts.RootFolder.RegisterTaskDefinition(title, td);
-            }
+            //using (TaskService ts = new TaskService())
+            //{
+               // TaskDefinition td = ts.NewTask();
+               // td.RegistrationInfo.Description = description;
+               //
+               // string date = string.Format("{0}-{1}-{2} {3}:{4}:00", jour, mois, annee, heure, minute);
+               // td.Triggers.Add(new TimeTrigger() { StartBoundary = Convert.ToDateTime(date) });
+              //  td.Actions.Add(new ExecAction(@"notepad.exe", path, null));
+              //  ts.RootFolder.RegisterTaskDefinition(title, td);
+           // }
         }
     }
 }

@@ -82,3 +82,5 @@ C:\Users\Emeric\Source\Repos\Projet-Info\RemoteControl\RemoteControl\bin\Debug\e
 C:\Users\Emeric\Source\Repos\Projet-Info\RemoteControl\RemoteControl\bin\Debug\fr\Microsoft.Win32.TaskScheduler.resources.dll
 C:\Users\Emeric\Source\Repos\Projet-Info\RemoteControl\RemoteControl\bin\Debug\it\Microsoft.Win32.TaskScheduler.resources.dll
 C:\Users\Emeric\Source\Repos\Projet-Info\RemoteControl\RemoteControl\bin\Debug\zh-CN\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\Pierre\Source\Repos\Projet-Info\RemoteControl\RemoteControl\bin\Debug\NAudio.dll
+C:\Users\Pierre\Source\Repos\Projet-Info\RemoteControl\RemoteControl\bin\Debug\NAudio.xml
