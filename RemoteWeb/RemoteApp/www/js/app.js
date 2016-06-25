@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 
 
-angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers', 'remote.constellationScripts'])
+angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
 
 
 .run(['$ionicPlatform', '$rootScope', 'constellationConsumer', function ($ionicPlatform, $rootScope, consumer) {
@@ -27,19 +27,22 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers', 'rem
     $rootScope.consumer = consumer;
     $rootScope.connectionState = 'Disconnected';
 
-     // scope permet de faire que la variable soit utilisée par le html, et pas seulement réduite au js
+
+    // scope permet de faire que la variable soit utilisée par le html, et pas seulement réduite au js
 
     $rootScope.consumer.intializeClient("http://localhost:8088", "6d540ec121c933fe48ea0ad3872d5b98dec65226", "RemoteAngular");
 
 
 
     $rootScope.consumer.onUpdateStateObject(function (stateobject) {
-        
-        if ($rootScope.consumer[stateobject.PackageName] == undefined) {
-            $rootScope.consumer[stateobject.PackageName] = {};
+        $rootScope.$apply(function () {
+            if ($rootScope.consumer[stateobject.PackageName] == undefined) {
+                $rootScope.consumer[stateobject.PackageName] = {};
             }
-        $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
-           });
+            $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
+        })
+
+    });
 
     $rootScope.consumer.onConnectionStateChanged(function (change) {
 
@@ -50,7 +53,7 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers', 'rem
         }
         $rootScope.$apply();
     });
-        $rootScope.consumer.connect();
+    $rootScope.consumer.connect();
 }])
 
 
