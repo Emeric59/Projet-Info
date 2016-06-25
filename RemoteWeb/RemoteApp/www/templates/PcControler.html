@@ -45,27 +45,34 @@
             </div>
 
                 <button class="button icon-right ion-android-hand button-bar button-outline button-positive" style="margin:2%;width:96%" ; ng-click="monitoroff()">
-                    Turn off monitor
+                    &nbsp; Turn off monitor
                 </button>
                 <button class="button icon-right ion-alert-circled button-bar button-outline button-calm" style="margin:2%;width:96%" ; ng-click="panicMode()">
-                    Panic Mode
+                    &nbsp; Panic Mode
                 </button>
                 <button class="button icon-right ion-power button-bar button-outline button-balanced" style="margin:2%;width:96%" ; ng-click="shutdown()">
-                    Shutdown
+                    &nbsp; Shutdown
                 </button>
                 <button class="button icon-right ion-speedometer button-bar button-outline button-energized" style="margin:2%;width:96%" ; ng-click="reboot()">
-                    Reboot
+                    &nbsp; Reboot
                 </button>
                 <button class="button icon-right ion-ios-moon button-bar button-outline button-assertive" style="margin:2%;width:96%" ; ng-click="sleep()">
-                    Sleep
+                    &nbsp; &nbsp;  Sleep
                 </button>
-                <button class="button icon-right ion-home button-bar button-outline button-royal" style="margin:2%;width:96%" ; ng-click="balance()">
-                    Power balanced
-                </button>
-                <button class="button icon-right ion-speedometer button-bar button-outline button-dark" style="margin:2%;width:96%" ; ng-click="save()">
-                    Power saving
-                </button>
+                
+            <div class="button-bar button-dark button-outline" style="width:96%;margin-left:2%">
+                <div class="button" id="save" ; ng-click="save()">
+                    <i class="ion-leaf" style="text-align:center"></i>
+                </div>
 
+                <div class="button" id="balance" ; ng-click="balance()">
+                    <i class="ion-home"></i>
+                </div>
+
+                <div class="button" id="high" ; ng-click="high()">
+                    <i class="ion-speedometer"></i>
+                </div>
+            </div>
 
         </div>
         

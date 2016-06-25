@@ -131,6 +131,12 @@ angular.module('remote.controllers', [])
 
             };
 
+            $scope.high = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "high");
+
+            };
+
             $scope.reboot = function () {
 
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "reboot", "");
