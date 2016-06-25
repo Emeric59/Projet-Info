@@ -101,6 +101,74 @@ angular.module('remote.controllers', [])
 
             };
 
+            $scope.panicMode = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "panicMode", "");
+
+            };
+
+            $scope.shutdown = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "shutdown", "");
+
+            };
+
+            $scope.sleep = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "sleep", "");
+
+            };
+
+            $scope.balance = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "balanced");
+
+            };
+
+            $scope.save = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "saver");
+
+            };
+
+            $scope.reboot = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "reboot", "");
+
+            };
+
+            $scope.play = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "play", "");
+
+            };
+
+            $scope.pause = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "pause", "");
+
+            };
+
+            $scope.stop = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "stop", "");
+
+            };
+
+            $scope.previous = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "previous", "");
+
+            };
+
+            $scope.next = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "next", "");
+
+            };
+
+            
+
             //$scope.brightness = {};
             //$scope.brightness.value = 0;
 

@@ -1,4 +1,4 @@
-<ion-view view-title="Media">
+<ion-view view-title="Media" ng-controller="MyController">
     <link rel="stylesheet" type="text/css" href="../css/ionicons.css">
 
   <ion-content>
@@ -19,30 +19,30 @@
     </ul> 
     <p>
         <div class="button-bar" style="width:96%;margin-left:2%">
-            <div class="button button-calm" id="Play">
+            <div class="button button-calm" id="Play" ; ng-click="play()">
                 <i class="ion-play" style="text-align:center"></i>
             </div>
 
-            <div class="button button-energized" id="Pause">
+            <div class="button button-energized" id="Pause" ; ng-click="pause()">
                 <i class="ion-pause"></i>
             </div>
 
-            <div class="button button-assertive" id="Stop">
+            <div class="button button-assertive" id="Stop" ; ng-click="stop()">
                 <i class="ion-stop"></i>
             </div>
         </div>
     </p>
     <p>
         <div class="button-bar" style="width:96%;margin-left:2%">
-            <div class="button button-balanced" id="Previous">
+            <div class="button button-balanced" id="Previous" ; ng-click="previous()">
                 <i class="ion-ios-skipbackward" style="text-align:center"></i>
             </div>
 
-            <div class="button button-balanced" id="Shuffle" >
+            <div class="button button-balanced" id="Shuffle">
                 <i class="ion-shuffle"></i>
             </div>
 
-            <div class="button button-balanced" id="Next">
+            <div class="button button-balanced" id="Next" ; ng-click="next()">
                 <i class="ion-ios-skipforward"></i>
             </div>
         </div>

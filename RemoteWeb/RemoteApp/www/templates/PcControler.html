@@ -9,7 +9,7 @@
         <br />
 
         <div class="list">
-            <div class="item item-divider item-calm">
+            <div class="item item-divider item-dark">
                 Volume Control
             </div>
                 <div class="item range range-calm">
@@ -29,7 +29,7 @@
                 </div>
             
 
-            <div class="item item-divider item-energized">
+            <div class="item item-divider item-dark">
                             Brightness Control
             </div>
                 <div class="item range range-positive range-energized">
@@ -39,55 +39,34 @@
                    
                     
                 </div>
-                <button class="button button-bar button-outline button-energized" style="margin:2%;width:96%" ; ng-click="monitoroff()">
+
+            <div class="item item-divider item-dark">
+                Hardware Control
+            </div>
+
+                <button class="button icon-right ion-android-hand button-bar button-outline button-positive" style="margin:2%;width:96%" ; ng-click="monitoroff()">
                     Turn off monitor
                 </button>
-
-            <p>
-
-                <button id="PowerSaver" title="PowerSaver"
-                        class="ion-leaf button-large button-icon "></button>
-                <button id="PowerBalanced"
-                        class="ion-home button-large button-icon"></button>
-                <button id="PowerSaver"
-                        class="ion-speedometer button-large button-icon "></button>
-
-            </p>
-
-
-            <p>
-                <button id="Sleep"
-                        class="ion-ios-moon button-large button-icon"></button>
-                <button id="Reboot"
-                        class="ion-refresh button-large button-icon"></button>
-                <button id="Shutdown"
-                        class="ion-power button-large button-icon "></button>
-
-            </p>
-
-            <h1>
-                <button id="Sleep"
-                        class="ion-alert-circled button-large button-icon"></button>
-            </h1>
-
-            <p>
-
-                <div class="button-bar" style="width:96%;margin-left:2%">
-                    <div class="button button-calm" id="Play">
-                        <i class="ion-play" style="text-align:center"></i>
-                    </div>
-
-                    <button class="button button-energized" id="Pause">
-                        <i class="ion-pause"></i>
-                    </button>
-
-                    <button class="button button-assertive" id="Stop">
-                        <i class="ion-stop"></i>
-                    </button>
-                </div>
+                <button class="button icon-right ion-alert-circled button-bar button-outline button-calm" style="margin:2%;width:96%" ; ng-click="panicMode()">
+                    Panic Mode
+                </button>
+                <button class="button icon-right ion-power button-bar button-outline button-balanced" style="margin:2%;width:96%" ; ng-click="shutdown()">
+                    Shutdown
+                </button>
+                <button class="button icon-right ion-speedometer button-bar button-outline button-energized" style="margin:2%;width:96%" ; ng-click="reboot()">
+                    Reboot
+                </button>
+                <button class="button icon-right ion-ios-moon button-bar button-outline button-assertive" style="margin:2%;width:96%" ; ng-click="sleep()">
+                    Sleep
+                </button>
+                <button class="button icon-right ion-home button-bar button-outline button-royal" style="margin:2%;width:96%" ; ng-click="balance()">
+                    Power balanced
+                </button>
+                <button class="button icon-right ion-speedometer button-bar button-outline button-dark" style="margin:2%;width:96%" ; ng-click="save()">
+                    Power saving
+                </button>
 
 
-            </p>
         </div>
         
         

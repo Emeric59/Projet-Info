@@ -90,4 +90,108 @@ angular.module('remote.controllers', [])
 })
 
 .controller('PlaylistCtrl', function ($scope, $stateParams) {
-});
+})
+
+.controller('MyController', ['$scope',
+        function ($scope) {
+
+            $scope.monitoroff = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "monitorOff", "");
+
+            };
+
+            $scope.panicMode = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "panicMode", "");
+
+            };
+
+            $scope.shutdown = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "shutdown", "");
+
+            };
+
+            $scope.sleep = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "sleep", "");
+
+            };
+
+            $scope.balance = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "balanced");
+
+            };
+
+            $scope.save = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "saver");
+
+            };
+
+            $scope.reboot = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "reboot", "");
+
+            };
+
+            $scope.play = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "play", "");
+
+            };
+
+            $scope.pause = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "pause", "");
+
+            };
+
+            $scope.stop = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "stop", "");
+
+            };
+
+            $scope.previous = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "previous", "");
+
+            };
+
+            $scope.next = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "next", "");
+
+            };
+
+            
+
+            //$scope.brightness = {};
+            //$scope.brightness.value = 0;
+
+            //$scope.$watch('brightness.value', function (val, old) {
+            //    $scope.brightness.value = parseInt(val);
+            //    console.log('range=' + $scope.brightness.value)
+
+            //});
+
+            $scope.volume = {};
+            $scope.volume.value = 0;
+            $scope.$watch('volume.value', function (val, old) {
+                $scope.volume.value = parseInt(val);
+                console.log('range=' + $scope.volume.value)
+            });
+
+            $scope.brightness = {};
+            $scope.brightness.value = 10;
+            $scope.setBrightness = function (rangeValue) {
+                console.log(rangeValue.value);
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetBrightness", rangeValue.value);
+
+            };
+
+
+        }]);
