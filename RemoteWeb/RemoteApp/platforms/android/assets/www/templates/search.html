@@ -71,8 +71,12 @@
       
 <p3>
     Chanson en cours de lecture :
-    <br />
-    <div>{{consumer.MediaPlayer.CurrentSong.Value}}</div>
+    <div style="text-align:center">
+        <div>{{consumer.MediaPlayer.CurrentSong.Value[0].Item1}}</div>
+        <div>{{consumer.MediaPlayer.CurrentSong.Value[0].Item2}}</div>
+        <div>{{consumer.MediaPlayer.CurrentSong.Value[0].Item3}}</div>
+        <div></div>
+    </div>
     <p><span id="CurrentArtist"></span> - <span id="CurrentAlbum"></span></p>   <br />
     <p>Current playlist :</p>    <br />
     <table id="CurrentPlaylist"></table>

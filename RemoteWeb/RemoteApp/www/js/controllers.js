@@ -96,6 +96,12 @@ angular.module('remote.controllers', [])
         function ($scope) {
             var PlayerState = false;
 
+            $scope.consumer.onUpdateStateObject(function (stateobject) {
+                if ($scope.fullyLoaded) {
+                    $scope.volume.value = $scope.consumer.RemoteControl.VolumeLevel.Value.level;
+                }
+            });
+
             $scope.monitoroff = function () {
 
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "monitorOff", "");
@@ -197,7 +203,7 @@ angular.module('remote.controllers', [])
             }
 
             $scope.volume = {};
-            $scope.volume.value = 0;
+            
             $scope.SetVolume = function (rangeValue) {
                 console.log(rangeValue.value);
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", rangeValue.value);

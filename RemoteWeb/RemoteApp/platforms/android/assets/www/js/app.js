@@ -26,7 +26,7 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
 
     $rootScope.consumer = consumer;
     $rootScope.connectionState = 'Disconnected';
-
+    $rootScope.fullyLoaded = false;
 
 
 
@@ -34,7 +34,18 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
 
     $rootScope.consumer.intializeClient("http://192.168.0.16:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteAngular");
 
-
+    $rootScope.consumer.onConnectionStateChanged(function (change) {
+        $rootScope.$apply(function () {
+            $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
+            if (change.newState === $.signalR.connectionState.connected) {
+                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "RemoteControl", "*", "*");
+                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "MediaPlayer", "*", "*");
+                $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "", function (result) {
+                    $rootScope.shuffleState = result.Data == false ? "off" : "on";
+                });
+            }
+        })
+    });
 
     $rootScope.consumer.onUpdateStateObject(function (stateobject) {
         $rootScope.$apply(function () {
@@ -42,23 +53,15 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
                 $rootScope.consumer[stateobject.PackageName] = {};
             }
             $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
-        })
-
-    });
-
-    $rootScope.consumer.onConnectionStateChanged(function (change) {
-        $rootScope.$apply(function () {
-            $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
-            if (change.newState === $.signalR.connectionState.connected) {
-                $rootScope.consumer.requestSubscribeStateObjects("*", "RemoteControl", "*", "*");
-                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "MediaPlayer", "*", "*");
-                $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "", function (result) {
-                    $rootScope.shuffleState = result.Data == false ? "off" : "on";
-                })
+            if ($rootScope.consumer.RemoteControl.VolumeLevel != undefined) {
+                $rootScope.fullyLoaded = true;
             }
 
         })
+
     });
+
+
     $rootScope.consumer.connect();
 
 
