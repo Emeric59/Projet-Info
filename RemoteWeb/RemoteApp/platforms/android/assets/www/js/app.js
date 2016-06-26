@@ -27,19 +27,19 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
     $rootScope.consumer = consumer;
     $rootScope.connectionState = 'Disconnected';
     $rootScope.remoteLoaded = false;
-
+    $rootScope.mediaLoaded = false;
 
 
     // scope permet de faire que la variable soit utilisée par le html, et pas seulement réduite au js
 
-    $rootScope.consumer.intializeClient("http://localhost:8088", "6d540ec121c933fe48ea0ad3872d5b98dec65226", "RemoteAngular");
+    $rootScope.consumer.intializeClient("http://localhost:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteAngular");
 
     $rootScope.consumer.onConnectionStateChanged(function (change) {
         $rootScope.$apply(function () {
             $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
             if (change.newState === $.signalR.connectionState.connected) {
-                $rootScope.consumer.requestSubscribeStateObjects("PCDEPIERRE_UI", "RemoteControl", "*", "*");
-                $rootScope.consumer.requestSubscribeStateObjects("PCDEPIERRE_UI", "MediaPlayer", "*", "*");
+                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "RemoteControl", "*", "*");
+                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "MediaPlayer", "*", "*");
                 $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "", function (result) {
                     $rootScope.shuffleState = result.Data == false ? "off" : "on";
                 });
@@ -56,8 +56,11 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
             $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
             if ($rootScope.consumer.RemoteControl.VolumeLevel != undefined && $rootScope.consumer.RemoteControl.BrightnessLevel != undefined) {
                 $rootScope.remoteLoaded = true;
-
             }
+            if ($rootScope.consumer.MediaPlayer != undefined && $rootScope.consumer.MediaPlayer.TimeData != undefined) {
+                $rootScope.mediaLoaded = true;
+            }
+
 
         })
 

@@ -92,9 +92,22 @@ angular.module('remote.controllers', [])
 .controller('PlaylistCtrl', function ($scope, $stateParams) {
 })
 
-.controller('MyController', ['$scope', 
+.controller('MyController', ['$scope',
         function ($scope) {
-                        
+
+            $scope.consumer.onUpdateStateObject(function (stateobject) {
+                if ($scope.remoteLoaded) {
+                    $scope.volume.value = $scope.consumer.RemoteControl.VolumeLevel.Value.level;
+                    $scope.brightness.value = $scope.consumer.RemoteControl.BrightnessLevel.Value;
+                };
+                if ($scope.mediaLoaded) {
+                    if ($scope.position != undefined) {
+                        $scope.position.value = $scope.consumer.MediaPlayer.TimeData.Value.currentPosition;
+                    }
+                };
+            });
+
+
             $scope.mute = function () {
                 console.log('mute');
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", "mute");
@@ -182,13 +195,13 @@ angular.module('remote.controllers', [])
 
             $scope.run = function () {
 
-            
+
                 if ($scope.consumer.RemoteControl.MediaPlayerState.Value == false) {
                     $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "closeMediaPlayer", "");
-                    
+
                 } else {
                     $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openMediaPlayer", "");
-                    
+
                 }
             };
 
@@ -207,15 +220,20 @@ angular.module('remote.controllers', [])
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadAlbum", album);
             };
 
+            $scope.volume = {};
+
             $scope.SetVolume = function (rangeValue) {
+                console.log(rangeValue.value);
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", rangeValue.value);
             };
 
+            $scope.brightness = {};
             $scope.SetBrightness = function (rangeValue) {
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetBrightness", rangeValue.value);
             };
 
-            $scope.setPosition = function (rangeValue) {
+            $scope.position = {};
+            $scope.SetPosition = function (rangeValue) {
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "setTime", rangeValue.value);
             }
 
