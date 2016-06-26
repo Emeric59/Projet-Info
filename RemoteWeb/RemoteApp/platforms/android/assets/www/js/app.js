@@ -54,7 +54,10 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
             $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
             if (change.newState === $.signalR.connectionState.connected) {
                 $rootScope.consumer.requestSubscribeStateObjects("PCDEPIERRE_UI", "*", "*", "*");
-            }
+                $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "", function (result) {
+                    $rootScope.shuffleState = result.Data == false ? "off" : "on";
+                });
+            };
         });
     });
     $rootScope.consumer.connect();
