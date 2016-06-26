@@ -1,6 +1,6 @@
-﻿var constellation = $.signalR.createConstellationConsumer("http://localhost:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteControl")
+﻿var constellation = $.signalR.createConstellationConsumer("http://localhost:8088", "6d540ec121c933fe48ea0ad3872d5b98dec65226", "RemoteControl")
 var tableau = document.getElementById("CurrentPlaylist");
-var MySentinel = "MSI-FLO_UI";
+var MySentinel = "PCDEPIERRE_UI";
 var PlayerState = false;
 
 constellation.connection.stateChanged(function (change) {
