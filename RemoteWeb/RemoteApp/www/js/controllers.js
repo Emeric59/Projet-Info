@@ -96,6 +96,8 @@ angular.module('remote.controllers', [])
         function ($scope) {
             var PlayerState = false;
 
+            
+
 
             $scope.monitoroff = function () {
 
@@ -184,6 +186,13 @@ angular.module('remote.controllers', [])
                     $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openMediaPlayer", "");
                     PlayerState = true;
                 }
+            };
+
+            $scope.shuffle = function () {
+
+                $scope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "set", function (result) {
+                    $scope.shuffleState = (result.Data == true ? "off" : "on");
+                });
             };
 
             

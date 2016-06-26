@@ -1,5 +1,14 @@
 <ion-view view-title="Media" ng-controller="MyController">
     <link rel="stylesheet" type="text/css" href="../css/ionicons.css">
+    <style>
+        .shuffleOn{
+            color:darkblue;
+
+        }
+        .shuffleOff{
+
+        }
+    </style>
 
   <ion-content>
 <p1>
@@ -38,8 +47,9 @@
                 <i class="ion-ios-skipbackward" style="text-align:center"></i>
             </div>
 
-            <div class="button button-balanced" id="Shuffle">
+            <div  class="button button-balanced" id="Shuffle" ; ng-click="shuffle()">
                 <i class="ion-shuffle"></i>
+                {{shuffleState}}
             </div>
 
             <div class="button button-balanced" id="Next" ; ng-click="next()">
