@@ -95,12 +95,13 @@ angular.module('remote.controllers', [])
 .controller('MyController', ['$scope', 
         function ($scope) {
             var PlayerState = false;
+                        
+            $scope.mute = function () {
+                console.log('mute');
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", "mute");
 
-            $scope.consumer.onUpdateStateObject(function (stateobject) {
-                if ($scope.fullyLoaded) {
-                    $scope.volume.value = $scope.consumer.RemoteControl.VolumeLevel.Value.level;
-                }
-            });
+            }
+
 
             $scope.monitoroff = function () {
 
@@ -202,19 +203,16 @@ angular.module('remote.controllers', [])
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadArtist", artist);
             }
 
-            $scope.volume = {};
-            
+            $scope.volume = {};            
             $scope.SetVolume = function (rangeValue) {
                 console.log(rangeValue.value);
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", rangeValue.value);
             };
 
-            $scope.brightness = {};
-            $scope.brightness.value = 0;
+            $scope.brightness = {};            
             $scope.SetBrightness = function (rangeValue) {
                 console.log(rangeValue.value);
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetBrightness", rangeValue.value);
             };
-
 
         }]);
