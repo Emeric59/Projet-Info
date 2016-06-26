@@ -1,8 +1,5 @@
 angular.module('remote.controllers', [])
 
-
-
-
 .controller('AppCtrl2', function ($scope, $ionicModal, $timeout) {
 
     // With the new view caching in Ionic, Controllers are only called
@@ -95,10 +92,15 @@ angular.module('remote.controllers', [])
 .controller('PlaylistCtrl', function ($scope, $stateParams) {
 })
 
-.controller('MyController', ['$scope',
+.controller('MyController', ['$scope', 
         function ($scope) {
-
             var PlayerState = false;
+
+            $scope.consumer.onUpdateStateObject(function (stateobject) {
+                if ($scope.fullyLoaded) {
+                    $scope.volume.value = $scope.consumer.RemoteControl.VolumeLevel.Value.level;
+                }
+            });
 
             $scope.monitoroff = function () {
 
@@ -189,30 +191,29 @@ angular.module('remote.controllers', [])
                 }
             };
 
-            
+            $scope.shuffle = function () {
 
-            //$scope.brightness = {};
-            //$scope.brightness.value = 0;
+                $scope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "set", function (result) {
+                    $scope.shuffleState = (result.Data == true ? "off" : "on");
+                });
+            };
 
-            //$scope.$watch('brightness.value', function (val, old) {
-            //    $scope.brightness.value = parseInt(val);
-            //    console.log('range=' + $scope.brightness.value)
-
-            //});
+            $scope.searchArtist = function (artist) {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadArtist", artist);
+            }
 
             $scope.volume = {};
-            $scope.volume.value = 0;
-            $scope.$watch('volume.value', function (val, old) {
-                $scope.volume.value = parseInt(val);
-                console.log('range=' + $scope.volume.value)
-            });
+            
+            $scope.SetVolume = function (rangeValue) {
+                console.log(rangeValue.value);
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", rangeValue.value);
+            };
 
             $scope.brightness = {};
-            $scope.brightness.value = 10;
-            $scope.setBrightness = function (rangeValue) {
+            $scope.brightness.value = 0;
+            $scope.SetBrightness = function (rangeValue) {
                 console.log(rangeValue.value);
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetBrightness", rangeValue.value);
-
             };
 
 

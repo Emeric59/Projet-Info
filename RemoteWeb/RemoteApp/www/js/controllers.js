@@ -96,8 +96,11 @@ angular.module('remote.controllers', [])
         function ($scope) {
             var PlayerState = false;
 
-            
-
+            $scope.consumer.onUpdateStateObject(function (stateobject) {
+                if ($scope.fullyLoaded) {
+                    $scope.volume.value = $scope.consumer.RemoteControl.VolumeLevel.Value.level;
+                }
+            });
 
             $scope.monitoroff = function () {
 
@@ -195,19 +198,12 @@ angular.module('remote.controllers', [])
                 });
             };
 
-            
-
-            //$scope.brightness = {};
-            //$scope.brightness.value = 0;
-
-            //$scope.$watch('brightness.value', function (val, old) {
-            //    $scope.brightness.value = parseInt(val);
-            //    console.log('range=' + $scope.brightness.value)
-
-            //});
+            $scope.searchArtist = function (artist) {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadArtist", artist);
+            }
 
             $scope.volume = {};
-            $scope.volume.value = 0;
+            
             $scope.SetVolume = function (rangeValue) {
                 console.log(rangeValue.value);
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", rangeValue.value);
