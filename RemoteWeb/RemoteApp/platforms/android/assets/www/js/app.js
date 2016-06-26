@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 
 
-angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers', 'remote.constellationScripts'])
+angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
 
 
 .run(['$ionicPlatform', '$rootScope', 'constellationConsumer', function ($ionicPlatform, $rootScope, consumer) {
@@ -26,31 +26,39 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers', 'rem
 
     $rootScope.consumer = consumer;
     $rootScope.connectionState = 'Disconnected';
+    $rootScope.objectsState = {};
 
-     // scope permet de faire que la variable soit utilisée par le html, et pas seulement réduite au js
+
+
+    // scope permet de faire que la variable soit utilisée par le html, et pas seulement réduite au js
 
     $rootScope.consumer.intializeClient("http://localhost:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteAngular");
 
 
 
     $rootScope.consumer.onUpdateStateObject(function (stateobject) {
-        
-        if ($rootScope.consumer[stateobject.PackageName] == undefined) {
-            $rootScope.consumer[stateobject.PackageName] = {};
+        $rootScope.$apply(function () {
+            if ($rootScope.consumer[stateobject.PackageName] === undefined) {
+                $rootScope.consumer[stateobject.PackageName] = {};
             }
-        $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
-           });
+            $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
+            if ($rootScope.consumer[stateobject.PackageName] === 'RemoteControl') {
+                $rootScope.initVolume = stateobject;
+            }
+        })
+
+    });
 
     $rootScope.consumer.onConnectionStateChanged(function (change) {
-
-        $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
-
-        if (change.newState === $.signalR.connectionState.connected) {
-            $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "*", "*", "*");
-        }
-        $rootScope.$apply();
+        $rootScope.$apply(function () {
+            $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
+            if (change.newState === $.signalR.connectionState.connected) {
+                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "*", "*", "*");
+            }
+        });
     });
-        $rootScope.consumer.connect();
+    $rootScope.consumer.connect();
+    
 }])
 
 
