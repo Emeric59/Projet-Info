@@ -123,6 +123,17 @@ namespace MediaPlayer
 
 
         /// <summary>
+        /// Sets the time.
+        /// </summary>
+        /// <param name="time">The time.</param>
+        [MessageCallback]
+        private void setTime(int time)
+        {
+            player.Ctlcontrols.currentPosition = time;
+        }
+
+
+        /// <summary>
         /// Loads the artist.
         /// </summary>
         /// <param name="artist">The artist.</param>
@@ -168,6 +179,12 @@ namespace MediaPlayer
         }
 
 
+        /// <summary>
+        /// Gets the collection.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         [MessageCallback]
         private TupleList<string, string, string> getCollection(string type, string value)
         {
@@ -188,6 +205,10 @@ namespace MediaPlayer
             return collection;
 
         }
+        /// <summary>
+        /// Gets the playlist.
+        /// </summary>
+        /// <returns></returns>
         [MessageCallback]
         private TupleList<string, string, string> getPlaylist()
         {
@@ -207,7 +228,10 @@ namespace MediaPlayer
 
         #endregion
 
-
+        /// <summary>
+        /// Gets the videos.
+        /// </summary>
+        [MessageCallback]
         private void GetVideos()
         {
             player.currentPlaylist = player.mediaCollection.getByAttribute("MediaType","video");
@@ -215,6 +239,11 @@ namespace MediaPlayer
 
         }
 
+        /// <summary>
+        /// Player media change event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The event.</param>
         private void player_MediaChange(object sender, _WMPOCXEvents_MediaChangeEvent e)
         {
             
@@ -227,17 +256,27 @@ namespace MediaPlayer
 
         }
 
-        
 
+
+        /// <summary>
+        /// Handles the Elapsed event of the Timer control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void Timer_Elapsed(object sender, System.EventArgs e)
         {
             string total =  convertInHHMMSS(player.currentMedia.duration) ;
             string current = convertInHHMMSS(player.Ctlcontrols.currentPosition);
 
-            PackageHost.PushStateObject("TimeData", new { total, current });
+            PackageHost.PushStateObject("TimeData", new { total, current, player.currentMedia.duration, player.Ctlcontrols.currentPosition });
         }
 
 
+        /// <summary>
+        /// Converts seconds in HHMMSS.
+        /// </summary>
+        /// <param name="time">The time in seconds.</param>
+        /// <returns></returns>
         private string convertInHHMMSS(double time)
         {
             int seconds = (int)time;
@@ -250,8 +289,20 @@ namespace MediaPlayer
 
     }
 
+    /// <summary>
+    /// Creates a new list of tuple
+    /// </summary>
+    /// <typeparam name="T1">The type of the 1.</typeparam>
+    /// <typeparam name="T2">The type of the 2.</typeparam>
+    /// <typeparam name="T3">The type of the 3.</typeparam> />
     public class TupleList<T1, T2, T3> : List<Tuple<T1, T2, T3>>
     {
+        /// <summary>
+        /// Adds the specified datas in the list.
+        /// </summary>
+        /// <param name="artist">The artist.</param>
+        /// <param name="album">The album.</param>
+        /// <param name="title">The title.</param>
         public void Add(T1 artist, T2 album, T3 title)
         {
             Add(new Tuple<T1, T2, T3>(artist, album, title));

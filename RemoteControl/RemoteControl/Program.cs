@@ -28,7 +28,7 @@ namespace RemoteControl
             PushBrightness();
 
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
-            string MySentinel = "PCDEPIERRE";
+            string MySentinel = "MSI-FLO";
 
             int seuil = 90;
             PackageHost.WriteInfo($"Seuil de tolérance RAM à {seuil}%");
@@ -102,7 +102,7 @@ namespace RemoteControl
         /// Pushes the brightness.
         /// </summary>
         [MessageCallback]
-        static void PushBrightness()
+        void PushBrightness()
         {
             ManagementScope scope = new ManagementScope("root\\WMI");
             SelectQuery query = new SelectQuery("SELECT * FROM WmiMonitorBrightness");
@@ -353,6 +353,7 @@ namespace RemoteControl
         [MessageCallback]
         void openMediaPlayer()
         {
+            PackageHost.ControlManager.PurgeStateObjects(PackageHost.SentinelName, "MediaPlayer");
             PackageHost.ControlManager.StartPackage(PackageHost.SentinelName, "MediaPlayer");
             PackageHost.PushStateObject("MediaPlayerState", true);
         }
@@ -364,6 +365,7 @@ namespace RemoteControl
         void closeMediaPlayer()
         {
             PackageHost.ControlManager.StopPackage(PackageHost.SentinelName, "MediaPlayer");
+            PackageHost.ControlManager.PurgeStateObjects(PackageHost.SentinelName, "MediaPlayer");
             PackageHost.PushStateObject("MediaPlayerState", false);
         }
 

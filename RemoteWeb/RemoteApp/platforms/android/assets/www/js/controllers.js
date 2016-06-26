@@ -94,16 +94,7 @@ angular.module('remote.controllers', [])
 
 .controller('MyController', ['$scope', 
         function ($scope) {
-            var PlayerState = false;
-
-            $scope.consumer.onUpdateStateObject(function (stateobject) {
-                if ($scope.remoteLoaded) {
-                    $scope.volume.value = $scope.consumer.RemoteControl.VolumeLevel.Value.level;
-                    $scope.brightness.value = $scope.consumer.RemoteControl.BrightnessLevel.Value;
-                    $scope.muteToggle = $scope.consumer.RemoteControl.VolumeLevel.Value.muteState;
-                }
-            });
-
+                        
             $scope.mute = function () {
                 console.log('mute');
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", "mute");
@@ -191,12 +182,13 @@ angular.module('remote.controllers', [])
 
             $scope.run = function () {
 
-                if (PlayerState == true) {
+            
+                if ($scope.consumer.RemoteControl.MediaPlayerState.Value == false) {
                     $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "closeMediaPlayer", "");
-                    PlayerState = false;
+                    
                 } else {
                     $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openMediaPlayer", "");
-                    PlayerState = true;
+                    
                 }
             };
 
@@ -209,19 +201,28 @@ angular.module('remote.controllers', [])
 
             $scope.searchArtist = function (artist) {
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadArtist", artist);
-            }
+            };
 
-            $scope.volume = {};            
+            $scope.searchAlbum = function (album) {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadAlbum", album);
+            };
+
             $scope.SetVolume = function (rangeValue) {
-                console.log(rangeValue.value);
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", rangeValue.value);
             };
 
-            $scope.brightness = {};            
             $scope.SetBrightness = function (rangeValue) {
-                console.log(rangeValue.value);
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetBrightness", rangeValue.value);
             };
+
+            $scope.setPosition = function (rangeValue) {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "setTime", rangeValue.value);
+            }
+
+            $scope.titleOnAlbumClick = function (song) {
+                console.log(song.Item2);
+            };
+
 
 
         }]);

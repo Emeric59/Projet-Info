@@ -43,7 +43,8 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
                 $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "", function (result) {
                     $rootScope.shuffleState = result.Data == false ? "off" : "on";
                 });
-            }
+                $rootScope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "PushBrightness", "");
+            };
         })
     });
 
@@ -55,6 +56,7 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
             $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
             if ($rootScope.consumer.RemoteControl.VolumeLevel != undefined && $rootScope.consumer.RemoteControl.BrightnessLevel != undefined) {
                 $rootScope.remoteLoaded = true;
+
             }
 
         })
