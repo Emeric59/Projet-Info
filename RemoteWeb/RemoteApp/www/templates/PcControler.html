@@ -14,10 +14,11 @@
             </div>
                 <div class="item range range-calm">
                     <i class="icon ion-volume-low"></i>
-                    <input type="range" class="item-calm" name="volume" min="0" max="100" step="1" value="{{volume.value}}" ng-model="volume.value" >
+                    <input type="range" class="item-calm" name="volume" min="0" max="100" step="1"  ng-model="volume.value" ng-change="SetVolume(volume)">
                     <i class="icon ion-volume-high"></i>
                     {{consumer.RemoteControl.VolumeLevel.Value.level}}
                 </div>
+            
                 <div class="item item-toggle">
                     Mute
                     <label class="toggle toggle-calm">
@@ -28,15 +29,18 @@
                     </label>
                 </div>
             
+                
+            
 
             <div class="item item-divider item-energized">
                             Brightness Control
             </div>
                 <div class="item range range-positive range-energized">
                     <i class="icon ion-ios-sunny-outline"></i>
-                    <input type="range" class="item-energized" name="brightness" min="0" max="100" step="10"  ng-model="brightness.value" ng-change="setBrightness(brightness)">
+                    <input type="range" class="item-energized" name="brightness" min="0" max="100" step="10" ng-model="brightness.value" ng-change="SetBrightness(brightness)">
                     <i class="icon ion-ios-sunny"></i>
                    
+
                     
                 </div>
                 <button class="button button-bar button-outline button-energized" style="margin:2%;width:96%" ; ng-click="monitoroff()">

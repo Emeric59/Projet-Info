@@ -26,6 +26,8 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
 
     $rootScope.consumer = consumer;
     $rootScope.connectionState = 'Disconnected';
+    $rootScope.objectsState = {};
+
 
 
     // scope permet de faire que la variable soit utilisée par le html, et pas seulement réduite au js
@@ -36,24 +38,27 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
 
     $rootScope.consumer.onUpdateStateObject(function (stateobject) {
         $rootScope.$apply(function () {
-            if ($rootScope.consumer[stateobject.PackageName] == undefined) {
+            if ($rootScope.consumer[stateobject.PackageName] === undefined) {
                 $rootScope.consumer[stateobject.PackageName] = {};
             }
             $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
+            if ($rootScope.consumer[stateobject.PackageName] === 'RemoteControl') {
+                $rootScope.initVolume = stateobject;
+            }
         })
 
     });
 
     $rootScope.consumer.onConnectionStateChanged(function (change) {
-
-        $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
-
-        if (change.newState === $.signalR.connectionState.connected) {
-            $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "*", "*", "*");
-        }
-        $rootScope.$apply();
+        $rootScope.$apply(function () {
+            $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
+            if (change.newState === $.signalR.connectionState.connected) {
+                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "*", "*", "*");
+            }
+        });
     });
     $rootScope.consumer.connect();
+    
 }])
 
 
