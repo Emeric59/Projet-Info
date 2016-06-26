@@ -96,9 +96,6 @@ angular.module('remote.controllers', [])
         function ($scope) {
             var PlayerState = false;
 
-            
-
-
             $scope.monitoroff = function () {
 
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "monitorOff", "");
@@ -195,16 +192,9 @@ angular.module('remote.controllers', [])
                 });
             };
 
-            
-
-            //$scope.brightness = {};
-            //$scope.brightness.value = 0;
-
-            //$scope.$watch('brightness.value', function (val, old) {
-            //    $scope.brightness.value = parseInt(val);
-            //    console.log('range=' + $scope.brightness.value)
-
-            //});
+            $scope.searchArtist = function (artist) {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadArtist", artist);
+            }
 
             $scope.volume = {};
             $scope.volume.value = 0;

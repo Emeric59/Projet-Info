@@ -50,6 +50,7 @@
             <div  class="button button-balanced" id="Shuffle" ; ng-click="shuffle()">
                 <i class="ion-shuffle"></i>
                 {{shuffleState}}
+                
             </div>
 
             <div class="button button-balanced" id="Next" ; ng-click="next()">
@@ -62,15 +63,16 @@
 
 </p1><br/>
 
-<p2>
-    <input id="search" type="search" placeholder="Research Art. or Alb." name="search">
-    <button id="SearchArtist" class="button icon-left ion-search">Artist</button>
+<div style="margin-left:1%">
+    <input id="search" type="search" placeholder="Research Art. or Alb." name="search" ng-model="search">
+    <button id="SearchArtist" class="button icon-left ion-search" ng-click="searchArtist(search)">Artist</button>
     <button id="SearchAlbum" class="button icon-left ion-search">Album</button>
-</p2><br /><br />
+</div><br /><br />
       
 <p3>
     Chanson en cours de lecture :
-    <p><br /><span id="CurrentSong">None</span><p />
+    <br />
+    <div>{{consumer.MediaPlayer.CurrentSong.Value}}</div>
     <p><span id="CurrentArtist"></span> - <span id="CurrentAlbum"></span></p>   <br />
     <p>Current playlist :</p>    <br />
     <table id="CurrentPlaylist"></table>

@@ -26,25 +26,22 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
 
     $rootScope.consumer = consumer;
     $rootScope.connectionState = 'Disconnected';
-    $rootScope.objectsState = {};
+
 
 
 
     // scope permet de faire que la variable soit utilisée par le html, et pas seulement réduite au js
 
-    $rootScope.consumer.intializeClient("http://localhost:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteAngular");
+    $rootScope.consumer.intializeClient("http://192.168.0.16:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteAngular");
 
 
 
     $rootScope.consumer.onUpdateStateObject(function (stateobject) {
         $rootScope.$apply(function () {
-            if ($rootScope.consumer[stateobject.PackageName] === undefined) {
+            if ($rootScope.consumer[stateobject.PackageName] == undefined) {
                 $rootScope.consumer[stateobject.PackageName] = {};
             }
             $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
-            if ($rootScope.consumer[stateobject.PackageName] === 'RemoteControl') {
-                $rootScope.initVolume = stateobject;
-            }
         })
 
     });
@@ -53,12 +50,18 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
         $rootScope.$apply(function () {
             $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
             if (change.newState === $.signalR.connectionState.connected) {
-                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "*", "*", "*");
+                $rootScope.consumer.requestSubscribeStateObjects("*", "RemoteControl", "*", "*");
+                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "MediaPlayer", "*", "*");
+                $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "", function (result) {
+                    $rootScope.shuffleState = result.Data == false ? "off" : "on";
+                })
             }
-        });
+
+        })
     });
     $rootScope.consumer.connect();
-    
+
+
 }])
 
 
@@ -78,7 +81,8 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
         url: '/search',
         views: {
             'menuContent': {
-                templateUrl: 'templates/search.html'
+                templateUrl: 'templates/search.html',
+                controller: 'MyController'
             }
         }
     })
@@ -96,7 +100,7 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
           views: {
               'menuContent': {
                   templateUrl: 'templates/PcControler.html',
-                  //controller:'MyController'
+                  controller: 'MyController'
               }
           }
       })
