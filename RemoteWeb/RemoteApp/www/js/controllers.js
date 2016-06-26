@@ -173,6 +173,15 @@ angular.module('remote.controllers', [])
 
             };
 
+            $scope.run = function () {
+
+                if (PlayerState == true) {
+                    $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "closeMediaPlayer", "");
+                } else {
+                    $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openMediaPlayer", "");
+                }
+            };
+
             
 
             //$scope.brightness = {};

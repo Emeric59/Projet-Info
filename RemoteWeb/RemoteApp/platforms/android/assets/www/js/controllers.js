@@ -131,6 +131,12 @@ angular.module('remote.controllers', [])
 
             };
 
+            $scope.high = function () {
+
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "high");
+
+            };
+
             $scope.reboot = function () {
 
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "reboot", "");
@@ -165,6 +171,15 @@ angular.module('remote.controllers', [])
 
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "next", "");
 
+            };
+
+            $scope.run = function () {
+
+                if (PlayerState == true) {
+                    $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "closeMediaPlayer", "");
+                } else {
+                    $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openMediaPlayer", "");
+                }
             };
 
             
