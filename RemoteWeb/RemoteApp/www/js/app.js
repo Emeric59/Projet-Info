@@ -26,7 +26,7 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
 
     $rootScope.consumer = consumer;
     $rootScope.connectionState = 'Disconnected';
-    $rootScope.fullyLoaded = false;
+    $rootScope.remoteLoaded = false;
 
 
 
@@ -53,8 +53,9 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
                 $rootScope.consumer[stateobject.PackageName] = {};
             }
             $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
-            if ($rootScope.consumer.RemoteControl.VolumeLevel != undefined) {
-                $rootScope.fullyLoaded = true;
+            if ($rootScope.consumer.RemoteControl.VolumeLevel != undefined && $rootScope.consumer.RemoteControl.BrightnessLevel != undefined) {
+                $rootScope.remoteLoaded = true;
+
             }
 
         })
