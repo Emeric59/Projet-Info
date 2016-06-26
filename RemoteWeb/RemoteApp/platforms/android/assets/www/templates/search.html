@@ -15,8 +15,8 @@
 
     <ul class="list">
 
-        <li class="item item-toggle" ; ng-click="run()">
-            Lecteur Media
+        <li class="item item-toggle" ; ng-click="run()"> 
+            Media Player
             <label class="toggle toggle-assertive">
                 <input type="checkbox">
                 <div class="track">
@@ -70,7 +70,7 @@
 </div><br /><br />
       
 <p3>
-    Chanson en cours de lecture :
+    &nbsp;&nbsp;Current song :
     <div style="text-align:center">
         <div>{{consumer.MediaPlayer.CurrentSong.Value[0].Item1}}</div>
         <div>{{consumer.MediaPlayer.CurrentSong.Value[0].Item2}}</div>
@@ -78,7 +78,7 @@
         <div></div>
     </div>
     <p><span id="CurrentArtist"></span> - <span id="CurrentAlbum"></span></p>   <br />
-    <p>Current playlist :</p>    <br />
+    <p>&nbsp;&nbsp;Current playlist :</p>    <br />
     <table id="CurrentPlaylist"></table>
     <button id="BackArtist" class="button icon-left ion-ios-arrow-back">Back to Artist</button>
 </p3>
