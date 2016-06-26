@@ -1,8 +1,5 @@
 angular.module('remote.controllers', [])
 
-
-
-
 .controller('AppCtrl2', function ($scope, $ionicModal, $timeout) {
 
     // With the new view caching in Ionic, Controllers are only called
@@ -95,10 +92,9 @@ angular.module('remote.controllers', [])
 .controller('PlaylistCtrl', function ($scope, $stateParams) {
 })
 
-.controller('MyController', ['$scope',
+.controller('MyController', ['$scope', 
         function ($scope) {
 
-            var PlayerState = false;
 
             $scope.monitoroff = function () {
 
@@ -182,10 +178,8 @@ angular.module('remote.controllers', [])
 
                 if (PlayerState == true) {
                     $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "closeMediaPlayer", "");
-                    PlayerState = false;
                 } else {
                     $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openMediaPlayer", "");
-                    PlayerState = true;
                 }
             };
 
@@ -202,17 +196,16 @@ angular.module('remote.controllers', [])
 
             $scope.volume = {};
             $scope.volume.value = 0;
-            $scope.$watch('volume.value', function (val, old) {
-                $scope.volume.value = parseInt(val);
-                console.log('range=' + $scope.volume.value)
-            });
+            $scope.SetVolume = function (rangeValue) {
+                console.log(rangeValue.value);
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", rangeValue.value);
+            };
 
             $scope.brightness = {};
-            $scope.brightness.value = 10;
-            $scope.setBrightness = function (rangeValue) {
+            $scope.brightness.value = 0;
+            $scope.SetBrightness = function (rangeValue) {
                 console.log(rangeValue.value);
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetBrightness", rangeValue.value);
-
             };
 
 
