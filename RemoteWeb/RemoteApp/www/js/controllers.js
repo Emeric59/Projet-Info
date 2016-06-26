@@ -94,6 +94,7 @@ angular.module('remote.controllers', [])
 
 .controller('MyController', ['$scope', 
         function ($scope) {
+            var PlayerState = false;
 
 
             $scope.monitoroff = function () {
@@ -178,8 +179,10 @@ angular.module('remote.controllers', [])
 
                 if (PlayerState == true) {
                     $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "closeMediaPlayer", "");
+                    PlayerState = false;
                 } else {
                     $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openMediaPlayer", "");
+                    PlayerState = true;
                 }
             };
 
