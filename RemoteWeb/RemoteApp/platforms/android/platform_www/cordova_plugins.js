@@ -27,10 +27,10 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "cordova-plugin-device": "1.1.2",
-    "cordova-plugin-console": "1.0.3",
     "cordova-plugin-whitelist": "1.2.2",
     "cordova-plugin-statusbar": "2.1.3",
-    "ionic-plugin-keyboard": "1.0.9"
+    "ionic-plugin-keyboard": "1.0.9",
+    "cordova-plugin-console": "1.0.3"
 };
 // BOTTOM OF METADATA
 });

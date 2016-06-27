@@ -246,9 +246,7 @@ namespace MediaPlayer
         [MessageCallback]
         private void GetVideos()
         {
-            player.currentPlaylist = player.mediaCollection.getByAttribute("MediaType","video");
-            
-
+            player.currentPlaylist = player.mediaCollection.getByAttribute("MediaType","video");                       
         }
 
         /// <summary>
