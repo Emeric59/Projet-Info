@@ -2,8 +2,7 @@
 <Package xmlns="http://schemas.myconstellation.io/Constellation/1.8/PackageManifest"
          Name="RemoteControl"
          Version="2.6.2"
-         Author="PraZ"
-         URL="http://www.mywebsite.com"
+         Author="RemoteControl Team"
          Description="RemoteControl Copyright ©  2016"
          EnableControlHub="true">
   <Compatibility constellationVersion="1.8" dotNetTargetPlatform="net45" />

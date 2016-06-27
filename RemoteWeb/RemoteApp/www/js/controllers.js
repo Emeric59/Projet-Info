@@ -1,6 +1,6 @@
 angular.module('remote.controllers', [])
 
-.controller('AppCtrl2', function ($scope, $ionicModal, $timeout) {
+/*.controller('AppCtrl2', function ($scope, $ionicModal, $timeout) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -41,7 +41,7 @@ angular.module('remote.controllers', [])
         }, 1000);
     };
 })
-
+*/
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 
     // Form data for the login modal
@@ -239,7 +239,6 @@ angular.module('remote.controllers', [])
 
                 $scope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "FullScreen", "set", function (result) {
                     $scope.fullScreenState = (result.Data == true ? "off" : "on");
-                    console.log($scope.fullScreenState);
                 });
             };
 
