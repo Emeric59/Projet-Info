@@ -77,7 +77,7 @@
             </li>
             <li class="item range item-borderless range-light">
                 {{consumer.MediaPlayer.TimeData.Value.current}}
-                <input type="range" name="position" min="0" max="{{consumer.MediaPlayer.TimeData.Value.duration}}" ng-model="consumer.MediaPlayer.TimeData.Value.currentPosition" ng-change="setPosition(position)">
+                <input type="range" name="position" min="0" max="{{consumer.MediaPlayer.TimeData.Value.duration}}" ng-model="position.value" ng-change="SetPosition(position)">
                 {{consumer.MediaPlayer.TimeData.Value.total}}
             </li>
         </ul>
