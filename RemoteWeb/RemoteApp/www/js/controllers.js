@@ -285,6 +285,10 @@ angular.module('remote.controllers', [])
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "GetVideos", "");
             };
 
+            $scope.openConstellation = function () {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "OpenBrowser", "https://developer.myconstellation.io/")
+            }
+
 
 
         }]);
