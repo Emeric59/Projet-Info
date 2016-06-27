@@ -247,23 +247,33 @@ namespace MediaPlayer
         {
             loadVid = false;
             player.currentPlaylist = player.mediaCollection.getByAttribute("MediaType", "video");
+            player.Ctlcontrols.pause();
 
-            int count = player.currentPlaylist.count;
-            PackageHost.WriteInfo("p: " + count.ToString());
-            int i = 0;
-            int j = 0;
-            while (i < count)
+            if (search != null)
             {
-                if (!player.currentPlaylist.Item[i].getItemInfo("Title").ToLower().Contains(search.ToLower()))
+                int count = player.currentPlaylist.count;
+                int i = 0;
+                while (i < count)
                 {
-                    player.currentPlaylist.removeItem(player.currentPlaylist.Item[i]);
-                    i--;
+                    if (!player.currentPlaylist.Item[i].getItemInfo("Title").ToLower().Contains(search.ToLower()))
+                    {
+                        player.currentPlaylist.removeItem(player.currentPlaylist.Item[i]);
+                        i--;
+                        count = player.currentPlaylist.count;
+                    }
+                    i++;
+                                
                 }
-                i++;
-                count = player.currentPlaylist.count;                
+                loadVid = true;
+                player.Ctlcontrols.playItem(player.currentPlaylist.Item[0]);
             }
-            loadVid = true;
-            player.Ctlcontrols.playItem(player.currentPlaylist.Item[0]);
+            else
+            {
+                player.Ctlcontrols.pause();
+                loadVid = true;
+            }
+
+
         }
 
         /// <summary>
