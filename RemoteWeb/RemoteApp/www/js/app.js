@@ -32,16 +32,19 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
 
     // scope permet de faire que la variable soit utilisée par le html, et pas seulement réduite au js
 
-    $rootScope.consumer.intializeClient("http://localhost:8088", "a28d975296302b2e3620a8626eb6d1ce56c79f23", "RemoteAngular");
+    $rootScope.consumer.intializeClient("http://192.168.43.56:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteAngular");
 
     $rootScope.consumer.onConnectionStateChanged(function (change) {
         $rootScope.$apply(function () {
             $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
             if (change.newState === $.signalR.connectionState.connected) {
-                $rootScope.consumer.requestSubscribeStateObjects("PC-EMERIC_UI", "RemoteControl", "*", "*");
-                $rootScope.consumer.requestSubscribeStateObjects("PC-EMERIC_UI", "MediaPlayer", "*", "*");
-                $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "", function (result) {
+                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "RemoteControl", "*", "*");
+                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "MediaPlayer", "*", "*");
+                $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "Shuffle", "", function (result) {
                     $rootScope.shuffleState = result.Data == false ? "off" : "on";
+                });
+                $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "FullScreen", "", function (result) {
+                    $rootScope.fullScreenState = result.Data == false ? "off" : "on";
                 });
                 $rootScope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "PushBrightness", "");
             };

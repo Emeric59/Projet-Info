@@ -212,6 +212,14 @@ angular.module('remote.controllers', [])
                 });
             };
 
+            $scope.fullscreen = function () {
+
+                $scope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "FullScreen", "set", function (result) {
+                    $scope.fullScreenState = (result.Data == true ? "off" : "on");
+                    console.log($scope.fullScreenState);
+                });
+            };
+
             $scope.searchArtist = function (artist) {
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "LoadArtist", artist);
             };
@@ -235,19 +243,27 @@ angular.module('remote.controllers', [])
             $scope.position = {};
             $scope.SetPosition = function (rangeValue) {
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "SetTime", rangeValue.value);
-            }
+            };
 
            $scope.browse = function (URL) {
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openBrowser", URL);
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "OpenBrowser", URL);
             };
 
             $scope.titleOnAlbumClick = function (song) {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "LoadAlbum", song.Item2);
                 console.log(song.Item2);
             };
 
+            $scope.titleOnTitleClick = function (song) {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "LoadTitleFromPlaylist", song.Item3);
+
+            };
+
             $scope.getVideos = function () {
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "GetVideos", album);
-            }
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "GetVideos", "");
+            };
+
+
 
 
         }]);

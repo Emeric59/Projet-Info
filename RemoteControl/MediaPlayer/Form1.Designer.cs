@@ -87,6 +87,18 @@ namespace MediaPlayer
         }
 
         [MessageCallback]
+        private bool FullScreen(string mode)
+        {
+            bool fullscreen = player.fullScreen;
+            if (mode == "set")
+            {
+                player.fullScreen = !fullscreen;
+            }
+            return fullscreen;
+        }
+
+
+        [MessageCallback]
         private void Play()
         {
             player.Ctlcontrols.play();
