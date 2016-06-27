@@ -2,8 +2,7 @@
 <Package xmlns="http://schemas.myconstellation.io/Constellation/1.8/PackageManifest"
          Name="MediaPlayer"
          Version="1.3.2"
-         Author="flo"
-         URL="http://www.mywebsite.com"
+         Author="RemoteControl Team"
          Description="MediaPlayer Copyright ©  2016"
          EnableControlHub="false">
   <Compatibility constellationVersion="1.8" dotNetTargetPlatform="net45" />
