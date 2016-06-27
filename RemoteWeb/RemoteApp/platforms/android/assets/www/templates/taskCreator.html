@@ -37,7 +37,7 @@
                     <input type="text" ng-model="taskData.minute">
                 </label>
                 <label class="item">
-                    <button class="button button-block button-positive" type="submit">Valider</button>
+                    <button class="button button-block button-positive" type="submit" ng-click="createTask(taskData.titre,taskData.description,taskData.jour,taskData.mois,taskData.annee,taskData.heure,taskData.minute)">Valider</button>
                 </label>
             </div>
         </form>

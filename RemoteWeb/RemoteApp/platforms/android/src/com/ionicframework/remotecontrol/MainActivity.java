@@ -17,7 +17,7 @@
        under the License.
  */
 
-package com.ionicframework.ionicsidemenu;
+package com.ionicframework.remotecontrol;
 
 import android.os.Bundle;
 import org.apache.cordova.*;
