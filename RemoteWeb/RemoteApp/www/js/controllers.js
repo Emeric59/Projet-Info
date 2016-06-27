@@ -77,7 +77,7 @@ angular.module('remote.controllers', [])
     };
 })
 
-
+/*
 .controller('PlaylistsCtrl', function ($scope) {
     $scope.playlists = [
       { title: 'Reggae', id: 1 },
@@ -91,6 +91,8 @@ angular.module('remote.controllers', [])
 
 .controller('PlaylistCtrl', function ($scope, $stateParams) {
 })
+
+    */
 
 .controller('MyController', ['$scope','$ionicPopup',
         function ($scope,$ionicPopup) {
