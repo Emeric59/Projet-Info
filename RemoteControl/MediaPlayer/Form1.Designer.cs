@@ -76,7 +76,7 @@ namespace MediaPlayer
         #region Control Function
 
         [MessageCallback]
-        private bool shuffle(string mode)
+        private bool Shuffle(string mode)
         {
             bool shuffle = player.settings.getMode("shuffle");
             if (mode == "set")
@@ -87,31 +87,31 @@ namespace MediaPlayer
         }
 
         [MessageCallback]
-        private void play()
+        private void Play()
         {
             player.Ctlcontrols.play();
         }
 
         [MessageCallback]
-        private void pause()
+        private void Pause()
         {
             player.Ctlcontrols.pause();
         }
 
         [MessageCallback]
-        private void stop()
+        private void Stop()
         {
             player.Ctlcontrols.stop();
         }
 
         [MessageCallback]
-        private void previous()
+        private void Previous()
         {
             player.Ctlcontrols.previous();
         }
 
         [MessageCallback]
-        private void next()
+        private void Next()
         {
             player.Ctlcontrols.next();
         }
@@ -127,7 +127,7 @@ namespace MediaPlayer
         /// </summary>
         /// <param name="time">The time.</param>
         [MessageCallback]
-        private void setTime(int time)
+        private void SetTime(int time)
         {
             player.Ctlcontrols.currentPosition = time;
         }
@@ -138,7 +138,7 @@ namespace MediaPlayer
         /// </summary>
         /// <param name="artist">The artist.</param>
         [MessageCallback]
-        private void loadArtist(string artist)
+        private void LoadArtist(string artist)
         {
             player.currentPlaylist = player.mediaCollection.getByAuthor(artist);
         }
@@ -154,7 +154,7 @@ namespace MediaPlayer
         /// </summary>
         /// <param name="album">The album.</param>
         [MessageCallback]
-        private void loadAlbum(string album)
+        private void LoadAlbum(string album)
         {
             player.currentPlaylist = player.mediaCollection.getByAlbum(album);
         }
@@ -164,7 +164,7 @@ namespace MediaPlayer
         /// </summary>
         /// <param name="title">The title.</param>
         [MessageCallback]
-        private void loadTitleFromPlaylist(string title)
+        private void LoadTitleFromPlaylist(string title)
         {
             int i = 0;
             while (i < player.currentPlaylist.count)
@@ -186,7 +186,7 @@ namespace MediaPlayer
         /// <param name="value">The value.</param>
         /// <returns></returns>
         [MessageCallback]
-        private TupleList<string, string, string> getCollection(string type, string value)
+        private TupleList<string, string, string> GetCollection(string type, string value)
         {
 
             var playlist = player.mediaCollection.getByAttribute(type, value);
@@ -210,7 +210,7 @@ namespace MediaPlayer
         /// </summary>
         /// <returns></returns>
         [MessageCallback]
-        private TupleList<string, string, string> getPlaylist()
+        private TupleList<string, string, string> GetPlaylist()
         {
             int count = player.currentPlaylist.count;
             var collection = new TupleList<string, string, string>
@@ -249,7 +249,7 @@ namespace MediaPlayer
             
             if (DateTime.Now > this.MPlayer.Value.LastUpdate.AddSeconds(2))
             {
-                PackageHost.PushStateObject("CurrentPlaylist", getPlaylist());
+                PackageHost.PushStateObject("CurrentPlaylist", GetPlaylist());
                 PackageHost.PushStateObject("CurrentSong", new TupleList<string, string, string> { { player.currentMedia.getItemInfo("Author"), player.currentMedia.getItemInfo("Album"), player.currentMedia.getItemInfo("Title") } });
             }                            
             

@@ -28,7 +28,7 @@ namespace RemoteControl
             PushBrightness();
 
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
-            string MySentinel = "MSI-FLO";
+            string MySentinel = "PC-EMERIC";
 
             int seuil = 90;
             PackageHost.WriteInfo($"Seuil de tolérance RAM à {seuil}%");
@@ -148,7 +148,7 @@ namespace RemoteControl
         /// </summary>
         /// <param name="plan">Plan.</param>
         [MessageCallback]
-        void setPowerPlan(string plan)
+        void SetPowerPlan(string plan)
         {
             switch (plan)
             {
@@ -201,7 +201,7 @@ namespace RemoteControl
         /// Launch the panic mode.
         /// </summary>
         [MessageCallback]
-        void panicMode()
+        void PanicMode()
         {
             Process nircmd = new Process();
 
@@ -221,7 +221,7 @@ namespace RemoteControl
         /// Turn off the monitor.
         /// </summary>
         [MessageCallback]
-        void monitorOff()
+        void MonitorOff()
         {
             Process nircmd = new Process();
 
@@ -237,7 +237,7 @@ namespace RemoteControl
         /// Shutdowns this instance.
         /// </summary>
         [MessageCallback]
-        void shutdown()
+        void Shutdown()
         {
             Process nircmd = new Process();
 
@@ -261,7 +261,7 @@ namespace RemoteControl
         /// Reboots this instance.
         /// </summary>
         [MessageCallback]
-        void reboot()
+        void Reboot()
         {
             Process nircmd = new Process();
 
@@ -285,7 +285,7 @@ namespace RemoteControl
         /// Sleeps this instance.
         /// </summary>
         [MessageCallback]
-        void sleep()
+        void Sleep()
         {
             Process nircmd = new Process();
 
@@ -310,7 +310,7 @@ namespace RemoteControl
         /// </summary>
         /// <param name="reponse">Reponse.</param>
         [MessageCallback]
-        void answerQuestion(string reponse)
+        void AnswerQuestion(string reponse)
         {
             Process nircmd = new Process();
 
@@ -339,7 +339,7 @@ namespace RemoteControl
         /// </summary>
         /// <param name="url">URL.</param>
         [MessageCallback]
-        void openBrowser(string url)
+        void OpenBrowser(string url)
         {
             Process browser = new Process();
             browser.StartInfo.UseShellExecute = true;
@@ -351,7 +351,7 @@ namespace RemoteControl
         /// Opens the media player.
         /// </summary>
         [MessageCallback]
-        void openMediaPlayer()
+        void OpenMediaPlayer()
         {
             PackageHost.ControlManager.PurgeStateObjects(PackageHost.SentinelName, "MediaPlayer");
             PackageHost.ControlManager.StartPackage(PackageHost.SentinelName, "MediaPlayer");
@@ -362,7 +362,7 @@ namespace RemoteControl
         /// Closes the media player.
         /// </summary>
         [MessageCallback]
-        void closeMediaPlayer()
+        void CloseMediaPlayer()
         {
             PackageHost.ControlManager.StopPackage(PackageHost.SentinelName, "MediaPlayer");
             PackageHost.ControlManager.PurgeStateObjects(PackageHost.SentinelName, "MediaPlayer");
