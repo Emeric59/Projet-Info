@@ -8,10 +8,10 @@
                 <br/>
                 <label class="item item-input">
                     <i class="icon ion-search placeholder-icon"></i>
-                    <input type="text" id="urlToSearch" placeholder="Entrez l'URL"><br>
+                    <input type="text" id="urlToSearch" placeholder="Entrez l'URL" ng-model="URL"><br>
                 </label>
                 <br/>
-                    <button id="Navigate" class="button-icon icon-right ion-chevron-right"> GO </button>
+                    <button id="Navigate" class="button-icon icon-right ion-chevron-right" ng-click="browse(URL)"> GO </button>
 
 </div>
         </p1>

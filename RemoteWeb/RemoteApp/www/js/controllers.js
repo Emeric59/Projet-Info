@@ -239,7 +239,6 @@ angular.module('remote.controllers', [])
 
                 $scope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "FullScreen", "set", function (result) {
                     $scope.fullScreenState = (result.Data == true ? "off" : "on");
-                    console.log($scope.fullScreenState);
                 });
             };
 

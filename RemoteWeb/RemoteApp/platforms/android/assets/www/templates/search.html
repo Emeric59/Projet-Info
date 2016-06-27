@@ -45,7 +45,6 @@
                     <div class="button button-balanced" id="Shuffle" ; ng-click="shuffle()">
                         <i class="ion-shuffle"></i>
                         {{shuffleState}}
-
                     </div>
 
                     <div class="button button-balanced" id="Next" ; ng-click="next()">
@@ -59,14 +58,26 @@
         </p1><br />
 
         <div style="margin-left:1%">
-            <input id="search" type="search" placeholder="Research Art. or Alb." name="search" ng-model="search">
+            <div class="item item-toggle item-borderless" style="float:right" >
+                <div style="float:right">Fullscreen</div>
+                <label class="toggle toggle-assertive">
+                    <input type="checkbox" ng-model="fullScreenState" ng-click="fullscreen()">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </div>
+        <br/>
+            <input id="search"  type="search" placeholder="Research Art. or Alb." name="search" ng-model="search">
             <button id="SearchArtist" class="button icon-left ion-search" ng-click="searchArtist(search)">Artist</button>
             <button id="SearchAlbum" class="button icon-left ion-search" ng-click="searchAlbum(search)">Album</button>
+            <button id="videos" class="button icon-left ion-ios-videocam" style="float:right;margin-right:1%" ng-click="getVideos()">Load video list</button>
         </div><br /><br />
 
         <div style="font-size:20px">
             Current song :
         </div>
+        <br />
         <ul style="text-align:center" class="list">
             <li class="item item-borderless">
                 <div>{{consumer.MediaPlayer.CurrentSong.Value[0].Item1}}</div>
@@ -83,6 +94,7 @@
         <div style="font-size:20px">
             Current playlist :
         </div>
+        <br />
         <ul style="text-align:center" class="list">
             <li class="item"
                 ng-repeat="song in consumer.MediaPlayer.CurrentPlaylist.Value"
@@ -93,7 +105,7 @@
                 <div>{{song.Item1}}</div>
                 <div ng-click="titleOnAlbumClick(song)">{{song.Item2}}</div>
                 <div class="row">
-                    <div class="col ">
+                    <div class="col " ng-click="titleOnTitleClick(song)">
                         <i ng-if="song.Item1 == consumer.MediaPlayer.CurrentSong.Value[0].Item1
                                 && song.Item2 == consumer.MediaPlayer.CurrentSong.Value[0].Item2
                                 && song.Item3 == consumer.MediaPlayer.CurrentSong.Value[0].Item3"
