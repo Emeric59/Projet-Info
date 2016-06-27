@@ -209,10 +209,10 @@ namespace RemoteControl
             File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
 
             nircmd.StartInfo.FileName = path;
-            nircmd.StartInfo.Arguments = string.Format("sendkeypress rwin+d");
+            nircmd.StartInfo.Arguments = string.Format("win togglehide alltopnodesktop"); 
             nircmd.Start();
             nircmd.StartInfo.FileName = path;
-            nircmd.StartInfo.Arguments = string.Format("mutesysvolume 1");
+            nircmd.StartInfo.Arguments = string.Format("mutesysvolume 2");
             nircmd.Start();
 
         }
@@ -268,7 +268,7 @@ namespace RemoteControl
             string path = Path.Combine(Path.GetTempPath(), "nircmd.exe");
             File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
 
-            DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment rédemarrer l'ordinateur ?", "Reboot ?", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment redémarrer l'ordinateur ?", "Reboot ?", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 nircmd.StartInfo.FileName = path;
