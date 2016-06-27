@@ -181,7 +181,7 @@
             </summary>
             <param name="valeur">Value.</param>
         </member>
-        <member name="M:RemoteControl.Program.setPowerPlan(System.String)">
+        <member name="M:RemoteControl.Program.SetPowerPlan(System.String)">
             <summary>
             Sets the power plan.
             </summary>
@@ -193,49 +193,49 @@
             </summary>
             <param name="level">Level.</param>
         </member>
-        <member name="M:RemoteControl.Program.panicMode">
+        <member name="M:RemoteControl.Program.PanicMode">
             <summary>
             Launch the panic mode.
             </summary>
         </member>
-        <member name="M:RemoteControl.Program.monitorOff">
+        <member name="M:RemoteControl.Program.MonitorOff">
             <summary>
             Turn off the monitor.
             </summary>
         </member>
-        <member name="M:RemoteControl.Program.shutdown">
+        <member name="M:RemoteControl.Program.Shutdown">
             <summary>
             Shutdowns this instance.
             </summary>
         </member>
-        <member name="M:RemoteControl.Program.reboot">
+        <member name="M:RemoteControl.Program.Reboot">
             <summary>
             Reboots this instance.
             </summary>
         </member>
-        <member name="M:RemoteControl.Program.sleep">
+        <member name="M:RemoteControl.Program.Sleep">
             <summary>
             Sleeps this instance.
             </summary>
         </member>
-        <member name="M:RemoteControl.Program.answerQuestion(System.String)">
+        <member name="M:RemoteControl.Program.AnswerQuestion(System.String)">
             <summary>
             Answers the question.
             </summary>
             <param name="reponse">Reponse.</param>
         </member>
-        <member name="M:RemoteControl.Program.openBrowser(System.String)">
+        <member name="M:RemoteControl.Program.OpenBrowser(System.String)">
             <summary>
             Opens the browser.
             </summary>
             <param name="url">URL.</param>
         </member>
-        <member name="M:RemoteControl.Program.openMediaPlayer">
+        <member name="M:RemoteControl.Program.OpenMediaPlayer">
             <summary>
             Opens the media player.
             </summary>
         </member>
-        <member name="M:RemoteControl.Program.closeMediaPlayer">
+        <member name="M:RemoteControl.Program.CloseMediaPlayer">
             <summary>
             Closes the media player.
             </summary>
