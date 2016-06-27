@@ -108,8 +108,13 @@ angular.module('remote.controllers', [])
             });
 
 
+            $scope.createTask = function (titre,description,jour,mois,annee,heure,minute) {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "TaskCreator", [titre,description,jour,mois,annee,heure,minute]);
+
+            }
+
+
             $scope.mute = function () {
-                console.log('mute');
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", "mute");
 
             }
@@ -238,7 +243,7 @@ angular.module('remote.controllers', [])
             }
 
            $scope.browse = function (URL) {
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openBrowser", URL);
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "OpenBrowser", URL);
             };
 
             $scope.titleOnAlbumClick = function (song) {
