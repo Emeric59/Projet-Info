@@ -35,7 +35,7 @@ namespace MediaPlayer
             PackageHost.PushStateObject("CurrentSong", new TupleList<string, string, string> { });
             
 
-            this.Text = string.Format("{0} - {1}", player.currentMedia.getItemInfo("Author"), player.currentMedia.getItemInfo("Title"));
+            this.Text = string.Format("MediaPlayer");
             
         }
 
