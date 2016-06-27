@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Package xmlns="http://schemas.myconstellation.io/Constellation/1.8/PackageManifest"
          Name="RemoteControl"
-         Version="2.6.2"
+         Version="2.6.4"
          Author="RemoteControl Team"
          Description="RemoteControl Copyright ©  2016"
          EnableControlHub="true">
