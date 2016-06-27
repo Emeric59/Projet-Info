@@ -209,10 +209,10 @@ namespace RemoteControl
             File.WriteAllBytes(path, RemoteControl.Properties.Resources.nircmd);
 
             nircmd.StartInfo.FileName = path;
-            nircmd.StartInfo.Arguments = string.Format("win togglehide alltopnodesktop"); 
+            nircmd.StartInfo.Arguments = string.Format("sendkeypress rwin+d");
             nircmd.Start();
             nircmd.StartInfo.FileName = path;
-            nircmd.StartInfo.Arguments = string.Format("mutesysvolume 2");
+            nircmd.StartInfo.Arguments = string.Format("mutesysvolume 1");
             nircmd.Start();
 
         }
