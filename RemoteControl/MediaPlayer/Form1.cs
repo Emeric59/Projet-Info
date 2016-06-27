@@ -35,9 +35,7 @@ namespace MediaPlayer
             PackageHost.PushStateObject("CurrentSong", new TupleList<string, string, string> { });
             
 
-            this.Text = string.Format("IsRunning: {0} - IsConnected: {1} - IsStandAlone: {2}", PackageHost.IsRunning, PackageHost.IsConnected, PackageHost.IsStandAlone);
-            PackageHost.WriteInfo("I'm running !");
-
+            this.Text = string.Format("MediaPlayer");
             
         }
 

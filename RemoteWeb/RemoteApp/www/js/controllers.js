@@ -92,8 +92,8 @@ angular.module('remote.controllers', [])
 .controller('PlaylistCtrl', function ($scope, $stateParams) {
 })
 
-.controller('MyController', ['$scope',
-        function ($scope) {
+.controller('MyController', ['$scope','$ionicPopup',
+        function ($scope,$ionicPopup) {
 
             $scope.consumer.onUpdateStateObject(function (stateobject) {
                 if ($scope.remoteLoaded) {
@@ -105,11 +105,31 @@ angular.module('remote.controllers', [])
                         $scope.position.value = $scope.consumer.MediaPlayer.TimeData.Value.currentPosition;
                     }
                 };
+
             });
+            
+            $scope.showConfirm = function () {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Confirm',
+                    template: 'Are you sure ?'
+                });
+
+                confirmPopup.then(function (res) {
+                    if (res) {
+                        $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "AnswerQuestion", "oui");
+                    } else {
+                        $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "AnswerQuestion", "non");
+                    }
+                });
+            };
+
+            $scope.createTask = function (titre,description,jour,mois,annee,heure,minute) {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "TaskCreator", [titre,description,jour,mois,annee,heure,minute]);
+
+            }
 
 
             $scope.mute = function () {
-                console.log('mute');
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetVolume", "mute");
 
             }
@@ -130,12 +150,14 @@ angular.module('remote.controllers', [])
             $scope.shutdown = function () {
 
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "Shutdown", "");
+                $scope.showConfirm();
 
             };
 
             $scope.sleep = function () {
 
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "Sleep", "");
+                $scope.showConfirm();
 
             };
 
@@ -160,6 +182,7 @@ angular.module('remote.controllers', [])
             $scope.reboot = function () {
 
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "Reboot", "");
+                $scope.showConfirm();
 
             };
 
@@ -262,7 +285,6 @@ angular.module('remote.controllers', [])
             $scope.getVideos = function () {
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "GetVideos", "");
             };
-
 
 
 
