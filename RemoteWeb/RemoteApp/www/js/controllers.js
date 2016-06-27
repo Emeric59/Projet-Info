@@ -237,6 +237,10 @@ angular.module('remote.controllers', [])
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "setTime", rangeValue.value);
             }
 
+           $scope.browse = function (URL) {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openBrowser", URL);
+            };
+
             $scope.titleOnAlbumClick = function (song) {
                 console.log(song.Item2);
             };
