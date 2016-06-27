@@ -117,79 +117,79 @@ angular.module('remote.controllers', [])
 
             $scope.monitoroff = function () {
 
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "monitorOff", "");
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "MonitorOff", "");
 
             };
 
             $scope.panicMode = function () {
 
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "panicMode", "");
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "PanicMode", "");
 
             };
 
             $scope.shutdown = function () {
 
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "shutdown", "");
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "Shutdown", "");
 
             };
 
             $scope.sleep = function () {
 
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "sleep", "");
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "Sleep", "");
 
             };
 
             $scope.balance = function () {
 
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "balanced");
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetPowerPlan", "balanced");
 
             };
 
             $scope.save = function () {
 
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "saver");
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetPowerPlan", "saver");
 
             };
 
             $scope.high = function () {
 
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "setPowerPlan", "high");
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "SetPowerPlan", "high");
 
             };
 
             $scope.reboot = function () {
 
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "reboot", "");
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "Reboot", "");
 
             };
 
             $scope.play = function () {
 
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "play", "");
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "Play", "");
 
             };
 
             $scope.pause = function () {
 
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "pause", "");
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "Pause", "");
 
             };
 
             $scope.stop = function () {
 
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "stop", "");
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "Stop", "");
 
             };
 
             $scope.previous = function () {
 
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "previous", "");
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "Previous", "");
 
             };
 
             $scope.next = function () {
 
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "next", "");
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "Next", "");
 
             };
 
@@ -197,27 +197,27 @@ angular.module('remote.controllers', [])
 
 
                 if ($scope.consumer.RemoteControl.MediaPlayerState.Value == false) {
-                    $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "closeMediaPlayer", "");
+                    $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "CloseMediaPlayer", "");
 
                 } else {
-                    $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "openMediaPlayer", "");
+                    $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "OpenMediaPlayer", "");
 
                 }
             };
 
             $scope.shuffle = function () {
 
-                $scope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "shuffle", "set", function (result) {
+                $scope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "Shuffle", "set", function (result) {
                     $scope.shuffleState = (result.Data == true ? "off" : "on");
                 });
             };
 
             $scope.searchArtist = function (artist) {
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadArtist", artist);
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "LoadArtist", artist);
             };
 
             $scope.searchAlbum = function (album) {
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "loadAlbum", album);
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "LoadAlbum", album);
             };
 
             $scope.volume = {};
@@ -234,13 +234,16 @@ angular.module('remote.controllers', [])
 
             $scope.position = {};
             $scope.SetPosition = function (rangeValue) {
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "setTime", rangeValue.value);
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "SetTime", rangeValue.value);
             }
 
             $scope.titleOnAlbumClick = function (song) {
                 console.log(song.Item2);
             };
 
+            $scope.getVideos = function () {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "GetVideos", album);
+            }
 
 
         }]);
