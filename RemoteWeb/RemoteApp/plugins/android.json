@@ -10,9 +10,6 @@
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
         },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
-        },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
         },
@@ -21,6 +18,9 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.ionicframework.remotecontrol"
         }
     },
     "dependent_plugins": {}

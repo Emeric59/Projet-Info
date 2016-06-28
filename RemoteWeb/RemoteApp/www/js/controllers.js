@@ -283,8 +283,8 @@ angular.module('remote.controllers', [])
 
             };
 
-            $scope.getVideos = function () {
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "GetVideos", "");
+            $scope.getVideos = function (search) {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "GetVideos", search);
             };
 
             $scope.openConstellation = function () {

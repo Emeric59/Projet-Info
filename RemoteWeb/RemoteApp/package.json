@@ -1,7 +1,7 @@
 {
-  "name": "ionic-sidemenu",
-  "version": "1.1.1",
-  "description": "An Ionic project",
+  "name": "RemoteControl",
+  "version": "2.3.1",
+  "description": "Connect your phone to your computer through the constellation plateform",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",

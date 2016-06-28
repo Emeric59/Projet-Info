@@ -70,8 +70,7 @@ namespace MediaPlayer
 
         [StateObjectLink(Package = "MediaPlayer", Name = "CurrentSong")]
         private StateObjectNotifier MPlayer { get; set; }
-        
-
+        bool loadVid = false;
 
         #region Control Function
 
@@ -244,10 +243,36 @@ namespace MediaPlayer
         /// Gets the videos.
         /// </summary>
         [MessageCallback]
-        private void GetVideos()
+        private void GetVideos(string search)
         {
-            player.currentPlaylist = player.mediaCollection.getByAttribute("MediaType","video");
-            
+            loadVid = false;
+            player.currentPlaylist = player.mediaCollection.getByAttribute("MediaType", "video");
+            player.Ctlcontrols.pause();
+
+            if (search != null)
+            {
+                int count = player.currentPlaylist.count;
+                int i = 0;
+                while (i < count)
+                {
+                    if (!player.currentPlaylist.Item[i].getItemInfo("Title").ToLower().Contains(search.ToLower()))
+                    {
+                        player.currentPlaylist.removeItem(player.currentPlaylist.Item[i]);
+                        i--;
+                        count = player.currentPlaylist.count;
+                    }
+                    i++;
+                                
+                }
+                loadVid = true;
+                player.Ctlcontrols.playItem(player.currentPlaylist.Item[0]);
+            }
+            else
+            {
+                player.Ctlcontrols.pause();
+                loadVid = true;
+            }
+
 
         }
 
@@ -258,14 +283,17 @@ namespace MediaPlayer
         /// <param name="e">The event.</param>
         private void player_MediaChange(object sender, _WMPOCXEvents_MediaChangeEvent e)
         {
-            
+
             if (DateTime.Now > this.MPlayer.Value.LastUpdate.AddSeconds(2))
             {
-                PackageHost.PushStateObject("CurrentPlaylist", GetPlaylist());
-                PackageHost.PushStateObject("CurrentSong", new TupleList<string, string, string> { { player.currentMedia.getItemInfo("Author"), player.currentMedia.getItemInfo("Album"), player.currentMedia.getItemInfo("Title") } });
-            }                            
-            
+                if (loadVid)
+                {
+                    PackageHost.PushStateObject("CurrentPlaylist", GetPlaylist());
+                    PackageHost.PushStateObject("CurrentSong", new TupleList<string, string, string> { { player.currentMedia.getItemInfo("Author"), player.currentMedia.getItemInfo("Album"), player.currentMedia.getItemInfo("Title") } });
 
+                }
+
+            }
         }
 
 
@@ -277,7 +305,7 @@ namespace MediaPlayer
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void Timer_Elapsed(object sender, System.EventArgs e)
         {
-            string total =  convertInHHMMSS(player.currentMedia.duration) ;
+            string total = convertInHHMMSS(player.currentMedia.duration);
             string current = convertInHHMMSS(player.Ctlcontrols.currentPosition);
 
             PackageHost.PushStateObject("TimeData", new { total, current, player.currentMedia.duration, player.Ctlcontrols.currentPosition });
