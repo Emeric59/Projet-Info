@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus enable-menu-with-back-views="false" ng-controller="MyController">
   <ion-side-menu-content>
     <ion-nav-bar class="bar-stable">
       <ion-nav-back-button>
@@ -34,7 +34,7 @@
           TaskCreator
         </ion-item>
           <div style="text-align:center;margin-top:10px"><span>{{connectionState}}</span></div>
-          <img ng-src="../img/constellation.png" />
+          <img ng-src="../img/constellation.png" ; ng-click="openConstellation()" />
       </ion-list>
     </ion-content>
   </ion-side-menu>

@@ -1,6 +1,6 @@
 angular.module('remote.controllers', [])
 
-.controller('AppCtrl2', function ($scope, $ionicModal, $timeout) {
+/*.controller('AppCtrl2', function ($scope, $ionicModal, $timeout) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -41,7 +41,7 @@ angular.module('remote.controllers', [])
         }, 1000);
     };
 })
-
+*/
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 
     // Form data for the login modal
@@ -77,7 +77,7 @@ angular.module('remote.controllers', [])
     };
 })
 
-
+/*
 .controller('PlaylistsCtrl', function ($scope) {
     $scope.playlists = [
       { title: 'Reggae', id: 1 },
@@ -91,6 +91,8 @@ angular.module('remote.controllers', [])
 
 .controller('PlaylistCtrl', function ($scope, $stateParams) {
 })
+
+    */
 
 .controller('MyController', ['$scope','$ionicPopup',
         function ($scope,$ionicPopup) {
@@ -284,6 +286,10 @@ angular.module('remote.controllers', [])
             $scope.getVideos = function () {
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "GetVideos", "");
             };
+
+            $scope.openConstellation = function () {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "OpenBrowser", "https://developer.myconstellation.io/")
+            }
 
 
 

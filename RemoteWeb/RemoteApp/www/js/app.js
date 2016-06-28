@@ -32,7 +32,7 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
 
     // scope permet de faire que la variable soit utilisée par le html, et pas seulement réduite au js
 
-    $rootScope.consumer.intializeClient("http://localhost:8088", "6d540ec121c933fe48ea0ad3872d5b98dec65226", "RemoteAngular");
+    $rootScope.consumer.intializeClient("http://192.168.1.129:8088", "6d540ec121c933fe48ea0ad3872d5b98dec65226", "RemoteAngular");
 
     $rootScope.consumer.onConnectionStateChanged(function (change) {
         $rootScope.$apply(function () {
