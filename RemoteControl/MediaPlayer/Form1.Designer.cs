@@ -70,7 +70,7 @@ namespace MediaPlayer
 
         [StateObjectLink(Package = "MediaPlayer", Name = "CurrentSong")]
         private StateObjectNotifier MPlayer { get; set; }
-        bool loadVid = false;
+        bool loadVid = true;
 
         #region Control Function
 
@@ -266,12 +266,15 @@ namespace MediaPlayer
                 }
                 loadVid = true;
                 player.Ctlcontrols.playItem(player.currentPlaylist.Item[0]);
+
             }
             else
             {
                 player.Ctlcontrols.pause();
                 loadVid = true;
             }
+            player.Ctlcontrols.pause();
+            loadVid = true;
 
 
         }

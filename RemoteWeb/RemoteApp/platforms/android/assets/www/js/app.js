@@ -32,40 +32,40 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
 
     // scope permet de faire que la variable soit utilisée par le html, et pas seulement réduite au js
 
-    $rootScope.consumer.intializeClient("http://192.168.1.129:8088", "6d540ec121c933fe48ea0ad3872d5b98dec65226", "RemoteAngular");
+    $rootScope.consumer.intializeClient("http://192.168.43.56:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteAngular");
 
     $rootScope.consumer.onConnectionStateChanged(function (change) {
         $rootScope.$apply(function () {
             $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
             if (change.newState === $.signalR.connectionState.connected) {
-                $rootScope.consumer.requestSubscribeStateObjects("PCDEPIERRE_UI", "RemoteControl", "*", "*");
-                $rootScope.consumer.requestSubscribeStateObjects("PCDEPIERRE_UI", "MediaPlayer", "*", "*");
+                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "RemoteControl", "*", "*");
+                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "MediaPlayer", "*", "*");
                 $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "Shuffle", "", function (result) {
-                    $rootScope.shuffleState = result.Data == false ? "off" : "on";
+                    $rootScope.shuffleState = result.Data === false ? "off" : "on";
                 });
                 $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "FullScreen", "", function (result) {
-                    $rootScope.fullScreenState = result.Data == false ? "off" : "on";
+                    $rootScope.fullScreenState = result.Data === false ? "off" : "on";
                 });
                 $rootScope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "PushBrightness", "");
-            };
-        })
+            }
+        });
     });
 
     $rootScope.consumer.onUpdateStateObject(function (stateobject) {
         $rootScope.$apply(function () {
-            if ($rootScope.consumer[stateobject.PackageName] == undefined) {
+            if ($rootScope.consumer[stateobject.PackageName] === undefined) {
                 $rootScope.consumer[stateobject.PackageName] = {};
             }
             $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
-            if ($rootScope.consumer.RemoteControl.VolumeLevel != undefined && $rootScope.consumer.RemoteControl.BrightnessLevel != undefined) {
+            if ($rootScope.consumer.RemoteControl.VolumeLevel !== undefined && $rootScope.consumer.RemoteControl.BrightnessLevel !== undefined) {
                 $rootScope.remoteLoaded = true;
             }
-            if ($rootScope.consumer.MediaPlayer != undefined && $rootScope.consumer.MediaPlayer.TimeData != undefined) {
+            if ($rootScope.consumer.MediaPlayer !== undefined && $rootScope.consumer.MediaPlayer.TimeData !== undefined) {
                 $rootScope.mediaLoaded = true;
             }
 
 
-        })
+        });
 
     });
 

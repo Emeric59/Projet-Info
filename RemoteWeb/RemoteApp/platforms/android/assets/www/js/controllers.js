@@ -77,7 +77,7 @@ angular.module('remote.controllers', [])
     };
 })
 
-
+/*
 .controller('PlaylistsCtrl', function ($scope) {
     $scope.playlists = [
       { title: 'Reggae', id: 1 },
@@ -91,6 +91,8 @@ angular.module('remote.controllers', [])
 
 .controller('PlaylistCtrl', function ($scope, $stateParams) {
 })
+
+    */
 
 .controller('MyController', ['$scope','$ionicPopup',
         function ($scope,$ionicPopup) {
@@ -281,8 +283,8 @@ angular.module('remote.controllers', [])
 
             };
 
-            $scope.getVideos = function () {
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "GetVideos", "");
+            $scope.getVideos = function (search) {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "GetVideos", search);
             };
 
             $scope.openConstellation = function () {
