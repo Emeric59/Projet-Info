@@ -94,8 +94,8 @@ angular.module('remote.controllers', [])
 
     */
 
-.controller('MyController', ['$scope','$ionicPopup',
-        function ($scope,$ionicPopup) {
+.controller('MyController', ['$scope', '$ionicPopup',
+        function ($scope, $ionicPopup) {
 
             $scope.consumer.onUpdateStateObject(function (stateobject) {
                 if ($scope.remoteLoaded) {
@@ -109,7 +109,7 @@ angular.module('remote.controllers', [])
                 };
 
             });
-            
+
             $scope.showConfirm = function () {
                 var confirmPopup = $ionicPopup.confirm({
                     title: 'Confirm',
@@ -125,8 +125,8 @@ angular.module('remote.controllers', [])
                 });
             };
 
-            $scope.createTask = function (titre,description,jour,mois,annee,heure,minute) {
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "TaskCreator", [titre,description,jour,mois,annee,heure,minute]);
+            $scope.createTask = function (titre, description, jour, mois, annee, heure, minute) {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "TaskCreator", [titre, description, jour, mois, annee, heure, minute]);
 
             }
 
@@ -269,7 +269,7 @@ angular.module('remote.controllers', [])
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["MediaPlayer"] }, "SetTime", rangeValue.value);
             };
 
-           $scope.browse = function (URL) {
+            $scope.browse = function (URL) {
                 $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "OpenBrowser", URL);
             };
 
@@ -288,9 +288,13 @@ angular.module('remote.controllers', [])
             };
 
             $scope.openConstellation = function () {
-                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "OpenBrowser", "https://developer.myconstellation.io/")
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "OpenBrowser", "https://developer.myconstellation.io/");
             }
 
+            $scope.snapshot = function () {
+                $scope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteWebcam"] }, "TakePicture", [$scope.manufacturer, $scope.model]);
+                console.log([$scope.manufacturer, $scope.model]);
+            }
 
 
         }]);

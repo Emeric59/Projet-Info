@@ -22,6 +22,13 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function onDeviceReady() {
+            $rootScope.manufacturer = device.manufacturer;
+            $rootScope.model = device.model;
+
+        }
     });
 
     $rootScope.consumer = consumer;
@@ -32,7 +39,7 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
 
     // scope permet de faire que la variable soit utilisée par le html, et pas seulement réduite au js
 
-    $rootScope.consumer.intializeClient("http://192.168.43.56:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteAngular");
+    $rootScope.consumer.intializeClient("http://192.168.0.11:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteAngular");
 
     $rootScope.consumer.onConnectionStateChanged(function (change) {
         $rootScope.$apply(function () {
@@ -102,7 +109,7 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
         url: '/browse',
         views: {
             'menuContent': {
-                templateUrl: 'templates/browse.html'
+                templateUrl: 'templates/browse.html',
             }
         }
     })

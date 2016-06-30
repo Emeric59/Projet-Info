@@ -6,6 +6,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Threading;
+using RemoteWebcam.PushBullet.MessageCallbacks;
 
 namespace RemoteWebcam
 {
@@ -34,10 +35,7 @@ namespace RemoteWebcam
             {
                 Console.WriteLine(dev.Name);
             }
-            string path;
-            path = VideoCapture(Vdevices);
-            ExtractFrame(path);
-
+            
 
 
 
@@ -55,19 +53,23 @@ namespace RemoteWebcam
             _job.ActivateSource(_deviceSource);
 
             FileArchivePublishFormat fileOut = new FileArchivePublishFormat();
+            
 
             // Sets file path and name
-            string output = String.Format("D:\\WebCam{0:yyyyMMdd_hhmmss}", DateTime.Now);
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            string output = String.Format(@"{0}\Constellation{1:yyyyMMdd_hhmmss}", path, DateTime.Now);
             fileOut.OutputFileName = string.Format("{0}.wmv",output);
+            
 
             // Adds the format to the job. You can add additional formats
             // as well such as Publishing streams or broadcasting from a port
             _job.PublishFormats.Add(fileOut);
+            
 
             // Starts encoding
             _job.StartEncoding();
 
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
 
             _job.StopEncoding();
 
@@ -79,7 +81,59 @@ namespace RemoteWebcam
         {
             Bitmap bitmap = AsfImage.FromFile(string.Format("{0}.wmv", input), 1.0);
             bitmap.Save(string.Format("{0}.bmp", input));
-            bitmap.Save(string.Format("D:\\latest.bmp"));
+        }
+
+        private void DeleteSources(string directory)
+        {
+            System.IO.File.Delete(directory + ".wmv");
+            System.IO.File.Delete(directory + ".bmp");
+        }
+
+        [MessageCallback]
+        void TakePicture(string manufacturer, string model)
+        {
+            Collection<EncoderDevice> Vdevices = EncoderDevices.FindDevices(EncoderDeviceType.Video);
+
+            foreach (EncoderDevice dev in Vdevices)
+            {
+                Console.WriteLine(dev.Name);
+            }
+
+            Console.WriteLine("Audio :");
+            Collection<EncoderDevice> Adevices = EncoderDevices.FindDevices(EncoderDeviceType.Audio);
+
+            foreach (EncoderDevice dev in Adevices)
+            {
+                Console.WriteLine(dev.Name);
+            }
+
+            string path;
+            path = VideoCapture(Vdevices);
+            ExtractFrame(path);
+            string message = string.Format("New pic from your Webcam @ {0}", PackageHost.SentinelName);
+            var task = MyConstellation.Packages.Pushbullet.CreatePushBulletScope().GetDevices();
+            double updated = 0;
+            Device mostRecentMatching = null;
+            if (task.Wait(5000) && task.IsCompleted)
+            {
+                foreach (Device dev in task.Result.Devices)
+                {
+                    if (dev.Manufacturer == manufacturer && dev.Model == model && dev.IsActive)
+                    {
+                        if (dev.Modified > updated)
+                        {
+                            updated = dev.Modified;
+                            mostRecentMatching = dev;
+                        }
+                    }
+                }
+            }
+            if (mostRecentMatching != null)
+            {
+                MyConstellation.Packages.Pushbullet.CreatePushBulletScope().PushFile(fileUri: path + ".bmp", body: message, target: PushTargetType.Device, targetArgument: mostRecentMatching.Id);
+            }
+            Thread.Sleep(5000);
+            DeleteSources(path);
         }
     }
 }
