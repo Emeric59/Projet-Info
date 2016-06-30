@@ -109,7 +109,7 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
         url: '/browse',
         views: {
             'menuContent': {
-                templateUrl: 'templates/browse.html',
+                templateUrl: 'templates/browse.html'
             }
         }
     })
