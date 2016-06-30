@@ -30,32 +30,7 @@ namespace RemoteControl
             PackageHost.WriteInfo("Package starting - IsRunning : {0} - IsConnected : {1}", PackageHost.IsRunning, PackageHost.IsConnected);
             string MySentinel_UI = PackageHost.SentinelName;
             int sentinelLength = MySentinel_UI.Length;
-            string MySentinel = MySentinel_UI.Substring(0, sentinelLength - 3);
-
-            int seuil = 90;
-            PackageHost.WriteInfo($"Seuil de tolérance RAM à {seuil}%");
-
-            bool k = false; // Initialisation en état processeur faible
-            PackageHost.SubscribeStateObjects(sentinel: MySentinel, package: "HWMonitor");
-            PackageHost.StateObjectUpdated += (s, e) =>
-            {
-                if (e.StateObject.Name == "/ram/load/0")
-                {
-                    if (!k && e.StateObject.DynamicValue.Value > seuil)
-                    {
-                        k = !k;
-                        MyConstellation.Packages.Pushbullet.CreatePushBulletScope().SendPush(new SendPushRequest
-                        {
-                            Message = $"Utilisation de la mémoire RAM à {e.StateObject.DynamicValue.Value}% supérieure au seuil de {seuil}%",
-                            Title = $"Message from {e.StateObject.SentinelName}"
-                        });
-                    }
-                    else if (k && e.StateObject.DynamicValue.Value < seuil)
-                    {
-                        k = !k;
-                    }
-                }
-            };
+            string MySentinel = MySentinel_UI.Substring(0, sentinelLength - 3);            
         }
 
         private void AudioEndpointVolume_OnVolumeNotification(AudioVolumeNotificationData data)
