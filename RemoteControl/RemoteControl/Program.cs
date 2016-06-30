@@ -19,8 +19,6 @@ namespace RemoteControl
         }
         public override void OnStart()
         {
-            // Contrôle de la RAM et envoie de push si elle dépasse le seuil indiqué
-
             PackageHost.PurgeStateObjects();
             MMDevice MMD = loadDefaultAudioDevice();
             MMD.AudioEndpointVolume.OnVolumeNotification += AudioEndpointVolume_OnVolumeNotification;
