@@ -37,43 +37,45 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
     $rootScope.mediaLoaded = false;
     $rootScope.loggedIn = false;
 
-    $rootScope.afterLogin = function () {
+    $rootScope.afterLogin = function ($timeout) {
         if ($rootScope.loggedIn) {
-            $rootScope.consumer.intializeClient('http://' + $rootScope.address + ':' + $rootScope.port, $rootScope.accessKey, "RemoteAngular");
+            
+                $rootScope.consumer.intializeClient('http://' + $rootScope.address + ':' + $rootScope.port, $rootScope.accessKey, "RemoteAngular");
 
-            $rootScope.consumer.onConnectionStateChanged(function (change) {
-                $rootScope.$apply(function () {
-                    $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
-                    if (change.newState === $.signalR.connectionState.connected) {
-                        $rootScope.consumer.requestSubscribeStateObjects($rootScope.sentinel, "RemoteControl", "*", "*");
-                        $rootScope.consumer.requestSubscribeStateObjects($rootScope.sentinel, "MediaPlayer", "*", "*");
-                        $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "Shuffle", "", function (result) {
-                            $rootScope.shuffleState = result.Data === false ? "off" : "on";
-                        });
-                        $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "FullScreen", "", function (result) {
-                            $rootScope.fullScreenState = result.Data === false ? "off" : "on";
-                        });
-                        $rootScope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "PushBrightness", "");
-                    }
+                $rootScope.consumer.onConnectionStateChanged(function (change) {
+                    $timeout(function () {
+                        $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
+                        if (change.newState === $.signalR.connectionState.connected) {
+                            $rootScope.consumer.requestSubscribeStateObjects($rootScope.sentinel, "RemoteControl", "*", "*");
+                            $rootScope.consumer.requestSubscribeStateObjects($rootScope.sentinel, "MediaPlayer", "*", "*");
+                            $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "Shuffle", "", function (result) {
+                                $rootScope.shuffleState = result.Data === false ? "off" : "on";
+                            });
+                            $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "FullScreen", "", function (result) {
+                                $rootScope.fullScreenState = result.Data === false ? "off" : "on";
+                            });
+                            $rootScope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "PushBrightness", "");
+                        }
+                    });
                 });
-            });
 
-            $rootScope.consumer.onUpdateStateObject(function (stateobject) {
-                $rootScope.$apply(function () {
-                    if ($rootScope.consumer[stateobject.PackageName] === undefined) {
-                        $rootScope.consumer[stateobject.PackageName] = {};
-                    }
-                    $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
-                    if ($rootScope.consumer.RemoteControl.VolumeLevel !== undefined && $rootScope.consumer.RemoteControl.BrightnessLevel !== undefined) {
-                        $rootScope.remoteLoaded = true;
-                    }
-                    if ($rootScope.consumer.MediaPlayer !== undefined && $rootScope.consumer.MediaPlayer.TimeData !== undefined) {
-                        $rootScope.mediaLoaded = true;
-                    }
+                $rootScope.consumer.onUpdateStateObject(function (stateobject) {
+                    $timeout(function () {
+                        if ($rootScope.consumer[stateobject.PackageName] === undefined) {
+                            $rootScope.consumer[stateobject.PackageName] = {};
+                        }
+                        $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
+                        if ($rootScope.consumer.RemoteControl.VolumeLevel !== undefined && $rootScope.consumer.RemoteControl.BrightnessLevel !== undefined) {
+                            $rootScope.remoteLoaded = true;
+                        }
+                        if ($rootScope.consumer.MediaPlayer !== undefined && $rootScope.consumer.MediaPlayer.TimeData !== undefined) {
+                            $rootScope.mediaLoaded = true;
+                        }
+                    });
                 });
-            });
-            $rootScope.consumer.connect();
-        }
+                $rootScope.consumer.connect();
+            }
+        
     }
 }])
 

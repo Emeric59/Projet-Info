@@ -1,7 +1,7 @@
 angular.module('remote.controllers', [])
 
-.controller('Login', ['$scope', '$rootScope',
-    function ($scope, $rootScope) {
+.controller('Login', ['$scope', '$rootScope','$timeout',
+    function ($scope, $rootScope, $timeout) {
 
         function SHA1(msg) {
             /**
@@ -141,10 +141,10 @@ angular.module('remote.controllers', [])
             return temp.toLowerCase();
         }
 
-        $scope.username = localStorage.username;
-        $rootScope.address = localStorage.address;
-        $rootScope.sentinel = localStorage.sentinel;
-        $rootScope.port = localStorage.port;
+        $scope.username = window.localStorage.getItem("username");
+        $rootScope.address = window.localStorage.getItem("address");
+        $rootScope.sentinel = window.localStorage.getItem("sentinel");
+        $rootScope.port = window.localStorage.getItem("port");
 
         $scope.logIn = function (user, pass, ip, port, sentinel) {
             if (ip == undefined) {
@@ -152,42 +152,41 @@ angular.module('remote.controllers', [])
             }
             else {
                 $rootScope.address = ip;
-                localStorage.address = ip;
+                window.localStorage.setItem("address", ip);
             }
             if (port == undefined) {
                 $rootScope.port = '8088';
             }
             else {
                 $rootScope.port = port;
-                localStorage.port = port;
+                window.localStorage.setItem("port", port);
             }
 
             $scope.username = user;
-            localStorage.username = user;
+            window.localStorage.setItem("username",user);
             $scope.password = pass;
 
             $rootScope.sentinel = sentinel;
-            localStorage.sentinel = sentinel;
+            window.localStorage.setItem("sentinel" ,sentinel);
 
             var key = user + pass;
             var hash = SHA1(key);
             $rootScope.accessKey = hash;
             $rootScope.loggedIn = true;
-            $scope.afterLogin();
+            $scope.afterLogin($timeout);
 
         };
 
         $scope.logOut = function () {
-            $scope.consumer.disconnect();
             $scope.loggedIn = false;
 
         };
 
         $scope.clear = function () {
-            localStorage.removeItem('username');
-            localStorage.removeItem('address');
-            localStorage.removeItem('port');
-            localStorage.removeItem('sentinel');
+            window.localStorage.removeItem("username");
+            window.localStorage.removeItem("address");
+            window.localStorage.removeItem("port");
+            window.localStorage.removeItem("sentinel");
         };
     }])
 
