@@ -35,51 +35,46 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
     $rootScope.connectionState = 'Disconnected';
     $rootScope.remoteLoaded = false;
     $rootScope.mediaLoaded = false;
+    $rootScope.loggedIn = false;
 
+    $rootScope.afterLogin = function () {
+        if ($rootScope.loggedIn) {
+            $rootScope.consumer.intializeClient('http://' + $rootScope.address + ':' + $rootScope.port, $rootScope.accessKey, "RemoteAngular");
 
-    // scope permet de faire que la variable soit utilisée par le html, et pas seulement réduite au js
-
-    $rootScope.consumer.intializeClient("http://192.168.0.11:8088", "615bd655bc724bc2c8eccf001f0aaf7df557849b", "RemoteAngular");
-
-    $rootScope.consumer.onConnectionStateChanged(function (change) {
-        $rootScope.$apply(function () {
-            $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
-            if (change.newState === $.signalR.connectionState.connected) {
-                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "RemoteControl", "*", "*");
-                $rootScope.consumer.requestSubscribeStateObjects("MSI-FLO_UI", "MediaPlayer", "*", "*");
-                $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "Shuffle", "", function (result) {
-                    $rootScope.shuffleState = result.Data === false ? "off" : "on";
+            $rootScope.consumer.onConnectionStateChanged(function (change) {
+                $rootScope.$apply(function () {
+                    $rootScope.connectionState = change.newState === $.signalR.connectionState.connected ? "Connected" : "Disconnected";
+                    if (change.newState === $.signalR.connectionState.connected) {
+                        $rootScope.consumer.requestSubscribeStateObjects($rootScope.sentinel, "RemoteControl", "*", "*");
+                        $rootScope.consumer.requestSubscribeStateObjects($rootScope.sentinel, "MediaPlayer", "*", "*");
+                        $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "Shuffle", "", function (result) {
+                            $rootScope.shuffleState = result.Data === false ? "off" : "on";
+                        });
+                        $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "FullScreen", "", function (result) {
+                            $rootScope.fullScreenState = result.Data === false ? "off" : "on";
+                        });
+                        $rootScope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "PushBrightness", "");
+                    }
                 });
-                $rootScope.consumer.sendMessageWithSaga({ Scope: "Package", Args: ["MediaPlayer"] }, "FullScreen", "", function (result) {
-                    $rootScope.fullScreenState = result.Data === false ? "off" : "on";
+            });
+
+            $rootScope.consumer.onUpdateStateObject(function (stateobject) {
+                $rootScope.$apply(function () {
+                    if ($rootScope.consumer[stateobject.PackageName] === undefined) {
+                        $rootScope.consumer[stateobject.PackageName] = {};
+                    }
+                    $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
+                    if ($rootScope.consumer.RemoteControl.VolumeLevel !== undefined && $rootScope.consumer.RemoteControl.BrightnessLevel !== undefined) {
+                        $rootScope.remoteLoaded = true;
+                    }
+                    if ($rootScope.consumer.MediaPlayer !== undefined && $rootScope.consumer.MediaPlayer.TimeData !== undefined) {
+                        $rootScope.mediaLoaded = true;
+                    }
                 });
-                $rootScope.consumer.sendMessage({ Scope: "Package", Args: ["RemoteControl"] }, "PushBrightness", "");
-            }
-        });
-    });
-
-    $rootScope.consumer.onUpdateStateObject(function (stateobject) {
-        $rootScope.$apply(function () {
-            if ($rootScope.consumer[stateobject.PackageName] === undefined) {
-                $rootScope.consumer[stateobject.PackageName] = {};
-            }
-            $rootScope.consumer[stateobject.PackageName][stateobject.Name] = stateobject;
-            if ($rootScope.consumer.RemoteControl.VolumeLevel !== undefined && $rootScope.consumer.RemoteControl.BrightnessLevel !== undefined) {
-                $rootScope.remoteLoaded = true;
-            }
-            if ($rootScope.consumer.MediaPlayer !== undefined && $rootScope.consumer.MediaPlayer.TimeData !== undefined) {
-                $rootScope.mediaLoaded = true;
-            }
-
-
-        });
-
-    });
-
-
-    $rootScope.consumer.connect();
-
-
+            });
+            $rootScope.consumer.connect();
+        }
+    }
 }])
 
 
@@ -123,6 +118,16 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
           }
       })
 
+        .state('app.Login', {
+            url: '/Login',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/Login.html',
+                    controller: 'Login'
+                }
+            }
+        })
+
 
 
     .state('app.single', {
@@ -137,5 +142,5 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
     });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/search');
+    $urlRouterProvider.otherwise('/app/Login');
 });
