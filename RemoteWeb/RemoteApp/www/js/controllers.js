@@ -1,6 +1,6 @@
 angular.module('remote.controllers', [])
 
-.controller('Login', ['$scope', '$rootScope','$timeout',
+.controller('login', ['$scope', '$rootScope','$timeout',
     function ($scope, $rootScope, $timeout) {
 
         function SHA1(msg) {

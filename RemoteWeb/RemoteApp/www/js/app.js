@@ -120,12 +120,12 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
           }
       })
 
-        .state('app.Login', {
-            url: '/Login',
+        .state('app.login', {
+            url: '/login',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/Login.html',
-                    controller: 'Login'
+                    templateUrl: 'templates/login.html',
+                    controller: 'login'
                 }
             }
         })
@@ -144,5 +144,5 @@ angular.module('remote', ['ionic', 'ngConstellation', 'remote.controllers'])
     });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/Login');
+    $urlRouterProvider.otherwise('/app/login');
 });
